@@ -10,7 +10,7 @@ export default function Anchor({
 }) {
   return (
     <Link
-      className={`${background} ${color} py-2 px-4 rounded text-center`}
+      className={`${background} ${color} py-2 px-4 rounded text-center text-xs md:text-base`}
       href={route}
     >
       {title}

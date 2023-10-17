@@ -25,9 +25,9 @@ export default function Login() {
 
   return (
     <div className="flex flex-col gap-10">
-      <div className="h-[40vh] md:h-[50vh] bg-cinza-100 rounded-bl-3xl rounded-br-3xl"></div>
+      <div className="h-[40vh] md:h-[50vh] bg-cinza-100 rounded-bl-3xl rounded-br-3xl "></div>
 
-      <div className="wrapper flex flex-col gap-4">
+      <div className="wrapper flex flex-col gap-4 text-xs md:text-base">
         <div className="p-1 bg-cinza-100 w-1/3 flex items-center justify-center rounded">
           <h1 className="text-xl md:text-3xl">LOGO</h1>
         </div>
@@ -64,7 +64,7 @@ export default function Login() {
             <div className="flex items-center p-2 gap-2 bg-cinza-100">
               <div className="p-2 rounded bg-cinza-200" />
               <input
-                className="text-base md:text-lg bg-transparent outline-none"
+                className="text-xs md:text-base md:text-lg bg-transparent outline-none"
                 type="email"
                 placeholder="Email"
                 required
@@ -73,7 +73,7 @@ export default function Login() {
             <div className="flex items-center p-2 gap-2 bg-cinza-100">
               <div className="p-2 rounded bg-cinza-200" />
               <input
-                className="text-base md:text-lg bg-transparent outline-none"
+                className="text-xs md:text-base md:text-lg bg-transparent outline-none"
                 type="password"
                 placeholder="Password"
                 required

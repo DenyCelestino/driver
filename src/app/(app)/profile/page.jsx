@@ -14,7 +14,7 @@ export default function Profile() {
 
   return (
     <div>
-      <div className="h-[30vh] md:h-[50vh] bg-cinza-100 rounded-bl-3xl rounded-br-3xl"></div>
+      <div className="h-[30vh] md:h-[50vh] bg-cinza-100 rounded-bl-3xl rounded-br-3xl text-xs md:text-base"></div>
 
       <div className="flex items-center justify-center">
         <div className="h-44 w-44 -mt-24 bg-white rounded-full shadow-lg" />

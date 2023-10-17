@@ -12,7 +12,7 @@ export default function Button({
 }) {
   return (
     <button
-      className={`${background} ${color} py-2 px-4 rounded-lg`}
+      className={`${background} ${color} py-2 px-4 rounded-lg text-xs md:text-base`}
       onClick={onClick}
     >
       {title}

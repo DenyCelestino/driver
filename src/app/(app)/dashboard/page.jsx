@@ -17,7 +17,7 @@ const rooms = [
 
 export default function Dashboard() {
   return (
-    <div className="wrapper flex flex-col gap-4">
+    <div className="wrapper flex flex-col gap-4 text-xs md:text-base">
       <div className=" flex items-center justify-between mt-6 text-base md:text-lg">
         <div className="p-2 bg-cinza-100">
           <h1>LOGO</h1>

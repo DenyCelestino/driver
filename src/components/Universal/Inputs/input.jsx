@@ -8,7 +8,7 @@ export default function Input({
   return (
     <div
       className="flex items-center  bg-cinza-100 rounded-full
-          gap-4 w-full
+          gap-4 w-full text-xs md:text-base
           "
     >
       <div>

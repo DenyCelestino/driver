@@ -16,6 +16,7 @@ export default function Home() {
     const handleBeforeInstallPrompt = event => {
       // Armazena o evento para ser usado posteriormente
       event.preventDefault()
+      console.log(event)
       setDeferredPrompt(event)
     }
 
@@ -50,7 +51,7 @@ export default function Home() {
     }
   }
   return (
-    <div className="flex items-center bg-zinc-50 justify-center min-h-screen">
+    <div className="flex items-center bg-zinc-50 justify-center min-h-screen text-xs md:text-base">
       {modalInstall && (
         <AnimatePresence>
           <motion.div
