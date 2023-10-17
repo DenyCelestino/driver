@@ -23,7 +23,7 @@ export default function Dashboard() {
           <h1>LOGO</h1>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 text-xs md:text-base">
           <span>Voce tem 2 semanas restantes</span>
 
           <div>
@@ -41,7 +41,7 @@ export default function Dashboard() {
         {rooms.map((room, index) => (
           <div
             key={index}
-            className="py-24 px-10 flex flex-col gap-8 items-center justify-center bg-cinza-100 rounded-3xl"
+            className="py-16  md:py-24 px-8 md:px-10 flex flex-col gap-8 items-center justify-center bg-cinza-100 rounded-3xl"
           >
             <h1>{room.title}</h1>
 
