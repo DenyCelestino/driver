@@ -18,7 +18,7 @@ export default function Result({
         <h1>Resultados</h1>
 
         <div className="flex items-center justify-center">
-          {score >= 5 ? (
+          {score >= 7 ? (
             <div className="flex flex-col items-center justify-center gap-3 ">
               <Lottie
                 className="h-20 w-20"
@@ -41,6 +41,7 @@ export default function Result({
                 Lamentamos, sua avaliação foi negativa, sua pontuação
                 foi: {score}/{total}
               </p>
+              <p>Pontuação aceitavel deve ser 7 ou mais</p>
             </div>
           )}
         </div>

@@ -17,7 +17,7 @@ export default function Time({
         <h1>Tempo esgotado</h1>
 
         <div className="flex items-center justify-center">
-          {score >= 5 ? (
+          {score >= 7 ? (
             <div className="flex flex-col items-center justify-center gap-3 ">
               <Lottie
                 className="h-20 w-20"
