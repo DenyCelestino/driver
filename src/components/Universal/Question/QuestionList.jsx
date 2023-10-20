@@ -4,31 +4,46 @@ import { Search } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import useSound from 'use-sound'
+import Result from '../Result/result'
+import Time from '../Result/time'
+import { useRouter } from 'next/navigation'
 
 export default function QuestionList({ questions }) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
+  const [result, setResult] = useState(false)
+  const [timeOut, setTimeOut] = useState(false)
   const [score, setScore] = useState(0)
   const [currentAnswer, setCurrentAnswer] = useState(null)
   const [correctAnswer, setCorrectAnswer] = useState(null)
   const [minutes, setMinutes] = useState(1)
   const [seconds, setSeconds] = useState(0)
+  const [userMinute, setUserMinute] = useState(0)
+  const [userSecond, setUserSecond] = useState(0)
 
   const [correct] = useSound('/correct.mp3')
   const [wrong] = useSound('/wrong.mp3')
   const [next] = useSound('/next.mp3')
+
+  const router = useRouter()
 
   // Função para atualizar o contador regressivo
   useEffect(() => {
     const interval = setInterval(() => {
       if (minutes === 0 && seconds === 0) {
         clearInterval(interval)
-        console.log('Tempo esgotado!')
+        setTimeOut(true)
       } else {
         if (seconds === 0) {
           setMinutes(minutes - 1)
           setSeconds(59)
+          if (!result && !timeOut) {
+            setUserMinute(minutes - 1)
+          }
         } else {
           setSeconds(seconds - 1)
+          if (!result && !timeOut) {
+            setUserSecond(seconds - 1)
+          }
         }
       }
     }, 1000)
@@ -63,9 +78,47 @@ export default function QuestionList({ questions }) {
       next()
     }
   }
-
+  const SeeResults = () => {
+    setResult(true)
+  }
+  function Try() {
+    router.push('/exam')
+    setResult(false)
+    setTimeOut(false)
+    setCurrentQuestion(0)
+    setScore(0)
+    setMinutes(1)
+  }
+  function Return() {
+    router.push('/dashboard')
+    setResult(false)
+    setTimeOut(false)
+    setCurrentQuestion(0)
+    setScore(0)
+    setMinutes(1)
+  }
   return (
     <div className="flex flex-col gap-4">
+      {result && (
+        <Result
+          score={score}
+          minutes={userMinute}
+          seconds={userSecond}
+          total={questions.length}
+          Try={Try}
+          Return={Return}
+        />
+      )}
+      {timeOut && (
+        <Time
+          score={score}
+          minutes={userMinute}
+          seconds={userSecond}
+          total={questions.length}
+          Try={Try}
+          Return={Return}
+        />
+      )}
       <div className="h-[30vh] flex flex-col  md:h-[50vh] relative bg-cinza-100 rounded-bl-3xl rounded-br-3xl p-4">
         {questions[currentQuestion].image && (
           <img
@@ -77,7 +130,7 @@ export default function QuestionList({ questions }) {
           Questões {currentQuestion + 1}/{questions.length}
         </span>
 
-        <div className="bg-cinza-200 p-2 flex items-center justify-center self-center rounded-lg w-1/3 absolute top-1 left-1/3 right-1/3">
+        <div className="bg-cinza-200/60 text-black p-2 flex items-center justify-center self-center rounded-lg w-1/3 absolute top-1 left-1/3 right-1/3">
           <span>
             {minutes}:{seconds}
           </span>
@@ -88,7 +141,7 @@ export default function QuestionList({ questions }) {
         </button>
       </div>
       <div className="wrapper flex flex-col gap-4">
-        <div className="p-12 md:p-14 bg-cinza-100 rounded-3xl text-center">
+        <div className="p-8 md:p-14 bg-cinza-100 rounded-3xl text-center">
           <h1> {questions[currentQuestion].questionText}</h1>
         </div>
 
@@ -121,12 +174,21 @@ export default function QuestionList({ questions }) {
 
         {currentAnswer && (
           <div className="flex items-center justify-center ">
-            <button
-              onClick={NextQuestion}
-              className="p-2 bg-green-600 rounded text-zinc-50"
-            >
-              Proxima pergunta
-            </button>
+            {currentQuestion === questions.length - 1 ? (
+              <button
+                onClick={SeeResults}
+                className="p-2 bg-green-600 rounded text-zinc-50"
+              >
+                Ver Resultados
+              </button>
+            ) : (
+              <button
+                onClick={NextQuestion}
+                className="p-2 bg-green-600 rounded text-zinc-50"
+              >
+                Proxima pergunta
+              </button>
+            )}
           </div>
         )}
       </div>
