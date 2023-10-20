@@ -31,7 +31,9 @@ export default function QuestionList({ questions }) {
     const interval = setInterval(() => {
       if (minutes === 0 && seconds === 0) {
         clearInterval(interval)
-        setTimeOut(true)
+        if (!result) {
+          setTimeOut(true)
+        }
       } else {
         if (seconds === 0) {
           setMinutes(minutes - 1)
