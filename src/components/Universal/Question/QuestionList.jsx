@@ -5,7 +5,7 @@ export default function QuestionList() {
     <div className="flex flex-col gap-4">
       {[1, 1, 1, 1].map((item, index) => (
         <div key={index} className="p-2 bg-cinza-100 rounded-full">
-          <div className="h-5 md:h-12 w-5 md:w-12 bg-cinza-200 rounded-full" />
+          <div className="h-8 md:h-12 w-8 md:w-12 bg-cinza-200 rounded-full" />
         </div>
       ))}
 
