@@ -12,7 +12,7 @@ export default function Input({
           "
     >
       <div>
-        <div className="h-8 w-8 md:h-12 md:w-12 bg-cinza-200 rounded-full" />
+        <div className="h-12 w-12 bg-cinza-200 rounded-full" />
       </div>
       <input
         className="bg-transparent outline-none "
