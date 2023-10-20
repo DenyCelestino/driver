@@ -18,7 +18,7 @@ export default function Result({
         <h1>Resultados</h1>
 
         <div className="flex items-center justify-center">
-          {score >= 7 ? (
+          {score >= 9 ? (
             <div className="flex flex-col items-center justify-center gap-3 ">
               <Lottie
                 className="h-20 w-20"

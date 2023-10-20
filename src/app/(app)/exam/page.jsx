@@ -1,7 +1,7 @@
 import QuestionList from '@/components/Universal/Question/QuestionList'
 const questions = [
   {
-    questionText: 'Qual é o nome completo dele ?',
+    questionText: 'Qual é o nome completo de Arie ?',
     image:
       'https://media.licdn.com/dms/image/C4D03AQEv2sVwDaA3hA/profile-displayphoto-shrink_800_800/0/1516979022302?e=1703116800&v=beta&t=w6zJSZYbsNHWiscHcTnaG0KQczAPgdBA41Jc5IHUZ9Q',
     answerOptions: [
@@ -35,13 +35,14 @@ const questions = [
         answerText: 'Amarelo',
         isCorrect: false
       },
-      {
-        answerText: 'Rosa quente',
-        isCorrect: true
-      },
+
       {
         answerText: 'Azul ciano',
         isCorrect: false
+      },
+      {
+        answerText: 'Rosa quente',
+        isCorrect: true
       }
     ]
   },
@@ -75,7 +76,7 @@ const questions = [
     answerOptions: [
       {
         answerText: 'Iassine Ernesto',
-        isCorrect: true
+        isCorrect: false
       },
       {
         answerText: 'Iassine Iahaia',
@@ -99,13 +100,14 @@ const questions = [
         answerText: '2021',
         isCorrect: false
       },
-      {
-        answerText: '2023',
-        isCorrect: true
-      },
+
       {
         answerText: '2018',
         isCorrect: false
+      },
+      {
+        answerText: '2023',
+        isCorrect: true
       },
       {
         answerText: '2020',
@@ -125,13 +127,14 @@ const questions = [
         answerText: 'Wannahave Apps',
         isCorrect: false
       },
-      {
-        answerText: 'Wannahave websites',
-        isCorrect: true
-      },
+
       {
         answerText: 'Wanna have web sites',
         isCorrect: false
+      },
+      {
+        answerText: 'Wannahave websites',
+        isCorrect: true
       }
     ]
   },
@@ -191,13 +194,14 @@ const questions = [
         answerText: 'Grow123&987',
         isCorrect: false
       },
-      {
-        answerText: 'Grow123&789',
-        isCorrect: true
-      },
+
       {
         answerText: 'Grow123&7890',
         isCorrect: false
+      },
+      {
+        answerText: 'Grow123&789',
+        isCorrect: true
       }
     ]
   },
@@ -220,6 +224,51 @@ const questions = [
       {
         answerText: 'Primeira Tentativa, Resultado Perfeito',
         isCorrect: true
+      }
+    ]
+  },
+  {
+    questionText: 'Que fast food Henri Geralmente pede no take away?',
+    image:
+      'https://freedesignfile.com/upload/2021/08/Fast-food-mural-wallpaper-vector.jpg',
+    answerOptions: [
+      {
+        answerText: 'Apas com batata frita',
+        isCorrect: false
+      },
+      {
+        answerText: 'Hamburguer e batata frita',
+        isCorrect: true
+      },
+      {
+        answerText: 'Batata frita com frango',
+        isCorrect: false
+      },
+      {
+        answerText: 'Sande de ovo',
+        isCorrect: false
+      }
+    ]
+  },
+  {
+    questionText: 'Qual é o apelido de Delfim?',
+    image: 'https://github.com/denycelestino.png',
+    answerOptions: [
+      {
+        answerText: 'Amisse',
+        isCorrect: false
+      },
+      {
+        answerText: 'Pastola',
+        isCorrect: true
+      },
+      {
+        answerText: 'Celestino',
+        isCorrect: false
+      },
+      {
+        answerText: 'Iahaia',
+        isCorrect: false
       }
     ]
   }

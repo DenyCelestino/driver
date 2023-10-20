@@ -17,7 +17,7 @@ export default function Time({
         <h1>Tempo esgotado</h1>
 
         <div className="flex items-center justify-center">
-          {score >= 7 ? (
+          {score >= 9 ? (
             <div className="flex flex-col items-center justify-center gap-3 ">
               <Lottie
                 className="h-20 w-20"
@@ -25,7 +25,7 @@ export default function Time({
                 loop={true}
               />
               <p>
-                Parabéns, sua avaliação foi positiva, sua pontuação
+                Parabéns, sua avaliação foi positiva ✅, sua pontuação
                 foi: {score}/{total}
               </p>
             </div>
@@ -37,8 +37,8 @@ export default function Time({
                 loop={true}
               />
               <p>
-                Lamentamos, sua avaliação foi negativa, sua pontuação
-                foi: {score}/{total}
+                Lamentamos, sua avaliação foi negativa 💔, sua
+                pontuação foi: {score}/{total}
               </p>
             </div>
           )}
