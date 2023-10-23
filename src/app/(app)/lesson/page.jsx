@@ -274,6 +274,24 @@ const questions = [
   }
 ]
 
+export async function generateMetadata() {
+  return {
+    title: 'Growskills - teste interno 😂',
+    openGraph: {
+      title: 'Growskills - teste interno 😂',
+      description:
+        'Prove o quanto você conhece a growskills adquirindo a maior pontuação ',
+      images: [
+        {
+          url: 'https://media.licdn.com/dms/image/D4D0BAQFM93atxI5kfA/company-logo_200_200/0/1697656933029/growskillsnl_logo?e=1706140800&v=beta&t=HE-j6CQOJrgT4AGmjFka4Wgp3UH6Z_cFzEK1LUJBQ1E',
+          width: 800,
+          height: 600,
+          alt: 'Growskills logo'
+        }
+      ]
+    }
+  }
+}
 export default function Lesson() {
   return <QuestionList questions={questions} />
 }
