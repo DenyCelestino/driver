@@ -8,14 +8,13 @@ import Link from 'next/link'
 import LOGO from '../../../../public/icon-192x192.png'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { isMobileSafari } from 'react-device-detect'
 
 export default function Home() {
   const { modalInstall, setModalInstall } = useMyContext()
   const [deferredPrompt, setDeferredPrompt] = useState(null)
+
   const isiOS =
     /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
-  const isAndroid = /Android/.test(navigator.userAgent)
   useEffect(() => {
     const handleBeforeInstallPrompt = event => {
       // Armazena o evento para ser usado posteriormente
@@ -84,7 +83,7 @@ export default function Home() {
                       1. Toque no ícone de compartilhamento no
                       navegador.
                     </p>
-                    <p>2. Selecione "Adicionar à Tela Inicial".</p>
+                    <p>2. Selecione 'Adicionar à Tela Inicial'.</p>
                   </div>
                 ) : (
                   <div>
