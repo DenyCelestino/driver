@@ -23,7 +23,9 @@ export default function QuestionList({ questions }) {
   const [correct] = useSound('/correct.mp3')
   const [wrong] = useSound('/wrong.mp3')
   const [next] = useSound('/next.mp3')
-
+  // const [tictac] = useSound('/tictac.mp3')
+  const [win] = useSound('/win.mp3')
+  const [lose] = useSound('/lose.mp3')
   const router = useRouter()
 
   // Função para atualizar o contador regressivo
@@ -43,6 +45,7 @@ export default function QuestionList({ questions }) {
           }
         } else {
           setSeconds(seconds - 1)
+
           if (!result && !timeOut) {
             setUserSecond(seconds - 1)
           }
@@ -81,6 +84,11 @@ export default function QuestionList({ questions }) {
     }
   }
   const SeeResults = () => {
+    if (score >= 9) {
+      win()
+    } else {
+      lose()
+    }
     setResult(true)
   }
   function Try() {

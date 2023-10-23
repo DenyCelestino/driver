@@ -8,6 +8,8 @@ import Link from 'next/link'
 import LOGO from '../../../../public/icon-192x192.png'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { isMobileSafari } from 'react-device-detect'
+
 export default function Home() {
   const { modalInstall, setModalInstall } = useMyContext()
   const [deferredPrompt, setDeferredPrompt] = useState(null)
@@ -71,14 +73,28 @@ export default function Home() {
             <div className="flex flex-col gap-1">
               <span>Instale o driver no seu disposito.</span>
               <div className="flex flex-col gap-2">
-                <div>
-                  <button
-                    onClick={handleInstallClick}
-                    className="py-2 px-4 rounded bg-green-400 text-white"
-                  >
-                    Instalar agora
-                  </button>
-                </div>
+                {isMobileSafari ? (
+                  <div>
+                    <p>
+                      Adicione este aplicativo à sua tela inicial:
+                    </p>
+                    <p>
+                      1. Toque no ícone de compartilhamento no
+                      navegador.
+                    </p>
+                    <p>2. Selecione "Adicionar à Tela Inicial".</p>
+                  </div>
+                ) : (
+                  <div>
+                    <button
+                      onClick={handleInstallClick}
+                      className="py-2 px-4 rounded bg-green-400 text-white"
+                    >
+                      Instalar agora
+                    </button>
+                  </div>
+                )}
+
                 <div>
                   <button
                     onClick={() => setModalInstall(!modalInstall)}

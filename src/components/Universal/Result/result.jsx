@@ -3,7 +3,8 @@
 import Lottie from 'lottie-react'
 import CONGRATS from '../../../../public/animations/congrats.json'
 import OOPS from '../../../../public/animations/opps.json'
-import Link from 'next/link'
+import useSound from 'use-sound'
+import { useEffect } from 'react'
 export default function Result({
   total = 0,
   score = 0,
