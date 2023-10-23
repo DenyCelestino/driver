@@ -101,11 +101,7 @@ export default function QuestionList({ questions }) {
   }
   function Return() {
     router.push('/dashboard')
-    setResult(false)
-    setTimeOut(false)
     setCurrentQuestion(0)
-    setScore(0)
-    setMinutes(1)
   }
   return (
     <div className="flex flex-col gap-4">
