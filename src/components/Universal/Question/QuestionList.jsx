@@ -93,7 +93,7 @@ export default function QuestionList({ questions }) {
   }
   function Try() {
     router.push('/exam')
-    setCorrectAnswer(null)
+    setCurrentAnswer(null)
     setCorrectAnswer(null)
     setResult(false)
     setTimeOut(false)
@@ -104,7 +104,7 @@ export default function QuestionList({ questions }) {
   function Return() {
     router.push('/dashboard')
     setCurrentQuestion(0)
-    setCorrectAnswer(null)
+    setCurrentAnswer(null)
     setCorrectAnswer(null)
   }
   return (
