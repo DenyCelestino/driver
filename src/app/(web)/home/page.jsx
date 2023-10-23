@@ -62,7 +62,7 @@ export default function Home() {
   }
   return (
     <div className="flex items-center bg-zinc-50 justify-center min-h-screen text-xs md:text-base">
-      {/* {!installed && (
+      {!installed && (
         <>
           {modalInstall && (
             <AnimatePresence>
@@ -119,7 +119,7 @@ export default function Home() {
             </AnimatePresence>
           )}
         </>
-      )} */}
+      )}
 
       <div className="wrapper flex flex-col gap-2">
         <h1 className="text-2xl md:text-3xl">LOGO</h1>
@@ -141,14 +141,14 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* {!installed && (
+        {!installed && (
           <div className="fixed bottom-2 right-4">
             <Button
               onClick={handleInstallClick}
               title="Dowload app"
             />
           </div>
-        )} */}
+        )}
       </div>
     </div>
   )
