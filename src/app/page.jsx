@@ -9,16 +9,15 @@ export default function Main() {
   useEffect(() => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
-        .register('/service-worker.js', { scope: '/' })
-        .then(registration => {
-          console.log(
-            'Service worker registered successfully. Scope:',
-            registration.scope
-          )
+        .register('/sw.js')
+        .then(resp => {
+          console.log('resp', resp)
         })
-        .catch(error => {
-          console.error('Service worker registration failed:', error)
+        .catch(err => {
+          console.log('err', err)
         })
+    } else {
+      console.log('no service worker')
     }
     router.push('/home')
   }, [])

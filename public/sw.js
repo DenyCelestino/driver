@@ -3,8 +3,15 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open('my-cache').then(cache => {
       return cache.addAll([
-        '/offline', // Rota para a página offline
-        '/static/css/styles.css' // Exemplo de recurso a ser armazenado em cache
+        '/',
+        '/dashboard'
+
+        // '_next/static/css/app/layout.css'
+        // 'src/app/globals.css'
+
+        // '/globals.css' // Inclua o arquivo CSS no cache
+
+        // '/static/css/styles.css' // Exemplo de recurso a ser armazenado em cache
         // Adicione outras rotas e recursos que deseja armazenar em cache
       ])
     })

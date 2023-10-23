@@ -73,7 +73,7 @@ export default function Login() {
             <div className="flex items-center p-2 gap-2 bg-cinza-100">
               <div className="p-2 rounded bg-cinza-200" />
               <input
-                className="text-xs md:text-base md:text-lg bg-transparent outline-none"
+                className="text-base md:text-lg bg-transparent outline-none"
                 type="password"
                 placeholder="Password"
                 required
