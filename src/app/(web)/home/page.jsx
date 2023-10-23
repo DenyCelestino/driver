@@ -12,8 +12,7 @@ import { useEffect, useState } from 'react'
 export default function Home() {
   const { modalInstall, setModalInstall } = useMyContext()
   const [deferredPrompt, setDeferredPrompt] = useState(null)
-  const [iosInstalled, setIosInstalled] = useState(false)
-  const [androidInstalled, setAndroidInstalled] = useState(false)
+  const [installed, setInstalled] = useState(true)
   let isiOS = false // Inicialize a variável isiOS
 
   if (typeof window !== 'undefined') {
@@ -23,49 +22,11 @@ export default function Home() {
     // Resto do seu código que depende de 'navigator'
   }
   useEffect(() => {
-    if (
-      'standalone' in window.navigator &&
-      window.navigator.standalone
-    ) {
-      setIosInstalled(true)
-      console.log('ios installed')
-      // A PWA está instalada no dispositivo iOS (Safari).
-    } else {
-      console.log('ios not installedd')
-
-      setIosInstalled(false)
-      // A PWA não está instalada no dispositivo iOS.
-    }
-    if (window.navigator.getInstalledRelatedApps) {
-      window.navigator
-        .getInstalledRelatedApps()
-        .then(relatedApps => {
-          if (relatedApps.length > 0) {
-            setAndroidInstalled(true)
-            console.log('Android installed')
-
-            // A PWA está instalada no dispositivo Android.
-          } else {
-            console.log('Android not installed')
-
-            setAndroidInstalled(false)
-            // A PWA não está instalada no dispositivo Android.
-          }
-        })
-        .catch(error => {
-          console.error(
-            'Erro ao verificar as apps relacionadas:',
-            error
-          )
-        })
-    } else {
-      // A propriedade getInstalledRelatedApps não é suportada no navegador.
-    }
-
     const handleBeforeInstallPrompt = event => {
       // Armazena o evento para ser usado posteriormente
       event.preventDefault()
       console.log(event)
+      setInstalled(false)
       setDeferredPrompt(event)
     }
 
@@ -101,7 +62,7 @@ export default function Home() {
   }
   return (
     <div className="flex items-center bg-zinc-50 justify-center min-h-screen text-xs md:text-base">
-      {!androidInstalled && (
+      {!installed && (
         <>
           {modalInstall && (
             <AnimatePresence>
@@ -180,9 +141,14 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="fixed bottom-2 right-4">
-          <Button title="Dowload app" />
-        </div>
+        {!installed && (
+          <div className="fixed bottom-2 right-4">
+            <Button
+              onClick={handleInstallClick}
+              title="Dowload app"
+            />
+          </div>
+        )}
       </div>
     </div>
   )
