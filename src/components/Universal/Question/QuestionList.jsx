@@ -93,6 +93,8 @@ export default function QuestionList({ questions }) {
   }
   function Try() {
     router.push('/exam')
+    setCorrectAnswer(null)
+    setCorrectAnswer(null)
     setResult(false)
     setTimeOut(false)
     setCurrentQuestion(0)
@@ -102,6 +104,8 @@ export default function QuestionList({ questions }) {
   function Return() {
     router.push('/dashboard')
     setCurrentQuestion(0)
+    setCorrectAnswer(null)
+    setCorrectAnswer(null)
   }
   return (
     <div className="flex flex-col gap-4">
