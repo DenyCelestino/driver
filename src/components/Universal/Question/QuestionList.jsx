@@ -147,7 +147,7 @@ export default function QuestionList({ questions }) {
         </button>
       </div>
       <div className="wrapper flex flex-col gap-4">
-        <div className="p-8 md:p-14 bg-cinza-100 rounded-3xl text-center">
+        <div className="p-4 md:p-14 bg-cinza-100 rounded-3xl text-center text-sm md:text-base">
           <h1> {questions[currentQuestion].questionText}</h1>
         </div>
 
@@ -158,7 +158,7 @@ export default function QuestionList({ questions }) {
                 disabled={currentAnswer != null}
                 onClick={() => handleAnswerButtonClick(item)}
                 key={index}
-                className={`p-2 border flex items-center gap-1 rounded-full ${
+                className={`p-2 text-sm md:text-base border flex items-center gap-1 rounded-full ${
                   currentAnswer === item
                     ? item.isCorrect
                       ? 'bg-green-600 text-zinc-50'
