@@ -12,9 +12,14 @@ import { useEffect, useState } from 'react'
 export default function Home() {
   const { modalInstall, setModalInstall } = useMyContext()
   const [deferredPrompt, setDeferredPrompt] = useState(null)
+  let isiOS = false // Inicialize a variável isiOS
 
-  const isiOS =
-    /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+  if (typeof window !== 'undefined') {
+    isiOS =
+      /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+
+    // Resto do seu código que depende de 'navigator'
+  }
   useEffect(() => {
     const handleBeforeInstallPrompt = event => {
       // Armazena o evento para ser usado posteriormente
