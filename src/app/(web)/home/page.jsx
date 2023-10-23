@@ -83,7 +83,7 @@ export default function Home() {
                       1. Toque no ícone de compartilhamento no
                       navegador.
                     </p>
-                    <p>2. Selecione 'Adicionar à Tela Inicial'.</p>
+                    <p>2. Selecione Adicionar à Tela Inicial.</p>
                   </div>
                 ) : (
                   <div>
