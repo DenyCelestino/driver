@@ -31,7 +31,7 @@ export default function Home() {
       console.log('ios installed')
       // A PWA está instalada no dispositivo iOS (Safari).
     } else {
-      console.log('ios not installed')
+      console.log('ios not installedd')
 
       setIosInstalled(false)
       // A PWA não está instalada no dispositivo iOS.
