@@ -13,7 +13,9 @@ import { isMobileSafari } from 'react-device-detect'
 export default function Home() {
   const { modalInstall, setModalInstall } = useMyContext()
   const [deferredPrompt, setDeferredPrompt] = useState(null)
-
+  const isiOS =
+    /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+  const isAndroid = /Android/.test(navigator.userAgent)
   useEffect(() => {
     const handleBeforeInstallPrompt = event => {
       // Armazena o evento para ser usado posteriormente
@@ -73,7 +75,7 @@ export default function Home() {
             <div className="flex flex-col gap-1">
               <span>Instale o driver no seu disposito.</span>
               <div className="flex flex-col gap-2">
-                {isMobileSafari ? (
+                {isiOS ? (
                   <div>
                     <p>
                       Adicione este aplicativo à sua tela inicial:
