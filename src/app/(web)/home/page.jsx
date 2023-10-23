@@ -28,8 +28,11 @@ export default function Home() {
       window.navigator.standalone
     ) {
       setIosInstalled(true)
+      console.log('ios installed')
       // A PWA está instalada no dispositivo iOS (Safari).
     } else {
+      console.log('ios not installed')
+
       setIosInstalled(false)
       // A PWA não está instalada no dispositivo iOS.
     }
@@ -39,8 +42,12 @@ export default function Home() {
         .then(relatedApps => {
           if (relatedApps.length > 0) {
             setAndroidInstalled(true)
+            console.log('Android installed')
+
             // A PWA está instalada no dispositivo Android.
           } else {
+            console.log('Android not installed')
+
             setAndroidInstalled(false)
             // A PWA não está instalada no dispositivo Android.
           }

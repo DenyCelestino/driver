@@ -5,7 +5,10 @@ const nextConfig = {
     dest: 'public',
     register: true,
     skipWaiting: true
-  })
+  }),
+  httpAgentOptions: {
+    keepAlive: true
+  }
 }
 
 module.exports = nextConfig
