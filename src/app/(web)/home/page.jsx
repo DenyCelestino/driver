@@ -25,7 +25,7 @@ export default function Home() {
     const handleBeforeInstallPrompt = event => {
       // Armazena o evento para ser usado posteriormente
       event.preventDefault()
-      console.log(event)
+
       setInstalled(false)
       setDeferredPrompt(event)
     }

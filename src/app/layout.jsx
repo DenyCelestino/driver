@@ -4,7 +4,7 @@ import './globals.css'
 import { Toaster } from 'react-hot-toast'
 
 export const metadata = {
-  title: 'CONPRO',
+  title: 'TrafegoTop',
   description: 'Click to Learn Driver Lessons',
   manifest: '/manifest.json',
   icons: {

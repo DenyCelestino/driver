@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
@@ -19,8 +20,15 @@ export default function Main() {
     } else {
       console.log('no service worker')
     }
-    router.push('/home')
+    // router.push('/home')
   }, [])
 
-  return <></>
+  return (
+    <div className="flex flex-col gap-2 items-center min-h-screen justify-center">
+      <h1>This is a landing page</h1>
+      <Link className="underline" href={'/home'}>
+        Go to home page
+      </Link>
+    </div>
+  )
 }
