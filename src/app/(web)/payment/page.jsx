@@ -23,12 +23,14 @@ export default function Payment() {
   const payment = async () => {
     try {
       setLoading(true)
+
       let res = await axios.post(
         `${ENDPOINT}payment.php`,
         JSON.stringify({
           number: number,
           amount: 10
-        })
+        }),
+        { cancelToken: source.token }
       )
       setLoading(false)
       console.log(res)
@@ -45,6 +47,9 @@ export default function Payment() {
         toast.error('Payment not sucessful, please try again')
       }
     } catch (error) {
+      setLoading(false)
+      setIsPaid(false)
+      toast.error('Payment not sucessful, please try again')
       console.log(error)
     }
   }
