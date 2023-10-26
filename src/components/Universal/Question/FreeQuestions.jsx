@@ -132,6 +132,7 @@ export default function FreeQuestions({ questions }) {
               'images/question/' +
               questions[currentQuestion].image
             }
+            alt="question"
           />
         )}
         <span className="absolute top-2 right-6 p-1 bg-black/40 rounded text-zinc-50">

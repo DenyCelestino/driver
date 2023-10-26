@@ -9,6 +9,7 @@ import toast from 'react-hot-toast'
 import Swal from 'sweetalert2'
 import { BeatLoader } from 'react-spinners'
 import ModalButton from '@/components/Universal/Modal/modalButton'
+import Image from 'next/image'
 
 const questions = [
   {
@@ -180,7 +181,7 @@ export default function Quizzes() {
             <span>Click to choose image</span>
             {imagePreview ? (
               <button onClick={handleClick} className="h-80 w-full">
-                <img
+                <Image
                   className=" w-full h-full object-contain"
                   src={imagePreview}
                 />

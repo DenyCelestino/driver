@@ -13,6 +13,7 @@ import useSound from 'use-sound'
 
 import { useRouter } from 'next/navigation'
 import { useMyContext } from '@/context/Context'
+import Image from 'next/image'
 
 export default function LessonQuestion({ questions }) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -58,6 +59,7 @@ export default function LessonQuestion({ questions }) {
               'images/question/' +
               questions[currentQuestion].image
             }
+            alt="question"
           />
         )}
         <span className="absolute top-2 right-6 p-1 bg-black/40 rounded text-zinc-50">

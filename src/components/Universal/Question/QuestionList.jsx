@@ -8,6 +8,7 @@ import Result from '../Result/result'
 import Time from '../Result/time'
 import { useRouter } from 'next/navigation'
 import { useMyContext } from '@/context/Context'
+import Image from 'next/image'
 
 export default function QuestionList({ questions }) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -141,6 +142,7 @@ export default function QuestionList({ questions }) {
               'images/question/' +
               questions[currentQuestion].image
             }
+            alt="question"
           />
         )}
         <span className="absolute top-2 right-6 p-1 bg-black/40 rounded text-zinc-50">
