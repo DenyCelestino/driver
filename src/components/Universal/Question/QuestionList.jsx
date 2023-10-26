@@ -135,7 +135,7 @@ export default function QuestionList({ questions }) {
       )}
       <div className="h-[30vh] flex flex-col  md:h-[50vh] relative  rounded-bl-3xl rounded-br-3xl p-4">
         {questions[currentQuestion].image && (
-          <Image
+          <img
             className="h-full w-full object-contain absolute top-0 left-0 rounded-bl-3xl rounded-br-3xl"
             src={
               ENDPOINT +

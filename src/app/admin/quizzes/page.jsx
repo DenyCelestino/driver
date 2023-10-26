@@ -227,7 +227,10 @@ export default function Quizzes() {
             </button>
             <div className="flex flex-col gap-3">
               {options.map((item, index) => (
-                <div className="flex items-center justify-between p-2 border border-gray-300 rounded">
+                <div
+                  key={index}
+                  className="flex items-center justify-between p-2 border border-gray-300 rounded"
+                >
                   <button onClick={() => toggleCorrectness(index)}>
                     {index + 1}.{item.text} -{' '}
                     {item.iscorrect ? '✅' : '❌'}
