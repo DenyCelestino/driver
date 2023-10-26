@@ -3,7 +3,6 @@
 import Anchor from '@/components/Universal/Anchor/anchor'
 import Input from '@/components/Universal/Inputs/input'
 import { ContextUser } from '@/context/ContextUser'
-import PrivateRoutes from '@/functions/PrivateRoutes'
 import { useEffect, useState } from 'react'
 
 export default function Profile() {
