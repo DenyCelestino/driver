@@ -81,7 +81,7 @@ export default function Login() {
                   setLogged(JSON.stringify(response.data.user))
 
                   router.push('/payment')
-                  return `Autenticado(a) com sucesso`
+                  return `Autenticado(a) com sucesso, ${response.data.user.name}`
                 },
                 error: response => {
                   setLoading(false)
