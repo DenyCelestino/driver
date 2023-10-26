@@ -1,4 +1,4 @@
-import TestQuestion from '@/components/Universal/Question/TestQuestion'
+import FreeQuestions from '@/components/Universal/Question/FreeQuestions'
 import axios from 'axios'
 
 export async function generateMetadata() {
@@ -25,5 +25,5 @@ export default async function Test() {
 
   const questions = res.data.questions
 
-  return <TestQuestion questions={questions} />
+  return <FreeQuestions questions={questions} />
 }

@@ -11,7 +11,8 @@ export default function Result({
   minutes = 0,
   seconds = 0,
   Try,
-  Return
+  Return,
+  test = false
 }) {
   return (
     <div className="flex flex-col gap-2 py-4 fixed inset-0 z-50 bg-white">
@@ -19,7 +20,7 @@ export default function Result({
         <h1>Resultados</h1>
 
         <div className="flex items-center justify-center">
-          {score >= 9 ? (
+          {score >= 3 ? (
             <div className="flex flex-col items-center justify-center gap-3 ">
               <Lottie
                 className="h-20 w-20"
@@ -50,7 +51,11 @@ export default function Result({
         <div className="flex items-center justify-between gap-4">
           <div className="bg-cinza-100 p-2 w-1/2 flex flex-col items-center justify-center rounded shadow">
             <h1>Tempo:</h1>
-            <span>{minutes + ':' + seconds}</span>
+            {test ? (
+              'Somente no exame'
+            ) : (
+              <span>{minutes + ':' + seconds}</span>
+            )}
           </div>
           <div className="bg-cinza-100 p-2 w-1/2 flex flex-col items-center justify-center rounded shadow">
             <h1> Pontuação:</h1>

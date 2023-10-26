@@ -10,6 +10,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        primary: {
+          200: '#DC4266'
+        },
         cinza: {
           100: '#F2F2F2',
           200: '#DCDCDC'

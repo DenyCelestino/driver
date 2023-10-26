@@ -7,6 +7,7 @@ import useSound from 'use-sound'
 import Result from '../Result/result'
 import Time from '../Result/time'
 import { useRouter } from 'next/navigation'
+import { useMyContext } from '@/context/Context'
 
 export default function QuestionList({ questions }) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -19,6 +20,8 @@ export default function QuestionList({ questions }) {
   const [seconds, setSeconds] = useState(0)
   const [userMinute, setUserMinute] = useState(0)
   const [userSecond, setUserSecond] = useState(0)
+
+  const { ENDPOINT } = useMyContext()
 
   const [correct] = useSound('/correct.mp3')
   const [wrong] = useSound('/wrong.mp3')
@@ -57,7 +60,7 @@ export default function QuestionList({ questions }) {
   }, [minutes, seconds])
   const handleAnswerButtonClick = answer => {
     setCurrentAnswer(answer)
-    if (answer.isCorrect) {
+    if (answer.iscorrect) {
       setScore(score + 1)
       setCorrectAnswer(answer)
       correct()
@@ -65,8 +68,8 @@ export default function QuestionList({ questions }) {
       wrong()
 
       setCorrectAnswer(
-        questions[currentQuestion].answerOptions.find(
-          option => option.isCorrect
+        questions[currentQuestion].options.find(
+          option => option.iscorrect
         )
       )
     }
@@ -84,7 +87,7 @@ export default function QuestionList({ questions }) {
     }
   }
   const SeeResults = () => {
-    if (score >= 9) {
+    if (score >= 3) {
       win()
     } else {
       lose()
@@ -129,11 +132,15 @@ export default function QuestionList({ questions }) {
           Return={Return}
         />
       )}
-      <div className="h-[30vh] flex flex-col  md:h-[50vh] relative bg-cinza-100 rounded-bl-3xl rounded-br-3xl p-4">
+      <div className="h-[30vh] flex flex-col  md:h-[50vh] relative  rounded-bl-3xl rounded-br-3xl p-4">
         {questions[currentQuestion].image && (
           <img
-            className="h-full w-full object-cover absolute top-0 left-0 rounded-bl-3xl rounded-br-3xl"
-            src={questions[currentQuestion].image}
+            className="h-full w-full object-contain absolute top-0 left-0 rounded-bl-3xl rounded-br-3xl"
+            src={
+              ENDPOINT +
+              'images/question/' +
+              questions[currentQuestion].image
+            }
           />
         )}
         <span className="absolute top-2 right-6 p-1 bg-black/40 rounded text-zinc-50">
@@ -152,34 +159,31 @@ export default function QuestionList({ questions }) {
       </div>
       <div className="wrapper flex flex-col gap-4">
         <div className="p-4 md:p-14 bg-cinza-100 rounded-3xl text-center text-sm md:text-base">
-          <h1> {questions[currentQuestion].questionText}</h1>
+          <h1> {questions[currentQuestion].question}</h1>
         </div>
 
         <div className="flex flex-col gap-4">
-          {questions[currentQuestion].answerOptions.map(
-            (item, index) => (
-              <button
-                disabled={currentAnswer != null}
-                onClick={() => handleAnswerButtonClick(item)}
-                key={index}
-                className={`p-2 text-sm md:text-base border flex items-center gap-1 rounded-full ${
-                  currentAnswer === item
-                    ? item.isCorrect
-                      ? 'bg-green-600 text-zinc-50'
-                      : 'bg-red-600 text-zinc-50'
-                    : 'border border-transparent'
-                } bg-cinza-100 ${
-                  correctAnswer === item &&
-                  'bg-green-600 text-zinc-50'
-                }`}
-              >
-                <div className="h-8 md:h-12 w-8 md:w-12 bg-cinza-200 rounded-full flex items-center justify-center">
-                  {index + 1}{' '}
-                </div>
-                <h1>{item.answerText}</h1>
-              </button>
-            )
-          )}
+          {questions[currentQuestion].options.map((item, index) => (
+            <button
+              disabled={currentAnswer != null}
+              onClick={() => handleAnswerButtonClick(item)}
+              key={index}
+              className={`p-2 text-sm md:text-base border flex items-center gap-1 rounded-full ${
+                currentAnswer === item
+                  ? item.iscorrect
+                    ? 'bg-green-600 text-zinc-50'
+                    : 'bg-red-600 text-zinc-50'
+                  : 'border border-transparent'
+              } bg-cinza-100 ${
+                correctAnswer === item && 'bg-green-600 text-zinc-50'
+              }`}
+            >
+              <div className="h-8 md:h-12 w-8 md:w-12 bg-cinza-200 rounded-full flex items-center justify-center">
+                {index + 1}{' '}
+              </div>
+              <h1>{item.option}</h1>
+            </button>
+          ))}
         </div>
 
         {currentAnswer && (

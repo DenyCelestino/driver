@@ -17,4 +17,11 @@
   body {
     -webkit-font-smothing: antialiased;
   }
+
+  ::-webkit-scrollbar {
+    width: 2px;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary-200;
+  }
 }

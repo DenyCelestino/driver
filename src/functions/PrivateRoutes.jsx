@@ -1,21 +1,22 @@
-// 'use client'
+'use client'
 
-// import { useEffect } from 'react'
-// import { useRouter } from 'next/navigation'
-// import { MyUserContext } from '@/context/UserContext'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { ContextUser } from '@/context/ContextUser'
 
-// export default function PrivateRoutes({ children }) {
-//   const { user } = MyUserContext()
+export default function PrivateRoutes({ children }) {
+  const { user } = ContextUser()
 
-//   const isLoggedIn = !!user
+  const isLoggedIn = !!user
 
-//   const router = useRouter()
+  const router = useRouter()
 
-//   useEffect(() => {
-//     if (!isLoggedIn) {
-//       router.push('/find')
-//     }
-//   }, [isLoggedIn, router])
+  useEffect(() => {
+    console.log(isLoggedIn)
+    if (!isLoggedIn) {
+      router.push('/login')
+    }
+  }, [])
 
-//   return isLoggedIn ? children : null
-// }
+  return isLoggedIn ? children : null
+}

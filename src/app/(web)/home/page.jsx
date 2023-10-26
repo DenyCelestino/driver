@@ -133,7 +133,7 @@ export default function Home() {
         </p>
 
         <div className="mt-9">
-          <Anchor route="/login" title="Make a test" />
+          <Anchor route="/free" title="Make a test" />
         </div>
         <div className="mt-9">
           <Link href={'#'} className="text-zinc-500 underline">

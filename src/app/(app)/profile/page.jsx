@@ -1,15 +1,17 @@
 'use client'
 
 import Anchor from '@/components/Universal/Anchor/anchor'
-import Button from '@/components/Universal/Button/button'
 import Input from '@/components/Universal/Inputs/input'
-import { useState } from 'react'
+import { ContextUser } from '@/context/ContextUser'
+import PrivateRoutes from '@/functions/PrivateRoutes'
+import { useEffect, useState } from 'react'
 
 export default function Profile() {
-  const [name, setName] = useState('Arie Van Der Kooij')
-  const [birthday, setBirthday] = useState('03/09/2000')
-  const [number, setNumber] = useState('848990989')
-  const [email, setEmail] = useState('arie@growskills.nl')
+  const { user } = ContextUser()
+  const [name, setName] = useState(user.name)
+  const [birthday, setBirthday] = useState('')
+  const [number, setNumber] = useState('')
+  const [email, setEmail] = useState(user.email)
   const [password, setPassword] = useState('growskills')
 
   return (
