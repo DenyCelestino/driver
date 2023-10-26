@@ -136,6 +136,7 @@ export default function TestQuestion({ questions }) {
             alt="question"
           />
         )}
+
         <span className="absolute top-2 right-6 p-1 bg-black/40 rounded text-zinc-50">
           Questões {currentQuestion + 1}/{questions.length}
         </span>

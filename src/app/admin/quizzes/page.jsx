@@ -184,6 +184,7 @@ export default function Quizzes() {
                 <Image
                   className=" w-full h-full object-contain"
                   src={imagePreview}
+                  alt="image preview"
                 />
               </button>
             ) : (
