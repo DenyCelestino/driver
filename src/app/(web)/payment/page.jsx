@@ -23,14 +23,14 @@ export default function Payment() {
   const payment = async () => {
     try {
       setLoading(true)
+      const source = axios.CancelToken.source() // Crie um novo CancelToken source
 
       let res = await axios.post(
         `${ENDPOINT}payment.php`,
         JSON.stringify({
           number: number,
           amount: 10
-        }),
-        { cancelToken: source.token }
+        })
       )
       setLoading(false)
       console.log(res)

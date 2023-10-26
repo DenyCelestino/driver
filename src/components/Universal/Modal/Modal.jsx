@@ -12,7 +12,7 @@ export default function Modal({ children }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -40 }}
           transition={{ duration: 0.8 }}
-          className="bg-white  min-h-[10px] max-h-[80%] overflow-y-scroll w-[90%] md:w-2/6 p-4 shadow-sm rounded-lg text-zinc-50"
+          className="bg-white  min-h-[10px] max-h-[80%] overflow-y-scroll w-[90%] md:w-2/6 p-4 shadow-sm rounded-lg "
         >
           {children}
         </motion.div>
