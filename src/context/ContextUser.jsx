@@ -3,7 +3,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
-
 import { useMyContext } from './Context'
 import axios from 'axios'
 
@@ -11,7 +10,6 @@ const UserContext = createContext({})
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState('')
-  const [localUser, setLocalUser] = useState('')
   const [bypass, setBypass] = useState('')
   const { ENDPOINT } = useMyContext()
 
@@ -33,26 +31,27 @@ export const UserProvider = ({ children }) => {
   }
 
   const checkPlan = async () => {
-    let res = await axios.get(
-      `${ENDPOINT}checkdays.php?user=${
-        JSON.parse(window.localStorage.getItem('user')).id
-      })
-      )}`
-    )
-
-    setBypass(res.data)
-    if (res.data.status == 404) {
-      router.push('/payment')
+    const storedUser = JSON.parse(localStorage.getItem('user'))
+    if (storedUser) {
+      try {
+        let res = await axios.get(
+          `${ENDPOINT}checkdays.php?user=${storedUser.id}`
+        )
+        setBypass(res.data)
+        if (res.data.status === 404) {
+          router.push('/payment')
+        }
+      } catch (error) {
+        // Tratar erros ao fazer a requisição
+        console.error('Erro ao verificar o plano:', error)
+      }
     }
   }
 
   useEffect(() => {
     getUser()
-
-    if (JSON.parse(window.localStorage.getItem('user'))) {
-      checkPlan()
-    }
-  }, [])
+    checkPlan()
+  }, [checkPlan]) // Incluindo checkPlan no array de dependências
 
   return (
     <UserContext.Provider
