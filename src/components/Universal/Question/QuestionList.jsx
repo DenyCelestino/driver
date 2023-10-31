@@ -59,7 +59,7 @@ export default function QuestionList({ questions }) {
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [minutes, seconds])
+  }, [minutes, seconds, result, timeOut]) // Adição das dependências result e timeOut
   const handleAnswerButtonClick = answer => {
     setCurrentAnswer(answer)
     if (answer.iscorrect) {
