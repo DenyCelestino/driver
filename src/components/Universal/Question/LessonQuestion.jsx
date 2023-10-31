@@ -52,6 +52,8 @@ export default function LessonQuestion({ questions }) {
   return (
     <div className="flex flex-col gap-4">
       <div className="h-[30vh] flex flex-col  md:h-[30vh] relative  rounded-bl-3xl rounded-br-3xl p-4">
+        {/* eslint-disable @next/next/no-img-element */}
+
         {questions[currentQuestion].image && (
           <img
             className="h-full w-full object-contain absolute top-0 left-0 rounded-bl-3xl rounded-br-3xl"

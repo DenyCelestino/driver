@@ -126,6 +126,8 @@ export default function FreeQuestions({ questions }) {
       )}
 
       <div className="h-[30vh] flex flex-col  md:h-[30vh] relative  rounded-bl-3xl rounded-br-3xl p-4">
+        {/* eslint-disable @next/next/no-img-element */}
+
         {questions[currentQuestion].image && (
           <img
             className="h-full w-full object-contain absolute top-0 left-0 rounded-bl-3xl rounded-br-3xl"
