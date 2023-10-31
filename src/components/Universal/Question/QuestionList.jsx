@@ -17,17 +17,17 @@ export default function QuestionList({ questions }) {
   const [score, setScore] = useState(0)
   const [currentAnswer, setCurrentAnswer] = useState(null)
   const [correctAnswer, setCorrectAnswer] = useState(null)
-  const [minutes, setMinutes] = useState(1)
+  const [minutes, setMinutes] = useState(8)
   const [seconds, setSeconds] = useState(0)
   const [userMinute, setUserMinute] = useState(0)
   const [userSecond, setUserSecond] = useState(0)
 
   const { ENDPOINT } = useMyContext()
 
-  const [correct] = useSound('/correct.mp3')
-  const [wrong] = useSound('/wrong.mp3')
+  // const [correct] = useSound('/correct.mp3')
+  // const [wrong] = useSound('/wrong.mp3')
   const [next] = useSound('/next.mp3')
-  // const [tictac] = useSound('/tictac.mp3')
+  const [tictac] = useSound('/tictac.mp3')
   const [win] = useSound('/win.mp3')
   const [lose] = useSound('/lose.mp3')
   const router = useRouter()
@@ -43,6 +43,7 @@ export default function QuestionList({ questions }) {
       } else {
         if (seconds === 0) {
           setMinutes(minutes - 1)
+
           setSeconds(59)
           if (!result && !timeOut) {
             setUserMinute(minutes - 1)
@@ -63,16 +64,6 @@ export default function QuestionList({ questions }) {
     setCurrentAnswer(answer)
     if (answer.iscorrect) {
       setScore(score + 1)
-      setCorrectAnswer(answer)
-      correct()
-    } else {
-      wrong()
-
-      setCorrectAnswer(
-        questions[currentQuestion].options.find(
-          option => option.iscorrect
-        )
-      )
     }
   }
 
@@ -133,7 +124,7 @@ export default function QuestionList({ questions }) {
           Return={Return}
         />
       )}
-      <div className="h-[30vh] flex flex-col  md:h-[50vh] relative  rounded-bl-3xl rounded-br-3xl p-4">
+      <div className="h-[30vh] flex flex-col  md:h-[30vh] relative  rounded-bl-3xl rounded-br-3xl p-4">
         {questions[currentQuestion].image && (
           <img
             className="h-full w-full object-contain absolute top-0 left-0 rounded-bl-3xl rounded-br-3xl"
@@ -167,14 +158,12 @@ export default function QuestionList({ questions }) {
         <div className="flex flex-col gap-4">
           {questions[currentQuestion].options.map((item, index) => (
             <button
-              disabled={currentAnswer != null}
+              // disabled={currentAnswer != null}
               onClick={() => handleAnswerButtonClick(item)}
               key={index}
               className={`p-2 text-sm md:text-base border flex items-center gap-1 rounded-full ${
                 currentAnswer === item
-                  ? item.iscorrect
-                    ? 'bg-green-600 text-zinc-50'
-                    : 'bg-red-600 text-zinc-50'
+                  ? 'border border-primary-200 text-primary-200'
                   : 'border border-transparent'
               } bg-cinza-100 ${
                 correctAnswer === item && 'bg-green-600 text-zinc-50'

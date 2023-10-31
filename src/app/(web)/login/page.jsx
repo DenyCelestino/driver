@@ -7,13 +7,43 @@ import toast from 'react-hot-toast'
 import { useGoogleLogin } from '@react-oauth/google'
 import axios from 'axios'
 import { ContextUser } from '@/context/ContextUser'
+import { DotLoader } from 'react-spinners'
 
 export default function Login() {
   const router = useRouter()
 
   const { ENDPOINT } = useMyContext()
-  const { setLogged } = ContextUser()
+  const { setCookies } = ContextUser()
   const [isLoading, setLoading] = useState(false)
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const signin = async e => {
+    e.preventDefault()
+
+    try {
+      setLoading(true)
+      const res = await axios.post(
+        `${ENDPOINT}signin.php`,
+        JSON.stringify({
+          email: email,
+          password: password
+        })
+      )
+      setLoading(false)
+      if (res.data.status == 200) {
+        toast.success(res.data.message)
+        router.push('/payment')
+        setCookies(res.data.user)
+        localStorage.setItem('user', JSON.stringify(res.data.user))
+      } else {
+        toast.error(res.data.message)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const chekIfUserExists = async (email, google_id) => {
     setLoading(true)
@@ -78,9 +108,13 @@ export default function Login() {
                 loading: 'Registando e Autenticando... ',
                 success: response => {
                   setLoading(false)
-                  setLogged(JSON.stringify(response.data.user))
+                  setCookies(response.data.user)
+                  localStorage.setItem(
+                    'user',
+                    JSON.stringify(response.data.user)
+                  )
 
-                  router.push('/payment')
+                  router.push('/dashboard')
                   return `Autenticado(a) com sucesso, ${response.data.user.name}`
                 },
                 error: response => {
@@ -91,8 +125,13 @@ export default function Login() {
             } else if (response.data.status == 200) {
               console.log(response.data)
               setLoading(false)
-              setLogged(JSON.stringify(response.data.user))
-              router.push('/payment')
+              setCookies(response.data.user)
+              localStorage.setItem(
+                'user',
+                JSON.stringify(response.data.user)
+              )
+
+              router.push('/dashboard')
               return `Autenticado(a) com sucesso, ${response.data.user.name}`
             }
           },
@@ -110,7 +149,7 @@ export default function Login() {
 
   return (
     <div className="flex flex-col gap-10">
-      <div className="h-[40vh] md:h-[50vh] bg-cinza-100 rounded-bl-3xl rounded-br-3xl "></div>
+      <div className="h-[40vh] md:h-[30vh] bg-cinza-100 rounded-bl-3xl rounded-br-3xl "></div>
 
       <div className="wrapper flex flex-col gap-4 text-xs md:text-base">
         <div className="p-1 bg-cinza-100 w-1/3 flex items-center justify-center rounded">
@@ -129,7 +168,7 @@ export default function Login() {
           onClick={login}
           className={`bg-cinza-100 py-2 px-4 rounded-lg`}
         >
-          Connect with google
+          Entrar com google
         </button>
 
         {/* others login  */}
@@ -149,19 +188,23 @@ export default function Login() {
             <div className="flex items-center p-2 gap-2 bg-cinza-100">
               <div className="p-2 rounded bg-cinza-200" />
               <input
-                className="text-base md:text-lg bg-transparent outline-none"
+                className="text-base md:text-lg bg-transparent outline-none w-full"
                 type="email"
                 placeholder="Email"
                 required
+                onChange={e => setEmail(e.target.value)}
+                value={email}
               />
             </div>
             <div className="flex items-center p-2 gap-2 bg-cinza-100">
               <div className="p-2 rounded bg-cinza-200" />
               <input
-                className="text-base md:text-lg bg-transparent outline-none"
+                className="text-base md:text-lg bg-transparent outline-none w-full"
                 type="password"
                 placeholder="Password"
                 required
+                onChange={e => setPassword(e.target.value)}
+                value={password}
               />
             </div>
           </div>
@@ -172,22 +215,28 @@ export default function Login() {
               Lost password
             </Link>
 
-            <div className="flex items-center gap-2">
+            {/* <div className="flex items-center gap-2">
               <input type="checkbox" />
               Remember me
-            </div>
+            </div> */}
           </div>
 
           {/* login button  */}
-          <button className={`bg-cinza-100 py-2 px-4 rounded-lg`}>
-            Login
+          <button
+            className={`bg-cinza-100 py-2 px-4 rounded-lg flex items-center justify-center`}
+          >
+            {isLoading ? (
+              <DotLoader size={20} color="#DC4266" />
+            ) : (
+              'Iniciar sessão'
+            )}
           </button>
         </form>
 
         {/* signup  */}
         <div className="mt-9 flex items-center justify-center">
           <span>No account ?</span>
-          <Link href={'#'} className="text-zinc-500 underline">
+          <Link href={'/signup'} className="text-zinc-500 underline">
             Signup
           </Link>
         </div>

@@ -6,16 +6,30 @@ import { ContextUser } from '@/context/ContextUser'
 import { useEffect, useState } from 'react'
 
 export default function Profile() {
-  const { user } = ContextUser()
-  const [name, setName] = useState(user.name)
+  // const objetoNoLocalStorage = JSON.parse(
+  //   localStorage.getItem('user')
+  // )
+  const [name, setName] = useState(
+    JSON.parse(localStorage.getItem('user')).name
+      ? JSON.parse(localStorage.getItem('user')).name
+      : ''
+  )
   const [birthday, setBirthday] = useState('')
-  const [number, setNumber] = useState('')
-  const [email, setEmail] = useState(user.email)
+  const [number, setNumber] = useState(
+    JSON.parse(localStorage.getItem('user')).number
+      ? JSON.parse(localStorage.getItem('user')).number
+      : ''
+  )
+  const [email, setEmail] = useState(
+    JSON.parse(localStorage.getItem('user')).email
+      ? JSON.parse(localStorage.getItem('user')).email
+      : ''
+  )
   const [password, setPassword] = useState('growskills')
 
   return (
     <div>
-      <div className="h-[30vh] md:h-[50vh] bg-cinza-100 rounded-bl-3xl rounded-br-3xl text-xs md:text-base"></div>
+      <div className="h-[30vh] md:h-[30vh] bg-cinza-100 rounded-bl-3xl rounded-br-3xl text-xs md:text-base"></div>
 
       <div className="flex items-center justify-center">
         <div className="h-44 w-44 -mt-24 bg-white rounded-full shadow-lg" />
@@ -34,12 +48,12 @@ export default function Profile() {
 
           {/* each one  */}
 
-          <Input
+          {/* <Input
             placeholder="Bithday"
             type="date"
             value={birthday}
             onChange={e => setBirthday(e.target.value)}
-          />
+          /> */}
 
           {/* each one  */}
           <Input

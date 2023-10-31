@@ -19,8 +19,11 @@ const rooms = [
 ]
 
 export default function Dashboard() {
-  const { user } = ContextUser()
+  const { bypass, logout } = ContextUser()
 
+  const objetoNoLocalStorage = JSON.parse(
+    localStorage.getItem('user')
+  )
   return (
     <div className="wrapper flex flex-col gap-4 text-xs md:text-base">
       <div className=" flex items-center justify-between mt-6 text-base md:text-lg">
@@ -28,8 +31,23 @@ export default function Dashboard() {
           <h1>LOGO</h1>
         </div>
 
-        <div className="flex items-center gap-2 text-xs md:text-base">
-          <span>Voce tem 2 semanas restantes</span>
+        <div className="flex items-center text-xs md:text-base gap-4">
+          <div className="flex flex-col gap-2 items-end justify-end">
+            <span
+              className={` ${bypass.days > 20 && 'text-green-600'} ${
+                bypass.days <= 7 && 'text-red-600 animate-bounce'
+              }`}
+            >
+              {' '}
+              {bypass.days > 0
+                ? `Você tem ${bypass.days} dia(s) de acesso`
+                : 'Seu plano de acesso termina hoje'}
+            </span>
+
+            <span className="cursor-pointer" onClick={logout}>
+              Sair
+            </span>
+          </div>
 
           <div>
             <div className="h-10 w-10 bg-cinza-100 rounded-full border border-cinza-200" />
@@ -38,7 +56,8 @@ export default function Dashboard() {
       </div>
 
       <span>
-        Heii Bem vindo {user.name}, escolha o que <br />
+        Heii Bem vindo {objetoNoLocalStorage.name}
+        , escolha o que <br />
         faremos hoje
       </span>
 
@@ -46,7 +65,7 @@ export default function Dashboard() {
         {rooms.map((room, index) => (
           <div
             key={index}
-            className="py-16  md:py-24 px-8 md:px-10 flex flex-col gap-8 items-center justify-center bg-cinza-100 rounded-3xl"
+            className="py-16  md:py-20 px-8 md:px-10 flex flex-col gap-8 items-center justify-center bg-cinza-100 rounded-3xl"
           >
             <h1>{room.title}</h1>
 

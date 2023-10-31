@@ -40,9 +40,10 @@ export default function LessonQuestion({ questions }) {
 
       setCurrentQuestion(Backquestion)
       next()
-    } else {
-      router.push('/dashboard')
     }
+  }
+  const exit = () => {
+    router.push('/dashboard')
   }
   const EnLesson = () => {
     router.push('/dashboard')
@@ -50,7 +51,7 @@ export default function LessonQuestion({ questions }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="h-[30vh] flex flex-col  md:h-[50vh] relative  rounded-bl-3xl rounded-br-3xl p-4">
+      <div className="h-[30vh] flex flex-col  md:h-[30vh] relative  rounded-bl-3xl rounded-br-3xl p-4">
         {questions[currentQuestion].image && (
           <img
             className="h-full w-full object-contain absolute top-0 left-0 rounded-bl-3xl rounded-br-3xl"
@@ -92,15 +93,7 @@ export default function LessonQuestion({ questions }) {
           ))}
         </div>
         <div className="flex items-center justify-around ">
-          {currentQuestion == 0 ? (
-            <button
-              className="flex items-center gap-2"
-              onClick={BackQuestion}
-            >
-              <Undo2Icon size={20} />
-              Sair da aula
-            </button>
-          ) : (
+          {currentQuestion != 0 && (
             <button
               className="flex items-center gap-2"
               onClick={BackQuestion}
@@ -108,6 +101,14 @@ export default function LessonQuestion({ questions }) {
               <ChevronLeftSquareIcon size={20} /> Pergunta anterior
             </button>
           )}
+
+          <button
+            className="flex items-center gap-1 p-2 bg-gray-600 rounded text-zinc-50"
+            onClick={exit}
+          >
+            <Undo2Icon size={20} />
+            Sair da aula
+          </button>
           {questions.length != currentQuestion + 1 ? (
             <button
               className="flex items-center gap-2"

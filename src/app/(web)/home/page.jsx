@@ -136,7 +136,7 @@ export default function Home() {
           <Anchor route="/free" title="Make a test" />
         </div>
         <div className="mt-9">
-          <Link href={'#'} className="text-zinc-500 underline">
+          <Link href={'/signup'} className="text-zinc-500 underline">
             Signup
           </Link>
         </div>

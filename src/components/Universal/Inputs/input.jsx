@@ -11,11 +11,11 @@ export default function Input({
           gap-4 w-full text-xs md:text-base
           "
     >
-      <div>
+      {/* <div>
         <div className="h-12 w-12 bg-cinza-200 rounded-full" />
-      </div>
+      </div> */}
       <input
-        className="bg-transparent outline-none "
+        className="bg-transparent p-4 rounded-full outline-none w-full"
         placeholder={placeholder}
         value={value}
         type={type}

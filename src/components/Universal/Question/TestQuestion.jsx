@@ -82,9 +82,11 @@ export default function TestQuestion({ questions }) {
       )
       console.log('correct answer: ' + correctAnswer)
       next()
-    } else {
-      router.push('/dashboard')
     }
+  }
+
+  const exit = () => {
+    router.push('/dashboard')
   }
   const SeeResults = () => {
     setOldQuestion(false)
@@ -124,7 +126,7 @@ export default function TestQuestion({ questions }) {
         />
       )}
 
-      <div className="h-[30vh] flex flex-col  md:h-[50vh] relative  rounded-bl-3xl rounded-br-3xl p-4">
+      <div className="h-[30vh] flex flex-col  md:h-[30vh] relative  rounded-bl-3xl rounded-br-3xl p-4">
         {questions[currentQuestion].image && (
           <img
             className="h-full w-full object-contain absolute top-0 left-0 rounded-bl-3xl rounded-br-3xl"
@@ -198,22 +200,22 @@ export default function TestQuestion({ questions }) {
         </div>
 
         <div className="flex items-center justify-around text-xs md:text-base">
-          {currentQuestion == 0 ? (
+          {currentQuestion != 0 && (
             <button
-              className="flex items-center gap-1 p-2 bg-gray-600 rounded text-zinc-50"
-              onClick={BackQuestion}
-            >
-              <Undo2Icon size={20} />
-              Sair da aula
-            </button>
-          ) : (
-            <button
-              className="flex items-center gap-1  p-2 bg-gray-600 rounded text-zinc-50"
+              className="flex items-center gap-2"
               onClick={BackQuestion}
             >
               <ChevronLeftSquareIcon size={20} /> Pergunta anterior
             </button>
           )}
+
+          <button
+            className="flex items-center gap-1 p-2 bg-gray-600 rounded text-zinc-50"
+            onClick={exit}
+          >
+            <Undo2Icon size={20} />
+            Sair do teste
+          </button>
           {currentAnswer && (
             <div className="flex items-center justify-center ">
               {currentQuestion === questions.length - 1 ? (
