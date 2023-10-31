@@ -1,6 +1,12 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback
+} from 'react'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
 import { useMyContext } from './Context'
@@ -30,7 +36,7 @@ export const UserProvider = ({ children }) => {
     getUser()
   }
 
-  const checkPlan = async () => {
+  const checkPlan = useCallback(async () => {
     const storedUser = JSON.parse(localStorage.getItem('user'))
     if (storedUser) {
       try {
@@ -42,16 +48,15 @@ export const UserProvider = ({ children }) => {
           router.push('/payment')
         }
       } catch (error) {
-        // Tratar erros ao fazer a requisição
         console.error('Erro ao verificar o plano:', error)
       }
     }
-  }
+  }, [ENDPOINT, router])
 
   useEffect(() => {
     getUser()
     checkPlan()
-  }, [checkPlan]) // Incluindo checkPlan no array de dependências
+  }, [checkPlan])
 
   return (
     <UserContext.Provider
