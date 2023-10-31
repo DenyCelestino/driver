@@ -14,7 +14,7 @@ export default function PrivateRoutes({ children }) {
     if (!isLoggedIn) {
       router.push('/login')
     }
-  }, [])
+  }, [isLoggedIn, router])
 
   return isLoggedIn ? children : null
 }
