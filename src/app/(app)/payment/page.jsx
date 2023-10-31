@@ -14,9 +14,6 @@ import { DotLoader } from 'react-spinners'
 import { ContextUser } from '@/context/ContextUser'
 
 export default function Payment() {
-  const objetoNoLocalStorage = JSON.parse(
-    localStorage.getItem('user')
-  )
   const [number, setNumber] = useState(
     objetoNoLocalStorage.number ? objetoNoLocalStorage.number : ''
   )
@@ -37,7 +34,7 @@ export default function Payment() {
         let res = await axios.post(
           `${ENDPOINT}payment.php`,
           JSON.stringify({
-            user: objetoNoLocalStorage.id,
+            user: JSON.parse(window.localStorage.getItem('user')).id,
             number: number,
             amount: 10
           })

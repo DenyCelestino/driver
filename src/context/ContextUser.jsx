@@ -11,6 +11,7 @@ const UserContext = createContext({})
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState('')
+  const [localUser, setLocalUser] = useState('')
   const [bypass, setBypass] = useState('')
   const { ENDPOINT } = useMyContext()
 
@@ -34,8 +35,9 @@ export const UserProvider = ({ children }) => {
   const checkPlan = async () => {
     let res = await axios.get(
       `${ENDPOINT}checkdays.php?user=${
-        JSON.parse(localStorage.getItem('user')).id
-      }`
+        JSON.parse(window.localStorage.getItem('user')).id
+      })
+      )}`
     )
 
     setBypass(res.data)
@@ -45,10 +47,11 @@ export const UserProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    // const item = JSON.parse(localStorage.getItem('user')).id
-    // console.log(item)
     getUser()
-    JSON.parse(localStorage.getItem('user')) && checkPlan()
+
+    if (JSON.parse(window.localStorage.getItem('user'))) {
+      checkPlan()
+    }
   }, [])
 
   return (

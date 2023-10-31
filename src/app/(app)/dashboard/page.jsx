@@ -2,6 +2,7 @@
 
 import { ContextUser } from '@/context/ContextUser'
 import Link from 'next/link'
+import { useEffect } from 'react'
 
 const rooms = [
   {
@@ -21,9 +22,10 @@ const rooms = [
 export default function Dashboard() {
   const { bypass, logout } = ContextUser()
 
-  const objetoNoLocalStorage = JSON.parse(
-    localStorage.getItem('user')
-  )
+  useEffect(() => {}, [])
+  // const objetoNoLocalStorage = JSON.parse(
+  //   window.localStorage.getItem('user')
+  // )
   return (
     <div className="wrapper flex flex-col gap-4 text-xs md:text-base">
       <div className=" flex items-center justify-between mt-6 text-base md:text-lg">
@@ -56,8 +58,7 @@ export default function Dashboard() {
       </div>
 
       <span>
-        Heii Bem vindo {objetoNoLocalStorage.name}
-        , escolha o que <br />
+        Heii Bem vindo , escolha o que <br />
         faremos hoje
       </span>
 
