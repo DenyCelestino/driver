@@ -5,7 +5,9 @@ import { useRouter } from 'next/navigation'
 import { ContextUser } from '@/context/ContextUser'
 
 export default function PrivateRoutes({ children }) {
-  const isLoggedIn = localStorage.getItem('user') ? true : false
+  const isLoggedIn = JSON.parse(localStorage.getItem('user'))
+    ? true
+    : false
 
   const router = useRouter()
 

@@ -13,9 +13,6 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState('')
   const [bypass, setBypass] = useState('')
   const { ENDPOINT } = useMyContext()
-  const objetoNoLocalStorage = JSON.parse(
-    localStorage.getItem('user')
-  )
 
   const router = useRouter()
 
@@ -36,9 +33,11 @@ export const UserProvider = ({ children }) => {
 
   const checkPlan = async () => {
     let res = await axios.get(
-      `${ENDPOINT}checkdays.php?user=${objetoNoLocalStorage.id}`
+      `${ENDPOINT}checkdays.php?user=${
+        JSON.parse(localStorage.getItem('user')).id
+      }`
     )
-    console.log(res.config)
+
     setBypass(res.data)
     if (res.data.status == 404) {
       router.push('/payment')
@@ -46,8 +45,10 @@ export const UserProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    console.log(objetoNoLocalStorage.id)
-    objetoNoLocalStorage && checkPlan()
+    // const item = JSON.parse(localStorage.getItem('user')).id
+    // console.log(item)
+    getUser()
+    JSON.parse(localStorage.getItem('user')) && checkPlan()
   }, [])
 
   return (
