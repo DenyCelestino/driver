@@ -103,7 +103,7 @@ export default function QuestionList({ questions }) {
     setCorrectAnswer(null)
   }
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2">
       {result && (
         <Result
           score={score}
