@@ -186,14 +186,14 @@ export default function QuestionList({ questions }) {
                 onClick={SeeResults}
                 className="p-2 bg-green-600 rounded text-zinc-50"
               >
-                Ver Resultados
+                Resultados
               </button>
             ) : (
               <button
                 onClick={NextQuestion}
                 className="p-2 bg-green-600 rounded text-zinc-50"
               >
-                Proxima pergunta
+                Proxima
               </button>
             )}
           </div>

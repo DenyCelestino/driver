@@ -207,7 +207,7 @@ export default function TestQuestion({ questions }) {
               className="flex items-center gap-2"
               onClick={BackQuestion}
             >
-              <ChevronLeftSquareIcon size={20} /> Pergunta anterior
+              <ChevronLeftSquareIcon size={20} /> Anterior
             </button>
           )}
 
@@ -216,7 +216,7 @@ export default function TestQuestion({ questions }) {
             onClick={exit}
           >
             <Undo2Icon size={20} />
-            Sair do teste
+            Sair
           </button>
           {currentAnswer && (
             <div className="flex items-center justify-center ">
@@ -225,7 +225,7 @@ export default function TestQuestion({ questions }) {
                   onClick={SeeResults}
                   className="p-2 bg-green-600 rounded text-zinc-50"
                 >
-                  Ver Resultados
+                  Resultados
                 </button>
               ) : (
                 <button

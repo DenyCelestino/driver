@@ -100,7 +100,7 @@ export default function LessonQuestion({ questions }) {
               className="flex items-center gap-2"
               onClick={BackQuestion}
             >
-              <ChevronLeftSquareIcon size={20} /> Pergunta anterior
+              <ChevronLeftSquareIcon size={20} /> Anterior
             </button>
           )}
 
@@ -116,14 +116,14 @@ export default function LessonQuestion({ questions }) {
               className="flex items-center gap-2"
               onClick={NextQuestion}
             >
-              Proxima pergunta <ChevronRightSquareIcon size={20} />
+              Proxima <ChevronRightSquareIcon size={20} />
             </button>
           ) : (
             <button
               onClick={EnLesson}
               className="flex items-center gap-2"
             >
-              Finalizar a aula <BookmarkCheckIcon size={20} />
+              Finalizar <BookmarkCheckIcon size={20} />
             </button>
           )}
         </div>

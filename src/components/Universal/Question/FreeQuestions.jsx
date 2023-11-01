@@ -205,7 +205,7 @@ export default function FreeQuestions({ questions }) {
               className="flex items-center gap-1  p-2 bg-black rounded text-zinc-50"
               onClick={BackQuestion}
             >
-              <ChevronLeftSquareIcon size={20} /> Pergunta anterior
+              <ChevronLeftSquareIcon size={20} /> Anterior
             </button>
           )}
 
@@ -214,7 +214,7 @@ export default function FreeQuestions({ questions }) {
             onClick={exit}
           >
             <Undo2Icon size={20} />
-            Sair do teste
+            Sair
           </button>
           {currentAnswer && (
             <div className="flex items-center justify-center ">
@@ -230,7 +230,7 @@ export default function FreeQuestions({ questions }) {
                   onClick={NextQuestion}
                   className="flex items-center gap-1 p-2 bg-primary-200 rounded text-zinc-50"
                 >
-                  Proxima pergunta{' '}
+                  Proxima
                   <ChevronRightSquareIcon size={20} />
                 </button>
               )}
