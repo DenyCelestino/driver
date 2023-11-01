@@ -50,7 +50,7 @@ export const UserProvider = ({ children }) => {
     } catch (error) {
       console.error('Erro ao verificar o plano:', error)
     }
-  }, [])
+  }, [ENDPOINT, router])
 
   useEffect(() => {
     getUser()
