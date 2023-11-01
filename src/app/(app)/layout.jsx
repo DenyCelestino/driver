@@ -9,7 +9,6 @@ export default function AppLayout({ children }) {
   return (
     <PrivateRoutes>
       <div className="pb-14 md:pb-0">{children}</div>
-
       <BottomTab />
     </PrivateRoutes>
   )
