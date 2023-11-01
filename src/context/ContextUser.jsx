@@ -57,7 +57,7 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     getUser()
     user && checkPlan()
-  }, [checkPlan, user])
+  }, [checkPlan])
 
   return (
     <UserContext.Provider
