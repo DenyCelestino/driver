@@ -15,11 +15,9 @@ import { ContextUser } from '@/context/ContextUser'
 import Cookies from 'js-cookie'
 
 export default function Payment() {
-  const [number, setNumber] = useState(
-    JSON.parse(Cookies.get('user')).number
-      ? JSON.parse(Cookies.get('user')).number
-      : ''
-  )
+  const getUserCookie = Cookies.get('user')
+  const user = getUserCookie ? JSON.parse(getUserCookie) : {}
+  const [number, setNumber] = useState(user.number ? user.number : '')
   const [isLoading, setLoading] = useState(false)
   const [isPaid, setIsPaid] = useState(false)
 
