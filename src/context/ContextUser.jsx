@@ -36,14 +36,13 @@ export const UserProvider = ({ children }) => {
     getUser()
   }
 
-  const checkPlan = async () => {
+  const checkPlan = useCallback(async () => {
     try {
       let res = await axios.get(
         `${ENDPOINT}checkdays.php?user=${
           JSON.parse(Cookies.get('user')).id
         }`
       )
-      console.log(res)
       setBypass(res.data)
       if (res.data.status === 404) {
         router.push('/payment')
@@ -51,7 +50,7 @@ export const UserProvider = ({ children }) => {
     } catch (error) {
       console.error('Erro ao verificar o plano:', error)
     }
-  }
+  }, [])
 
   useEffect(() => {
     getUser()
