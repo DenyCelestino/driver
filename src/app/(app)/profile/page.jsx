@@ -3,6 +3,7 @@
 import Anchor from '@/components/Universal/Anchor/anchor'
 import Input from '@/components/Universal/Inputs/input'
 import { ContextUser } from '@/context/ContextUser'
+import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
 
 export default function Profile() {
@@ -10,19 +11,19 @@ export default function Profile() {
   //   localStorage.getItem('user')
   // )
   const [name, setName] = useState(
-    JSON.parse(localStorage.getItem('user')).name
-      ? JSON.parse(localStorage.getItem('user')).name
+    JSON.parse(Cookies.get('user')).name
+      ? JSON.parse(Cookies.get('user')).name
       : ''
   )
   const [birthday, setBirthday] = useState('')
   const [number, setNumber] = useState(
-    JSON.parse(localStorage.getItem('user')).number
-      ? JSON.parse(localStorage.getItem('user')).number
+    JSON.parse(Cookies.get('user')).number
+      ? JSON.parse(Cookies.get('user')).number
       : ''
   )
   const [email, setEmail] = useState(
-    JSON.parse(localStorage.getItem('user')).email
-      ? JSON.parse(localStorage.getItem('user')).email
+    JSON.parse(Cookies.get('user')).email
+      ? JSON.parse(Cookies.get('user')).email
       : ''
   )
   const [password, setPassword] = useState('growskills')
