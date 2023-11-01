@@ -109,7 +109,7 @@ export default function TestQuestion({ questions }) {
     router.push('/test')
   }
   function Return() {
-    router.push('/home')
+    router.push('/dashboard')
     setCurrentQuestion(0)
     setCurrentAnswer(null)
     setCorrectAnswer(null)
