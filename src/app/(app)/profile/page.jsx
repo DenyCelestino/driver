@@ -7,22 +7,13 @@ import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
 
 export default function Profile() {
-  const [name, setName] = useState(
-    JSON.parse(Cookies.get('user')).name
-      ? JSON.parse(Cookies.get('user')).name
-      : ''
-  )
+  const getUserCookie = Cookies.get('user')
+  const user = getUserCookie ? JSON.parse(getUserCookie) : {}
+
+  const [name, setName] = useState(user.name ? user.name : '')
   const [birthday, setBirthday] = useState('')
-  const [number, setNumber] = useState(
-    JSON.parse(Cookies.get('user')).number
-      ? JSON.parse(Cookies.get('user')).number
-      : ''
-  )
-  const [email, setEmail] = useState(
-    JSON.parse(Cookies.get('user')).email
-      ? JSON.parse(Cookies.get('user')).email
-      : ''
-  )
+  const [number, setNumber] = useState(user.number ? user.number : '')
+  const [email, setEmail] = useState(user.email ? user.email : '')
   const [password, setPassword] = useState('growskills')
 
   return (
