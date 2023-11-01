@@ -52,12 +52,12 @@ export const UserProvider = ({ children }) => {
     } catch (error) {
       console.error('Erro ao verificar o plano:', error)
     }
-  }, [ENDPOINT, router, user])
+  }, [ENDPOINT, router])
 
   useEffect(() => {
     getUser()
     user && checkPlan()
-  }, [checkPlan])
+  }, [checkPlan, user])
 
   return (
     <UserContext.Provider
