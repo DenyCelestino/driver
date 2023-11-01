@@ -21,7 +21,8 @@ const rooms = [
 
 export default function Dashboard() {
   const { bypass, logout } = ContextUser()
-
+  const getUserCookie = Cookies.get('user')
+  const user = getUserCookie ? JSON.parse(getUserCookie) : {}
   useEffect(() => {}, [])
 
   return (
@@ -56,7 +57,7 @@ export default function Dashboard() {
       </div>
 
       <span>
-        Heii Bem vindo , escolha o que <br />
+        Heii Bem vindo {user.name}, escolha o que <br />
         faremos hoje
       </span>
 
