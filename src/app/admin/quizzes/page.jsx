@@ -181,7 +181,9 @@ export default function Quizzes() {
             <span>Click to choose image</span>
             {imagePreview ? (
               <button onClick={handleClick} className="h-80 w-full">
-                <img
+                <Image
+                  width={100}
+                  height={100}
                   className=" w-full h-full object-contain"
                   src={imagePreview}
                   alt="image preview"
