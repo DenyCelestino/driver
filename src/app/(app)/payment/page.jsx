@@ -12,10 +12,13 @@ import CHECK from '../../../../public/animations/check.json'
 import SUCESS from '../../../../public/animations/sucess.json'
 import { DotLoader } from 'react-spinners'
 import { ContextUser } from '@/context/ContextUser'
+import Cookies from 'js-cookie'
 
 export default function Payment() {
   const [number, setNumber] = useState(
-    objetoNoLocalStorage.number ? objetoNoLocalStorage.number : ''
+    JSON.parse(Cookies.get('user')).number
+      ? JSON.parse(Cookies.get('user')).number
+      : ''
   )
   const [isLoading, setLoading] = useState(false)
   const [isPaid, setIsPaid] = useState(false)
@@ -34,7 +37,7 @@ export default function Payment() {
         let res = await axios.post(
           `${ENDPOINT}payment.php`,
           JSON.stringify({
-            user: JSON.parse(window.localStorage.getItem('user')).id,
+            user: JSON.parse(Cookies.get('user')).id,
             number: number,
             amount: 10
           })

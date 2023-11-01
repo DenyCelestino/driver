@@ -23,7 +23,7 @@ export const UserProvider = ({ children }) => {
 
   const logout = () => {
     Cookies.remove('user')
-    localStorage.removeItem('user')
+
     router.push('/login')
   }
 
@@ -36,27 +36,27 @@ export const UserProvider = ({ children }) => {
     getUser()
   }
 
-  const checkPlan = useCallback(async () => {
-    const storedUser = JSON.parse(localStorage.getItem('user'))
-    if (storedUser) {
-      try {
-        let res = await axios.get(
-          `${ENDPOINT}checkdays.php?user=${storedUser.id}`
-        )
-        setBypass(res.data)
-        if (res.data.status === 404) {
-          router.push('/payment')
-        }
-      } catch (error) {
-        console.error('Erro ao verificar o plano:', error)
+  const checkPlan = async () => {
+    try {
+      let res = await axios.get(
+        `${ENDPOINT}checkdays.php?user=${
+          JSON.parse(Cookies.get('user')).id
+        }`
+      )
+      console.log(res)
+      setBypass(res.data)
+      if (res.data.status === 404) {
+        router.push('/payment')
       }
+    } catch (error) {
+      console.error('Erro ao verificar o plano:', error)
     }
-  }, [ENDPOINT, router])
+  }
 
   useEffect(() => {
     getUser()
     checkPlan()
-  }, [checkPlan])
+  }, [])
 
   return (
     <UserContext.Provider

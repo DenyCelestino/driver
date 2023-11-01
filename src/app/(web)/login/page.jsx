@@ -36,7 +36,6 @@ export default function Login() {
         toast.success(res.data.message)
         router.push('/payment')
         setCookies(res.data.user)
-        localStorage.setItem('user', JSON.stringify(res.data.user))
       } else {
         toast.error(res.data.message)
       }
@@ -109,10 +108,6 @@ export default function Login() {
                 success: response => {
                   setLoading(false)
                   setCookies(response.data.user)
-                  localStorage.setItem(
-                    'user',
-                    JSON.stringify(response.data.user)
-                  )
 
                   router.push('/dashboard')
                   return `Autenticado(a) com sucesso, ${response.data.user.name}`
@@ -126,10 +121,6 @@ export default function Login() {
               console.log(response.data)
               setLoading(false)
               setCookies(response.data.user)
-              localStorage.setItem(
-                'user',
-                JSON.stringify(response.data.user)
-              )
 
               router.push('/dashboard')
               return `Autenticado(a) com sucesso, ${response.data.user.name}`

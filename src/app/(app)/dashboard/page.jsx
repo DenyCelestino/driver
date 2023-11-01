@@ -23,9 +23,7 @@ export default function Dashboard() {
   const { bypass, logout } = ContextUser()
 
   useEffect(() => {}, [])
-  // const objetoNoLocalStorage = JSON.parse(
-  //   window.localStorage.getItem('user')
-  // )
+
   return (
     <div className="wrapper flex flex-col gap-4 text-xs md:text-base">
       <div className=" flex items-center justify-between mt-6 text-base md:text-lg">

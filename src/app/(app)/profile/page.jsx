@@ -7,9 +7,6 @@ import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
 
 export default function Profile() {
-  // const objetoNoLocalStorage = JSON.parse(
-  //   localStorage.getItem('user')
-  // )
   const [name, setName] = useState(
     JSON.parse(Cookies.get('user')).name
       ? JSON.parse(Cookies.get('user')).name
