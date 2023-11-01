@@ -11,7 +11,6 @@ import toast from 'react-hot-toast'
 import CHECK from '../../../../public/animations/check.json'
 import SUCESS from '../../../../public/animations/sucess.json'
 import { DotLoader } from 'react-spinners'
-import { ContextUser } from '@/context/ContextUser'
 import Cookies from 'js-cookie'
 
 export default function Payment() {

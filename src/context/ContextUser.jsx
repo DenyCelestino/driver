@@ -28,7 +28,9 @@ export const UserProvider = ({ children }) => {
   }
 
   const getUser = () => {
-    setUser(JSON.parse(Cookies.get('user')))
+    const getUserCookie = Cookies.get('user')
+    const user = getUserCookie ? JSON.parse(getUserCookie) : {}
+    setUser(user)
   }
 
   const setCookies = user => {
@@ -37,11 +39,11 @@ export const UserProvider = ({ children }) => {
   }
 
   const checkPlan = useCallback(async () => {
+    const getUserCookie = Cookies.get('user')
+    const user = getUserCookie ? JSON.parse(getUserCookie) : {}
     try {
       let res = await axios.get(
-        `${ENDPOINT}checkdays.php?user=${
-          JSON.parse(Cookies.get('user')).id
-        }`
+        `${ENDPOINT}checkdays.php?user=${user.id}`
       )
       setBypass(res.data)
       if (res.data.status === 404) {
