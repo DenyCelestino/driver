@@ -10,8 +10,12 @@ export default function AppLayout({ children }) {
   return (
     <PrivateRoutes>
       <Checkplan>
-        <div className="pb-14 md:pb-0">{children}</div>
-        <BottomTab />
+        <div
+        // className="pb-14 md:pb-0"
+        >
+          {children}
+        </div>
+        {/* <BottomTab /> */}
       </Checkplan>
     </PrivateRoutes>
   )
