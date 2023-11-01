@@ -7,9 +7,9 @@ import Cookies from 'js-cookie'
 
 export default function PrivateRoutes({ children }) {
   const router = useRouter()
-
+  const getUserCookie = Cookies.get('user')
   useEffect(() => {
-    const isLoggedIn = JSON.parse(Cookies.get('user')) ? true : false
+    const isLoggedIn = getUserCookie ? true : false
 
     console.log(isLoggedIn)
     if (!isLoggedIn) {

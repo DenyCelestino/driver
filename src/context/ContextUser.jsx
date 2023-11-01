@@ -15,7 +15,9 @@ import axios from 'axios'
 const UserContext = createContext({})
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState('')
+  const getUserCookie = Cookies.get('user')
+  const userCookie = getUserCookie ? JSON.parse(getUserCookie) : {}
+  const [user, setUser] = useState(userCookie ? userCookie : '')
   const [bypass, setBypass] = useState('')
   const { ENDPOINT } = useMyContext()
 
@@ -38,26 +40,9 @@ export const UserProvider = ({ children }) => {
     getUser()
   }
 
-  const checkPlan = useCallback(async () => {
-    const getUserCookie = Cookies.get('user')
-    const user = getUserCookie ? JSON.parse(getUserCookie) : {}
-    try {
-      let res = await axios.get(
-        `${ENDPOINT}checkdays.php?user=${user.id}`
-      )
-      setBypass(res.data)
-      if (res.data.status === 404) {
-        router.push('/payment')
-      }
-    } catch (error) {
-      console.error('Erro ao verificar o plano:', error)
-    }
-  }, [ENDPOINT, router])
-
   useEffect(() => {
     getUser()
-    user && checkPlan()
-  }, [checkPlan])
+  }, [])
 
   return (
     <UserContext.Provider
@@ -67,6 +52,7 @@ export const UserProvider = ({ children }) => {
         setCookies,
         getUser,
         bypass,
+        setBypass,
         logout
       }}
     >

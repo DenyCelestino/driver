@@ -1,4 +1,5 @@
 import BottomTab from '@/components/Universal/BottomTab/BottomTab'
+import Checkplan from '@/functions/Checkplan'
 import PrivateRoutes from '@/functions/PrivateRoutes'
 
 export const metadata = {
@@ -8,8 +9,10 @@ export const metadata = {
 export default function AppLayout({ children }) {
   return (
     <PrivateRoutes>
-      <div className="pb-14 md:pb-0">{children}</div>
-      <BottomTab />
+      <Checkplan>
+        <div className="pb-14 md:pb-0">{children}</div>
+        <BottomTab />
+      </Checkplan>
     </PrivateRoutes>
   )
 }

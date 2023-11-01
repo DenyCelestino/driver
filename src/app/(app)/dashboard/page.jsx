@@ -24,7 +24,6 @@ export default function Dashboard() {
   const { bypass, logout } = ContextUser()
   const getUserCookie = Cookies.get('user')
   const user = getUserCookie ? JSON.parse(getUserCookie) : {}
-  useEffect(() => {}, [])
 
   return (
     <div className="wrapper flex flex-col gap-4 text-xs md:text-base">
@@ -57,10 +56,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <span>
-        Heii Bem vindo {user.name}, escolha o que <br />
-        faremos hoje
-      </span>
+      <span>Seja bem vindo , selecione o que faremos hoje</span>
 
       <div className="flex flex-col gap-4">
         {rooms.map((room, index) => (
