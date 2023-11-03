@@ -155,7 +155,6 @@ export default function QuestionList({ questions }) {
           {questions[currentQuestion].options.map((item, index) => (
             <button
               key={index}
-              disabled={currentAnswer != null}
               onClick={() => handleAnswerButtonClick(item)}
               className={`${
                 currentAnswer === item ? 'option-selected' : 'option'
