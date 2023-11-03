@@ -20,7 +20,7 @@ export default function Header({ time, NoApp = true }) {
             : 0 + ' dias restantes'}
         </span>
       </div>
-      {NoApp ? (
+      {!NoApp ? (
         <Link className="login-anchor" href={'/login'}>
           Criar conta/Login
         </Link>
