@@ -459,6 +459,10 @@ em {
   align-items: center;
   font-size: 16px;
 }
+.app-header .login-anchor {
+  color: #84bc9c;
+  text-decoration: underline;
+}
 .app-header .logo {
   height: 32px;
   width: 32px;
