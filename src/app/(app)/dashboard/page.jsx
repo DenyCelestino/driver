@@ -5,6 +5,8 @@ import Rooms from '@/components/App/Dashboard/Rooms'
 import { ContextUser } from '@/context/ContextUser'
 import Cookies from 'js-cookie'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 const rooms = [
   {
@@ -22,9 +24,7 @@ const rooms = [
 ]
 
 export default function Dashboard() {
-  const { bypass, logout } = ContextUser()
-  const getUserCookie = Cookies.get('user')
-  const user = getUserCookie ? JSON.parse(getUserCookie) : {}
+  const { bypass } = ContextUser()
 
   return (
     <section className="dashboard">

@@ -9,13 +9,13 @@ export default function AppLayout({ children }) {
   const { hamburguer, setHamburguer } = ContextUser()
 
   return (
-    <Checkplan>
-      <PrivateRoutes>
+    <PrivateRoutes>
+      <Checkplan>
         <div>
           {hamburguer && <NavBar />}
           {children}
         </div>
-      </PrivateRoutes>
-    </Checkplan>
+      </Checkplan>
+    </PrivateRoutes>
   )
 }

@@ -16,7 +16,7 @@ export default function Header({ time, NoApp = true }) {
         <Image className="logo" src={LOGO} alt="Logo" />
         <span className="btn-days">
           {time.days
-            ? time.days + 'dias restantes'
+            ? time.days + ' dias restantes'
             : 0 + ' dias restantes'}
         </span>
       </div>

@@ -21,13 +21,11 @@ export default function Checkplan({ children }) {
       let res = await axios.get(
         `${ENDPOINT}checkdays.php?user=${user.id}`
       )
-      console.log(res.data.status)
+
       setBypass(res.data)
       if (res.data.status == 200) {
-        console.log('good')
         router.push('/dashboard')
       } else if (res.data.status == 404) {
-        console.log('bad')
         router.push('/payment')
       } else {
         toast.error(
@@ -39,8 +37,10 @@ export default function Checkplan({ children }) {
       console.error('Erro ao verificar o plano:', error)
     }
   }
+
   useEffect(() => {
     checkPlan()
   }, [])
+
   return children
 }
