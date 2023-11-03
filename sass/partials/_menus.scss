@@ -1,0 +1,143 @@
+#content-container {
+  .menu-is-open & {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    top: 0;
+  }
+}
+
+.header-menu-small {
+  position: fixed;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  transition: all 0.3s ease;
+  z-index: 8;
+  opacity: 0;
+  min-height: 100vh;
+  background: $color-green;
+  padding-top: 120px;
+
+  .menu-is-open & {
+    position: relative;
+    top: 0;
+    opacity: 1;
+  }
+
+  > ul {
+    position: relative;
+  }
+
+  li {
+    margin-bottom: 3px;
+  }
+
+  a {
+    font-family: $font-family-title;
+    font-size: 30px;
+    color: $color-green;
+    display: block;
+    background: $color-white;
+    padding: 20px;
+  }
+}
+
+.header-menu-large {
+  display: none;
+
+  @include breakpoint-desktop-small {
+    display: flex;
+    align-items: flex-start;
+    ul {
+      display: flex;
+    }
+    li + li {
+      margin-left: 2rem;
+    }
+
+    li {
+      position: relative;
+      &.current-menu-item {
+        &:before {
+          transition: all 0.4s ease-in-out;
+          content: '';
+          position: absolute;
+          left: 0;
+          top: -50px;
+          width: 44px;
+          height: 25px;
+          background: $color-orange;
+          border-bottom-right-radius: 120px;
+          border-bottom-left-radius: 80px;
+        }
+        a {
+          pointer-events: none;
+        }
+      }
+      .fixed & {
+        &.current-menu-item {
+          &:before {
+            top: -40px;
+          }
+        }
+      }
+      a {
+        font-family: $font-family-default;
+        font-size: 16px;
+        text-decoration: none;
+        color: $color-orange;
+        font-weight: 800;
+        text-transform: uppercase;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .fixed & {
+      padding-top: 20px;
+    }
+  }
+}
+
+.header-burger {
+  position: absolute;
+  top: 50px;
+  transform: translateY(-50%);
+  right: 20px;
+  transition: transform 0.3s ease;
+  transform-origin: center;
+
+  @include breakpoint-desktop-small {
+    display: none;
+  }
+
+  .menu-is-open & {
+    transform: translateY(-50%) rotate(-90deg);
+  }
+
+  .fixed & {
+  }
+}
+
+.header-burger-open {
+  display: block;
+  width: 40px;
+  height: 40px;
+
+  .menu-is-open & {
+    display: none;
+  }
+}
+
+.header-burger-close {
+  display: none;
+  width: 40px;
+  height: 40px;
+
+  .menu-is-open & {
+    display: block;
+  }
+}

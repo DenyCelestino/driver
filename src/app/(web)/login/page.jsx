@@ -8,6 +8,9 @@ import { useGoogleLogin } from '@react-oauth/google'
 import axios from 'axios'
 import { ContextUser } from '@/context/ContextUser'
 import { DotLoader } from 'react-spinners'
+import LOGO from '../../../../public/logo.svg'
+import GOOGLE from '../../../../public/google.svg'
+import Image from 'next/image'
 
 export default function Login() {
   const router = useRouter()
@@ -34,7 +37,7 @@ export default function Login() {
       setLoading(false)
       if (res.data.status == 200) {
         toast.success(res.data.message)
-        router.push('/payment')
+        router.push('/dashboard')
         setCookies(res.data.user)
       } else {
         toast.error(res.data.message)
@@ -139,97 +142,54 @@ export default function Login() {
   })
 
   return (
-    <div className="flex flex-col gap-10">
-      <div className="h-[40vh] md:h-[30vh] bg-cinza-100 rounded-bl-3xl rounded-br-3xl "></div>
+    <div className="login">
+      <div className="wrapper">
+        <Image className="logo" src={LOGO} alt="Logo" />
 
-      <div className="wrapper flex flex-col gap-4 text-xs md:text-base">
-        <div className="p-1 bg-cinza-100 w-1/3 flex items-center justify-center rounded">
-          <h1 className="text-xl md:text-3xl">LOGO</h1>
-        </div>
-
-        <div>
-          <p className="text-xs md:text-base w-10/12">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit
-          </p>
-          <p className="text-xs md:text-base w-10/12">
-            Accusamus aut, culpa veritatis explicabo sunt.
-          </p>
-        </div>
-        <button
-          onClick={login}
-          className={`bg-cinza-100 py-2 px-4 rounded-lg`}
-        >
-          Entrar com google
-        </button>
-
-        {/* others login  */}
-        <div className="flex items-center justify-between">
-          <div className="h-1 bg-cinza-100 w-1/3" />
-          <span className="text-xs md:text-base">OR</span>
-          <div className="h-1 bg-cinza-100 w-1/3" />
-        </div>
-
-        {/* input container  */}
-
-        <form
-          onSubmit={e => signin(e)}
-          className="flex flex-col gap-4"
-        >
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center p-2 gap-2 bg-cinza-100">
-              <div className="p-2 rounded bg-cinza-200" />
+        <div className="login-form">
+          <div className="login-inputs">
+            <span>Iniciar com Google</span>
+            <button onClick={login} className="google-button">
+              <Image src={GOOGLE} alt="Logo" width={20} height={20} />
+              Continuar com Google
+            </button>
+          </div>
+          <form onSubmit={e => signin(e)} className="fill-container">
+            <div className="login-inputs">
+              <span>Email</span>
               <input
-                className="text-base md:text-lg bg-transparent outline-none w-full"
+                placeholder="email@example.com"
                 type="email"
-                placeholder="Email"
                 required
                 onChange={e => setEmail(e.target.value)}
                 value={email}
               />
             </div>
-            <div className="flex items-center p-2 gap-2 bg-cinza-100">
-              <div className="p-2 rounded bg-cinza-200" />
+            <div className="login-inputs">
+              <span>Password</span>
               <input
-                className="text-base md:text-lg bg-transparent outline-none w-full"
                 type="password"
-                placeholder="Password"
+                placeholder="*****"
                 required
                 onChange={e => setPassword(e.target.value)}
                 value={password}
               />
             </div>
-          </div>
+            <div className="login-button-container">
+              <button>
+                {isLoading ? (
+                  <DotLoader size={20} color="#FFF" />
+                ) : (
+                  'Entrar'
+                )}
+              </button>
+            </div>
 
-          {/* forgot password  */}
-          <div className="flex items-center justify-between">
-            <Link href={'#'} className="text-zinc-500 underline">
-              Lost password
-            </Link>
-
-            {/* <div className="flex items-center gap-2">
-              <input type="checkbox" />
-              Remember me
-            </div> */}
-          </div>
-
-          {/* login button  */}
-          <button
-            className={`bg-cinza-100 py-2 px-4 rounded-lg flex items-center justify-center`}
-          >
-            {isLoading ? (
-              <DotLoader size={20} color="#DC4266" />
-            ) : (
-              'Iniciar sessão'
-            )}
-          </button>
-        </form>
-
-        {/* signup  */}
-        <div className="mt-9 flex items-center justify-center">
-          <span>No account ?</span>
-          <Link href={'/signup'} className="text-zinc-500 underline">
-            Signup
-          </Link>
+            <span className="login-signup">
+              Não tenho uma conta,{' '}
+              <Link href={'/signup'}>Criar conta</Link>
+            </span>
+          </form>
         </div>
       </div>
     </div>

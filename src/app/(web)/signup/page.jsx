@@ -1,14 +1,13 @@
 'use client'
 import { useMyContext } from '@/context/Context'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import Modal from '@/components/Universal/Modal/Modal'
-import Lottie from 'lottie-react'
-import EMAIl from '../../../../public/animations/email.json'
 import { DotLoader } from 'react-spinners'
+import Image from 'next/image'
+import LOGO from '../../../../public/logo.svg'
+import { useRouter } from 'next/navigation'
 
 export default function Signup() {
   const { ENDPOINT } = useMyContext()
@@ -21,9 +20,11 @@ export default function Signup() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [number, setNumber] = useState('')
 
+  const router = useRouter()
+
   const signup = async e => {
     e.preventDefault()
-    console.log('here')
+
     if (confirmPassword != password) {
       toast.error('As senhas devem ser iguais')
     } else if (password.length < 8) {
@@ -47,7 +48,8 @@ export default function Signup() {
 
         if (res.data.status == 200) {
           toast.success(res.data.message)
-          setRes(true)
+
+          router.push('/login')
         } else {
           toast.error(res.data.message)
         }
@@ -58,86 +60,35 @@ export default function Signup() {
   }
 
   return (
-    <div className="flex flex-col gap-10">
-      <div className="h-[40vh] md:h-[30vh] bg-cinza-100 rounded-bl-3xl rounded-br-3xl "></div>
+    <div className="login">
+      <div className="wrapper">
+        <Image className="logo" src={LOGO} alt="Logo" />
 
-      {res && (
-        <Modal>
-          <div className="flex flex-col items-center justify-center text-center text-xs md:text-base gap-4">
-            <Lottie
-              className="h-40 w-40"
-              animationData={EMAIl}
-              loop={true}
-            />
-            <p>
-              Enviamos um email de confirmacão {email}, verifique e
-              siga as instruções para terminar o cadastro...
-            </p>
-
-            <Link
-              onClick={() => setRes(false)}
-              className="p-2 bg-primary-200 text-zinc-50 rounded"
-              href={'/login'}
-            >
-              Esta bem, vamos
-            </Link>
-          </div>
-        </Modal>
-      )}
-      <div className="wrapper flex flex-col gap-4 text-xs md:text-base">
-        {/* <div className="p-1 bg-cinza-100 w-1/3 flex items-center justify-center rounded">
-          <h1 className="text-xl md:text-3xl">LOGO</h1>
-        </div> */}
-
-        <div>
-          <p className="text-xs md:text-base w-10/12">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit
-          </p>
-          <p className="text-xs md:text-base w-10/12">
-            Accusamus aut, culpa veritatis explicabo sunt.
-          </p>
-        </div>
-
-        {/* others login  */}
-        {/* <div className="flex items-center justify-between">
-          <div className="h-1 bg-cinza-100 w-1/3" />
-          <span className="text-xs md:text-base">OR</span>
-          <div className="h-1 bg-cinza-100 w-1/3" />
-        </div> */}
-
-        {/* input container  */}
-
-        <form
-          onSubmit={e => signup(e)}
-          className="flex flex-col gap-4"
-        >
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center p-2 gap-2 bg-cinza-100">
-              <div className="p-2 rounded bg-cinza-200" />
+        <div className="login-form">
+          <form onSubmit={e => signup(e)} className="fill-container">
+            <div className="login-inputs">
+              <span>Nome</span>
               <input
-                className="text-base md:text-lg bg-transparent outline-none w-full"
+                placeholder="John Doe"
                 type="text"
-                placeholder="Nome"
                 required
                 onChange={e => setName(e.target.value)}
                 value={name}
               />
             </div>
-            <div className="flex items-center p-2 gap-2 bg-cinza-100">
-              <div className="p-2 rounded bg-cinza-200" />
+            <div className="login-inputs">
+              <span>Email</span>
               <input
-                className="text-base md:text-lg bg-transparent outline-none w-full"
+                placeholder="email@example.com"
                 type="email"
-                placeholder="Email"
                 required
                 onChange={e => setEmail(e.target.value)}
                 value={email}
               />
             </div>
-            <div className="flex items-center p-2 gap-2 bg-cinza-100">
-              <div className="p-2 rounded bg-cinza-200" />
+            <div className="login-inputs">
+              <span>Telefone</span>
               <input
-                className="text-base md:text-lg bg-transparent outline-none w-full"
                 type="number"
                 placeholder="Celular (+258)"
                 required
@@ -145,10 +96,9 @@ export default function Signup() {
                 value={number}
               />
             </div>
-            <div className="flex items-center p-2 gap-2 bg-cinza-100">
-              <div className="p-2 rounded bg-cinza-200" />
+            <div className="login-inputs">
+              <span>Password</span>
               <input
-                className="text-base md:text-lg bg-transparent outline-none w-full"
                 type="password"
                 placeholder="Password"
                 required
@@ -156,10 +106,9 @@ export default function Signup() {
                 value={password}
               />
             </div>
-            <div className="flex items-center p-2 gap-2 bg-cinza-100">
-              <div className="p-2 rounded bg-cinza-200" />
+            <div className="login-inputs">
+              <span>Confirmar password</span>
               <input
-                className="text-base md:text-lg bg-transparent outline-none w-full"
                 type="password"
                 placeholder="Confirme seu password"
                 required
@@ -167,28 +116,20 @@ export default function Signup() {
                 value={confirmPassword}
               />
             </div>
-          </div>
+            <div className="login-button-container">
+              <button disabled={isLoading}>
+                {isLoading ? (
+                  <DotLoader size={20} color="#FFF" />
+                ) : (
+                  'Criar conta'
+                )}
+              </button>
+            </div>
 
-          {/* login button  */}
-
-          <button
-            disabled={isLoading}
-            className={`bg-cinza-100 py-2 px-4 rounded-lg flex justify-center items-center`}
-          >
-            {isLoading ? (
-              <DotLoader size={20} color="#DC4266" />
-            ) : (
-              'Criar conta'
-            )}
-          </button>
-        </form>
-
-        {/* signup  */}
-        <div className="mt-9 flex items-center justify-center">
-          <span>Have a account ?</span>
-          <Link href={'/login'} className="text-zinc-500 underline">
-            Login
-          </Link>
+            <span className="login-signup">
+              Tenho uma conta, <Link href={'/login'}>Entrar</Link>
+            </span>
+          </form>
         </div>
       </div>
     </div>

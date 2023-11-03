@@ -1,11 +1,11 @@
 {
-    "theme_color": "#DC4266",
-    "background_color": "#DC4266",
+    "theme_color": "#84bc9c",
+    "background_color": "#84bc9c",
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "TrafegoTop",
-    "short_name": "TrafegoTop",
+    "name": "Tr\u00e1fegoTop",
+    "short_name": "Tr\u00e1fegoTop",
     "icons": [
         {
             "src": "/icon-192x192.png",

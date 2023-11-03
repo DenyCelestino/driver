@@ -1,0 +1,120 @@
+h1,
+h2,
+h3,
+h4 {
+  font-family: $font-family-title;
+  line-height: 1.5;
+  color: $color-green;
+}
+
+h1 {
+  font-size: 30px;
+  @include breakpoint-desktop-small {
+    font-size: 58px;
+  }
+  @include breakpoint-desktop-medium {
+    font-size: 58px;
+  }
+  @include breakpoint-desktop-large {
+    font-size: 58px;
+  }
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+h4 {
+  font-size: 18px;
+}
+
+b,
+strong {
+  font-family: $font-family-title;
+}
+
+em {
+  font-style: italic;
+}
+
+.text-container {
+  max-width: 700px;
+  p,
+  ul,
+  ol,
+  blockquote,
+  .embed-container,
+  .wp-caption {
+    line-height: 28px;
+
+    max-width: 100%;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  p.body-text-intro {
+    font-size: 26px;
+    line-height: 30px;
+    @include breakpoint-tablet {
+      font-size: 36px;
+      line-height: 40px;
+    }
+  }
+
+  ul,
+  ol {
+    position: relative;
+    list-style: none;
+
+    li:not(.gfield) {
+      // padding-left: 1.25em;
+
+      &::before {
+        position: absolute;
+        text-indent: -1.25em;
+        display: none;
+      }
+    }
+  }
+
+  ul {
+    li:not(.gfield) {
+      &::before {
+        content: '•';
+      }
+    }
+  }
+
+  ol {
+    counter-reset: ol-counter;
+
+    li {
+      counter-increment: ol-counter;
+
+      &::before {
+        content: counter(ol-counter) '.';
+      }
+    }
+  }
+
+  a {
+    &:not(.btn) {
+      &:hover {
+        color: rgba($color: $color-white, $alpha: 0.7);
+      }
+    }
+  }
+
+  blockquote {
+    padding-left: 1em;
+    font-size: 1.4em;
+    line-height: 1.2;
+    border-left: 0.1rem solid currentColor;
+  }
+}

@@ -1,17 +1,18 @@
 import { ContextProvider } from '@/context/Context'
 import './globals.css'
+import './fonts.css'
 
 import { Toaster } from 'react-hot-toast'
 import { UserProvider } from '@/context/ContextUser'
 
 export const metadata = {
-  title: 'TrafegoTop',
+  title: 'TráfegoTop',
   description: 'Click to Learn Driver Lessons',
   manifest: '/manifest.json',
   icons: {
     apple: '/icon-192x192.png'
   },
-  themeColor: '#DC4266'
+  themeColor: '#84bc9c'
 }
 export default function RootLayout({ children }) {
   return (

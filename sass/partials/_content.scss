@@ -1,0 +1,664 @@
+.landing {
+}
+
+.app-header {
+  display: flex;
+  padding: 20px 0 0 0;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+
+  .logo {
+    height: 32px;
+    width: 32px;
+  }
+  .app-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .btn-days {
+      padding: 4px 20px;
+      border-radius: 20px;
+      background: $color-orange;
+      color: $color-white;
+    }
+  }
+  .app-header-right {
+    display: flex;
+    gap: 10px;
+    .app-header-menu {
+      font-weight: bold;
+      color: $color-green;
+      cursor: pointer;
+      &.active {
+        color: $color-white;
+      }
+    }
+    .hamburguer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+
+      .hamburguer-arrow {
+        width: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+      }
+
+      span {
+        height: 3px;
+        width: 8px;
+        background: $color-green;
+      }
+
+      .arrow-middle {
+        width: 15px;
+      }
+      .hamburguer-arrow-close {
+        width: 20px;
+        display: flex;
+        position: relative;
+        > span {
+          width: 30px;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+        &.active {
+          > span {
+            background: $color-white;
+          }
+        }
+      }
+    }
+  }
+}
+
+//app nav bar
+
+.app-nav-bar {
+  position: fixed;
+  inset: 0;
+  background: $color-green;
+  z-index: 200;
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+  .routes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .route {
+      padding: 14px 24px;
+      border-radius: 10px;
+      background: $color-white;
+      color: $color-green;
+      font-weight: bold;
+    }
+  }
+  .logout-container {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      text-decoration: underline;
+      color: $color-white;
+    }
+  }
+}
+//dashboard screen
+.dashboard {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+  }
+
+  .rooms {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+
+    @include breakpoint-desktop-small {
+      gap: 129px;
+      margin-top: 66px;
+    }
+  }
+  .room {
+    padding: 10px;
+    height: 150px;
+    @include breakpoint-desktop-small {
+      height: 344px;
+    }
+    border-radius: 10px;
+    display: flex;
+    background: $color-green;
+    position: relative;
+    &:nth-child(odd) {
+      justify-content: flex-end;
+    }
+    > img {
+      position: absolute;
+
+      height: calc(100% + 50px);
+      @include breakpoint-desktop-small {
+        height: calc(100% + 100px);
+      }
+      width: 100%;
+      object-fit: cover;
+      bottom: 0;
+      left: 0;
+    }
+    .room-title {
+      font-size: 27px;
+      font-weight: bold;
+      color: $color-white;
+      word-wrap: break-word;
+    }
+    .room-subtitle {
+      position: absolute;
+      bottom: -30px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .room-subtitle-button {
+      padding: 13px 30px;
+      background: $color-orange;
+      font-size: 18px;
+      font-weight: bold;
+      color: $color-white;
+      border-radius: 30px;
+      text-transform: uppercase;
+    }
+  }
+}
+.lesson {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .lesson-image {
+    height: 20vh;
+    @include breakpoint-desktop-small {
+      height: 40vh;
+    }
+    > img {
+      object-fit: contain;
+    }
+  }
+  .question-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    > span {
+      font-size: 16px;
+    }
+    h1 {
+      font-size: 16px;
+
+      font-weight: bold;
+    }
+  }
+  .options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .option {
+    font-size: 16px;
+
+    background: $color-green-light;
+    padding: 15px 24px;
+    display: flex;
+    border-radius: 10px;
+    gap: 12px;
+    color: $color-black;
+    width: 100%;
+  }
+  .option-selected {
+    font-size: 16px;
+    background: $color-green-light;
+    padding: 15px 24px;
+    display: flex;
+    border-radius: 10px;
+    gap: 12px;
+    color: $color-orange;
+    border: 1px solid $color-orange;
+    width: 100%;
+    .option-letters-container {
+      height: 100%;
+
+      > span {
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: $color-orange;
+      }
+    }
+  }
+  .option-letters-container {
+    height: 100%;
+
+    > span {
+      font-size: 20px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: $color-black;
+    }
+  }
+  .option-container {
+    height: 100%;
+    text-align: left;
+  }
+  .error-option {
+    font-size: 16px;
+
+    background: $color-red;
+    padding: 15px 24px;
+    display: flex;
+    border-radius: 10px;
+    gap: 12px;
+    color: $color-white;
+    width: 100%;
+    .option-letters-container {
+      height: 100%;
+      > span {
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: $color-white;
+      }
+    }
+  }
+  .correct-option {
+    font-size: 16px;
+
+    background: $color-green;
+    padding: 15px 24px;
+    display: flex;
+    border-radius: 10px;
+    gap: 12px;
+    color: $color-white;
+    width: 100%;
+    .option-letters-container {
+      height: 100%;
+      > span {
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: $color-white;
+      }
+    }
+  }
+  .question-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    > button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 15px;
+
+      font-size: 18px;
+
+      &:nth-child(2) {
+        background: $color-green-light;
+      }
+    }
+  }
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  padding-top: 16px;
+  position: fixed;
+  background: $color-white;
+  color: $color-green;
+  inset: 0;
+  z-index: 100;
+  .wrapper {
+    display: flex;
+    gap: 10px;
+  }
+  .header-result {
+    .title {
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 18px;
+    }
+    p {
+      font-size: 16px;
+    }
+  }
+  .congrats-image {
+    height: 180px;
+    padding: 10px;
+    background: $color-red;
+    border-radius: 10px;
+    text-align: center;
+    color: $color-white;
+    > h1 {
+      font-size: 20px;
+
+      font-weight: bold;
+      color: $color-white;
+    }
+  }
+  .share {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 16px;
+
+    > a {
+      text-decoration: underline;
+
+      font-size: 16px;
+    }
+  }
+  .text {
+    font-size: 16px;
+  }
+  .try {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .tryagain {
+      padding: 8px 12px;
+      background: $color-orange;
+      font-size: 16px;
+      color: $color-white;
+      border-radius: 100px;
+    }
+    .back {
+      text-decoration: underline;
+      color: $color-black;
+      font-size: 16px;
+    }
+  }
+}
+
+//login screen
+.login {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    padding: 40px 0;
+  }
+  span {
+    font-size: 18px;
+    color: $color-green;
+  }
+  .login-form {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 50px;
+    gap: 37px;
+  }
+  .login-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    input {
+      background: $color-green-light;
+      color: $color-green;
+      padding: 15px 23px;
+      border-radius: 10px;
+      width: 100%;
+    }
+    input::placeholder {
+      color: $color-black;
+      opacity: 0.3;
+    }
+  }
+  .fill-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .google-button {
+    background: $color-green-light;
+    color: $color-green;
+    padding: 17px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    color: $color-black;
+  }
+  .login-button-container {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      padding: 10px 30px;
+      background: $color-orange;
+      color: $color-white;
+      text-transform: uppercase;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .login-signup {
+    font-size: 16px;
+    > a {
+      text-decoration: underline;
+    }
+  }
+}
+
+//profile screen
+.profile {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    font-size: 16px;
+  }
+  .avatar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .avatar {
+    height: 110px;
+    width: 110px;
+    @include breakpoint-desktop-small {
+      height: 200px;
+      width: 200px;
+    }
+    border-radius: 50%;
+    border: 5px solid $color-green;
+    @include breakpoint-desktop-small {
+      border: 10px solid $color-green;
+    }
+    position: relative;
+
+    > img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+  .avatar-edit {
+    position: absolute;
+    bottom: 0;
+    height: 34px;
+    width: 34px;
+    @include breakpoint-desktop-small {
+      height: 60px;
+      width: 60px;
+    }
+    right: -10px;
+    background: $color-green;
+    color: $color-white;
+    font-size: 20px;
+    @include breakpoint-desktop-small {
+      font-size: 40px;
+    }
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+  }
+  span {
+    font-size: 18px;
+    color: $color-green;
+  }
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 50px;
+    gap: 37px;
+  }
+  .profile-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    input {
+      color: $color-green;
+      height: 100%;
+      width: 100%;
+    }
+    input::placeholder {
+      color: $color-black;
+      opacity: 0.3;
+    }
+  }
+  .input {
+    display: flex;
+    align-items: center;
+    background: $color-green-light;
+    color: $color-green;
+    padding: 15px 23px;
+    border-radius: 10px;
+    width: 100%;
+  }
+  .fill-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .profile-button-container {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      padding: 10px 30px;
+      background: $color-orange;
+      color: $color-white;
+      text-transform: uppercase;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.modal-presences {
+  position: fixed;
+  inset: 0;
+  background-color: rgba($color: #000000, $alpha: 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .modal-presences-content {
+    background: $color-white;
+    min-height: 10px;
+    width: 90%;
+    @include breakpoint-desktop-small {
+      width: 33%;
+    }
+    padding: 1rem;
+    border-radius: 10px;
+    @include breakpoint-desktop-small {
+      min-height: 33%;
+    }
+  }
+  .modal-presences-content-of-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    text-align: center;
+    .lottie {
+      height: 160px;
+      width: 160px;
+    }
+  }
+}
+.modal-background-button {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  cursor: pointer;
+}
+
+//payment screen
+.payment {
+  .fill-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .payment-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    input {
+      background: $color-green-light;
+      color: $color-green;
+      padding: 15px 23px;
+      border-radius: 10px;
+      width: 100%;
+    }
+    input::placeholder {
+      color: $color-black;
+      opacity: 0.3;
+    }
+  }
+  .get-access-button {
+    padding: 10px 30px;
+    background: $color-orange;
+    color: $color-white;
+    text-transform: uppercase;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .other-number {
+    color: $color-green;
+    text-decoration: underline;
+  }
+}

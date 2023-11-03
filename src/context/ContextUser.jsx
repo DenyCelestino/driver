@@ -19,14 +19,14 @@ export const UserProvider = ({ children }) => {
   const userCookie = getUserCookie ? JSON.parse(getUserCookie) : {}
   const [user, setUser] = useState(userCookie ? userCookie : '')
   const [bypass, setBypass] = useState('')
-  const { ENDPOINT } = useMyContext()
+  const [hamburguer, setHamburguer] = useState(false)
 
   const router = useRouter()
 
   const logout = () => {
     Cookies.remove('user')
-
     router.push('/login')
+    setHamburguer(false)
   }
 
   const getUser = () => {
@@ -53,7 +53,9 @@ export const UserProvider = ({ children }) => {
         getUser,
         bypass,
         setBypass,
-        logout
+        logout,
+        hamburguer,
+        setHamburguer
       }}
     >
       {children}

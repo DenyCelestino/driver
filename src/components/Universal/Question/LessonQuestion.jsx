@@ -1,24 +1,20 @@
 'use client'
 
-import {
-  BookmarkCheckIcon,
-  ChevronLeftSquareIcon,
-  ChevronRightSquareIcon,
-  Search,
-  Undo2Icon
-} from 'lucide-react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { useState } from 'react'
 
 import useSound from 'use-sound'
 
 import { useRouter } from 'next/navigation'
 import { useMyContext } from '@/context/Context'
-import Image from 'next/image'
+import { ContextUser } from '@/context/ContextUser'
+import Header from '@/components/App/Dashboard/Header'
 
 export default function LessonQuestion({ questions }) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
 
   const { ENDPOINT } = useMyContext()
+  const { bypass } = ContextUser()
 
   const [next] = useSound('/next.mp3')
 
@@ -37,7 +33,6 @@ export default function LessonQuestion({ questions }) {
   const BackQuestion = () => {
     if (currentQuestion != 0) {
       const Backquestion = currentQuestion - 1
-
       setCurrentQuestion(Backquestion)
       next()
     }
@@ -50,80 +45,70 @@ export default function LessonQuestion({ questions }) {
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="h-[30vh] flex flex-col  md:h-[30vh] relative  rounded-bl-3xl rounded-br-3xl p-4">
-        {/* eslint-disable @next/next/no-img-element */}
+    <div className="lesson">
+      <div className="wrapper">
+        <Header time={bypass} />
 
-        {questions[currentQuestion].image && (
-          <img
-            className="h-full w-full object-contain absolute top-0 left-0 rounded-bl-3xl rounded-br-3xl"
-            src={
-              ENDPOINT +
-              'images/question/' +
-              questions[currentQuestion].image
-            }
-            alt="question"
-          />
-        )}
-        <span className="absolute top-2 right-6 p-1 bg-black/40 rounded text-zinc-50">
-          Questões {currentQuestion + 1}/{questions.length}
-        </span>
-
-        <button className="bg-white absolute bottom-2 right-6 p-1 rounded-full">
-          <Search size={18} />
-        </button>
-      </div>
-      <div className="wrapper flex flex-col gap-4">
-        <div className="p-4 md:p-14 bg-cinza-100 rounded-3xl text-center text-sm md:text-base">
+        <div className="lesson-image cover-image">
+          {questions[currentQuestion].image && (
+            <img
+              src={
+                ENDPOINT +
+                'images/question/' +
+                questions[currentQuestion].image
+              }
+              alt="question"
+            />
+          )}
+        </div>
+        <div className="question-container">
+          <span>
+            Questão: {currentQuestion + 1}/{questions.length}
+          </span>
           <h1> {questions[currentQuestion].question}</h1>
         </div>
-        <div className="flex flex-col gap-4">
+
+        <div className="options-container">
           {questions[currentQuestion].options.map((item, index) => (
             <button
               key={index}
-              className={`p-2 text-sm md:text-base border flex items-center gap-1 rounded-full ${
-                item.iscorrect
-                  ? 'bg-green-600 text-zinc-50'
-                  : 'bg-red-600 text-zinc-50'
-              } `}
+              className={`option ${
+                item.iscorrect ? 'correct-option' : 'error-option'
+              }  `}
             >
-              <div className="h-8 md:h-12 w-8 md:w-12 bg-cinza-200 rounded-full flex items-center justify-center">
-                {index + 1}{' '}
+              <div className="option-letters-container">
+                <span>
+                  {index == 0
+                    ? 'A'
+                    : index == 1
+                    ? 'B'
+                    : index == 2
+                    ? 'C'
+                    : 'D'}
+                </span>
               </div>
-              <h1>{item.option}</h1>
+              <div className="option-container">
+                <span>{item.option}</span>
+              </div>
             </button>
           ))}
         </div>
-        <div className="flex items-center justify-around ">
-          {currentQuestion != 0 && (
-            <button
-              className="flex items-center gap-2"
-              onClick={BackQuestion}
-            >
-              <ChevronLeftSquareIcon size={20} /> Anterior
-            </button>
-          )}
 
-          <button
-            className="flex items-center gap-1 p-2 bg-gray-600 rounded text-zinc-50"
-            onClick={exit}
-          >
-            <Undo2Icon size={20} />
-            Sair da aula
+        <div className="question-buttons">
+          <button onClick={BackQuestion}>
+            <ArrowLeft />
+            <span>Anterior</span>
           </button>
+
           {questions.length != currentQuestion + 1 ? (
-            <button
-              className="flex items-center gap-2"
-              onClick={NextQuestion}
-            >
-              Proxima <ChevronRightSquareIcon size={20} />
+            <button onClick={NextQuestion}>
+              <span>Proxima</span>
+              <ArrowRight />
             </button>
           ) : (
-            <button
-              onClick={EnLesson}
-              className="flex items-center gap-2"
-            >
-              Finalizar <BookmarkCheckIcon size={20} />
+            <button onClick={EnLesson}>
+              <span>Finalizar</span>
+              <ArrowRight />
             </button>
           )}
         </div>

@@ -1,16 +1,14 @@
 'use client'
 
-import {
-  ChevronLeftSquareIcon,
-  ChevronRightSquareIcon,
-  Search,
-  Undo2Icon
-} from 'lucide-react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
+
 import { useState } from 'react'
 import useSound from 'use-sound'
 import Result from '../Result/result'
 import { useRouter } from 'next/navigation'
 import { useMyContext } from '@/context/Context'
+import Header from '@/components/App/Dashboard/Header'
+import { ContextUser } from '@/context/ContextUser'
 
 export default function FreeQuestions({ questions }) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -23,6 +21,7 @@ export default function FreeQuestions({ questions }) {
   const [oldQuestion, setOldQuestion] = useState(false)
 
   const { ENDPOINT } = useMyContext()
+  const { bypass } = ContextUser()
 
   const [correct] = useSound('/correct.mp3')
   const [wrong] = useSound('/wrong.mp3')
@@ -114,7 +113,7 @@ export default function FreeQuestions({ questions }) {
     setCorrectAnswer(null)
   }
   return (
-    <div className="flex flex-col gap-4">
+    <div className="lesson">
       {result && (
         <Result
           score={score}
@@ -124,117 +123,101 @@ export default function FreeQuestions({ questions }) {
           test={true}
         />
       )}
+      <div className="wrapper">
+        <Header time={bypass} />
 
-      <div className="h-[30vh] flex flex-col  md:h-[30vh] relative  rounded-bl-3xl rounded-br-3xl p-4">
-        {/* eslint-disable @next/next/no-img-element */}
-
-        {questions[currentQuestion].image && (
-          <img
-            className="h-full w-full object-contain absolute top-0 left-0 rounded-bl-3xl rounded-br-3xl"
-            src={
-              ENDPOINT +
-              'images/question/' +
-              questions[currentQuestion].image
-            }
-            alt="question"
-          />
-        )}
-        <span className="absolute top-2 right-6 p-1 bg-black/40 rounded text-zinc-50">
-          Questões {currentQuestion + 1}/{questions.length}
-        </span>
-
-        <button className="bg-white absolute bottom-2 right-6 p-1 rounded-full">
-          <Search size={18} />
-        </button>
-      </div>
-      <div className="wrapper flex flex-col gap-4">
-        <div className="p-4 md:p-14 bg-cinza-100 rounded-3xl text-center text-sm md:text-base">
+        <div className="lesson-image cover-image">
+          {questions[currentQuestion].image && (
+            <img
+              src={
+                ENDPOINT +
+                'images/question/' +
+                questions[currentQuestion].image
+              }
+              alt="question"
+            />
+          )}
+        </div>
+        <div className="question-container">
+          <span>
+            Questão: {currentQuestion + 1}/{questions.length}
+          </span>
           <h1> {questions[currentQuestion].question}</h1>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="options-container">
           {questions[currentQuestion].options.map((item, index) => (
-            <div className="flex flex-col" key={index}>
+            <div key={index}>
               {oldQuestion ? (
                 <button
                   disabled
-                  className={`p-2 text-sm md:text-base border flex items-center gap-1 rounded-full ${
+                  className={`${
                     currentAnswer === item
                       ? item.iscorrect
-                        ? 'bg-green-600 text-zinc-50'
-                        : 'bg-red-600 text-zinc-50'
-                      : 'border border-transparent'
-                  } bg-cinza-100 ${
-                    correctAnswer === item &&
-                    'bg-green-600 text-zinc-50'
-                  }`}
+                        ? 'correct-option'
+                        : 'error-option'
+                      : 'option'
+                  } ${correctAnswer === item && 'correct-option'} `}
                 >
-                  <div className="h-8 md:h-12 w-8 md:w-12 bg-cinza-200 rounded-full flex items-center justify-center">
-                    {index + 1}{' '}
+                  <div className="option-letters-container">
+                    <span>
+                      {index == 0
+                        ? 'A'
+                        : index == 1
+                        ? 'B'
+                        : index == 2
+                        ? 'C'
+                        : 'D'}
+                    </span>
                   </div>
-                  <h1>{item.option}</h1>
+                  <div className="option-container">
+                    <span>{item.option}</span>
+                  </div>
                 </button>
               ) : (
                 <button
                   disabled={currentAnswer != null}
                   onClick={() => handleAnswerButtonClick(item)}
-                  className={`p-2 text-sm md:text-base border flex items-center gap-1 rounded-full ${
+                  className={`${
                     currentAnswer === item
                       ? item.iscorrect
-                        ? 'bg-green-600 text-zinc-50'
-                        : 'bg-red-600 text-zinc-50'
-                      : 'border border-transparent'
-                  } bg-cinza-100 ${
-                    correctAnswer === item &&
-                    'bg-green-600 text-zinc-50'
-                  }`}
+                        ? 'correct-option'
+                        : 'error-option'
+                      : 'option'
+                  }  ${correctAnswer === item && 'correct-option'}`}
                 >
-                  <div className="h-8 md:h-12 w-8 md:w-12 bg-cinza-200 rounded-full flex items-center justify-center">
-                    {index + 1}{' '}
+                  <div className="option-letters-container">
+                    <span>{index + 1}</span>
                   </div>
-                  <h1>{item.option}</h1>
+                  <div className="option-container">
+                    <span>{item.option}</span>
+                  </div>
                 </button>
               )}
             </div>
           ))}
         </div>
 
-        <div className="flex items-center justify-around text-xs md:text-base">
-          {currentQuestion != 0 && (
-            <button
-              className="flex items-center gap-1  p-2 bg-black rounded text-zinc-50"
-              onClick={BackQuestion}
-            >
-              <ChevronLeftSquareIcon size={20} /> Anterior
-            </button>
-          )}
-
-          <button
-            className="flex items-center gap-1 p-2 bg-gray-600 rounded text-zinc-50"
-            onClick={exit}
-          >
-            <Undo2Icon size={20} />
-            Sair
+        <div className="question-buttons">
+          <button onClick={BackQuestion}>
+            <ArrowLeft />
+            <span>Anterior</span>
           </button>
+
           {currentAnswer && (
-            <div className="flex items-center justify-center ">
+            <>
               {currentQuestion === questions.length - 1 ? (
-                <button
-                  onClick={SeeResults}
-                  className="p-2 bg-green-600 rounded text-zinc-50"
-                >
-                  Ver Resultados
+                <button onClick={SeeResults}>
+                  <span>Resultados</span>
+                  <ArrowRight />
                 </button>
               ) : (
-                <button
-                  onClick={NextQuestion}
-                  className="flex items-center gap-1 p-2 bg-primary-200 rounded text-zinc-50"
-                >
-                  Proxima
-                  <ChevronRightSquareIcon size={20} />
+                <button onClick={NextQuestion}>
+                  <span>Proxima</span>
+                  <ArrowRight />
                 </button>
               )}
-            </div>
+            </>
           )}
         </div>
       </div>

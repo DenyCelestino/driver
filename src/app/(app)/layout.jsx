@@ -1,22 +1,21 @@
-import BottomTab from '@/components/Universal/BottomTab/BottomTab'
+'use client'
+
+import NavBar from '@/components/App/Navbar'
+import { ContextUser } from '@/context/ContextUser'
 import Checkplan from '@/functions/Checkplan'
 import PrivateRoutes from '@/functions/PrivateRoutes'
 
-export const metadata = {
-  title: 'App'
-}
-
 export default function AppLayout({ children }) {
+  const { hamburguer, setHamburguer } = ContextUser()
+
   return (
-    <PrivateRoutes>
-      <Checkplan>
-        <div
-        // className="pb-14 md:pb-0"
-        >
+    <Checkplan>
+      <PrivateRoutes>
+        <div>
+          {hamburguer && <NavBar />}
           {children}
         </div>
-        {/* <BottomTab /> */}
-      </Checkplan>
-    </PrivateRoutes>
+      </PrivateRoutes>
+    </Checkplan>
   )
 }

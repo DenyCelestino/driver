@@ -1,10 +1,14 @@
 'use client'
 
+import Header from '@/components/App/Dashboard/Header'
 import Anchor from '@/components/Universal/Anchor/anchor'
 import Input from '@/components/Universal/Inputs/input'
 import { ContextUser } from '@/context/ContextUser'
 import Cookies from 'js-cookie'
+import { PencilLine } from 'lucide-react'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { DotLoader } from 'react-spinners'
 
 export default function Profile() {
   const getUserCookie = Cookies.get('user')
@@ -16,59 +20,85 @@ export default function Profile() {
   const [email, setEmail] = useState(user.email ? user.email : '')
   const [password, setPassword] = useState('growskills')
 
+  const [isLoading, setLoading] = useState(false)
+
+  const { bypass } = ContextUser()
+
   return (
-    <div>
-      <div className="h-[30vh] md:h-[30vh] bg-cinza-100 rounded-bl-3xl rounded-br-3xl text-xs md:text-base"></div>
+    <div className="profile">
+      <div className="wrapper">
+        <Header time={bypass} />
 
-      <div className="flex items-center justify-center">
-        <div className="h-44 w-44 -mt-24 bg-white rounded-full shadow-lg" />
-      </div>
+        <div className="avatar-container">
+          <div className="avatar">
+            <img src="https://media.licdn.com/dms/image/D4E03AQGjDromGcPp6A/profile-displayphoto-shrink_200_200/0/1682194840630?e=1704326400&v=beta&t=iudDkWaGyPWNR0WoDlK3kK4_hsqIp_V0YJSYEOWGhTw" />
 
-      <div className="mt-4 p-2 flex flex-col gap-2">
-        {/* input  */}
-
-        <div className="wrapper flex flex-col gap-4 text-base md:text-lg">
-          {/* each one  */}
-          <Input
-            placeholder="name"
-            value={name}
-            onChange={e => setName(e.target.value)}
-          />
-
-          {/* each one  */}
-
-          {/* <Input
-            placeholder="Bithday"
-            type="date"
-            value={birthday}
-            onChange={e => setBirthday(e.target.value)}
-          /> */}
-
-          {/* each one  */}
-          <Input
-            placeholder="Number"
-            type="number"
-            value={number}
-            onChange={e => setNumber(e.target.value)}
-          />
-
-          {/* each one  */}
-          <Input
-            placeholder="email"
-            type="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          {/* each one  */}
-          <Input
-            placeholder="password"
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-
-          <Anchor route="/payment" title="Obter acesso" />
+            <button className="avatar-edit">
+              <PencilLine />
+            </button>
+          </div>
         </div>
+
+        <form onSubmit={e => signin(e)} className="fill-container">
+          <div className="profile-inputs">
+            <span>Nome</span>
+            <div className="input">
+              <input
+                placeholder="email@example.com"
+                type="text"
+                onChange={e => setName(e.target.value)}
+                value={name}
+              />
+              <PencilLine />
+            </div>
+          </div>
+          <div className="profile-inputs">
+            <span>Telefone</span>
+            <div className="input">
+              <input
+                placeholder="+258 XX XX XX"
+                type="number"
+                onChange={e => setNumber(e.target.value)}
+                value={number}
+              />
+              <PencilLine />
+            </div>
+          </div>
+          <div className="profile-inputs">
+            <span>Email</span>
+            <div className="input">
+              <input
+                placeholder="+258 XX XX XX"
+                type="email"
+                onChange={e => setEmail(e.target.value)}
+                value={email}
+              />
+              <PencilLine />
+            </div>
+          </div>
+          <div className="profile-inputs">
+            <span>Password</span>
+            <div className="input">
+              <input
+                placeholder="*****"
+                type="password"
+                onChange={e => setPassword(e.target.value)}
+                value={password}
+              />
+              <PencilLine />
+            </div>
+          </div>
+
+          <div className="profile-button-container">
+            <button>
+              {isLoading ? (
+                <DotLoader size={20} color="#FFF" />
+              ) : (
+                'Guardar'
+              )}
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   )

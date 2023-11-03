@@ -8,7 +8,9 @@ import Result from '../Result/result'
 import Time from '../Result/time'
 import { useRouter } from 'next/navigation'
 import { useMyContext } from '@/context/Context'
-import Image from 'next/image'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
+import Header from '@/components/App/Dashboard/Header'
+import { ContextUser } from '@/context/ContextUser'
 
 export default function QuestionList({ questions }) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -17,12 +19,13 @@ export default function QuestionList({ questions }) {
   const [score, setScore] = useState(0)
   const [currentAnswer, setCurrentAnswer] = useState(null)
   const [correctAnswer, setCorrectAnswer] = useState(null)
-  const [minutes, setMinutes] = useState(8)
+  const [minutes, setMinutes] = useState(1)
   const [seconds, setSeconds] = useState(0)
   const [userMinute, setUserMinute] = useState(0)
   const [userSecond, setUserSecond] = useState(0)
 
   const { ENDPOINT } = useMyContext()
+  const { bypass } = ContextUser()
 
   // const [correct] = useSound('/correct.mp3')
   // const [wrong] = useSound('/wrong.mp3')
@@ -103,15 +106,14 @@ export default function QuestionList({ questions }) {
     setCorrectAnswer(null)
   }
   return (
-    <div className="flex flex-col gap-4">
+    <div className="lesson">
       {result && (
         <Result
           score={score}
-          minutes={userMinute}
-          seconds={userSecond}
           total={questions.length}
           Try={Try}
           Return={Return}
+          test={true}
         />
       )}
       {timeOut && (
@@ -124,80 +126,76 @@ export default function QuestionList({ questions }) {
           Return={Return}
         />
       )}
-      <div className="h-[30vh] flex flex-col  md:h-[30vh] relative  rounded-bl-3xl rounded-br-3xl p-4">
-        {/* eslint-disable @next/next/no-img-element */}
+      <div className="wrapper">
+        <Header time={bypass} />
 
-        {questions[currentQuestion].image && (
-          <img
-            className="h-full w-full object-contain absolute top-0 left-0 rounded-bl-3xl rounded-br-3xl"
-            src={
-              ENDPOINT +
-              'images/question/' +
-              questions[currentQuestion].image
-            }
-            alt="question"
-          />
-        )}
-        <span className="absolute top-2 right-6 p-1 bg-black/40 rounded text-zinc-50">
-          Questões {currentQuestion + 1}/{questions.length}
-        </span>
-
-        <div className="bg-cinza-200/60 text-black p-2 flex items-center justify-center self-center rounded-lg w-1/3 absolute top-1 left-1/3 right-1/3">
-          <span>
-            {minutes}:{seconds}
-          </span>
+        <div className="lesson-image cover-image">
+          {questions[currentQuestion].image && (
+            <img
+              src={
+                ENDPOINT +
+                'images/question/' +
+                questions[currentQuestion].image
+              }
+              alt="question"
+            />
+          )}
         </div>
-
-        <button className="bg-white absolute bottom-2 right-6 p-1 rounded-full">
-          <Search size={18} />
-        </button>
-      </div>
-      <div className="wrapper flex flex-col gap-4">
-        <div className="p-4 md:p-14 bg-cinza-100 rounded-3xl text-center text-sm md:text-base">
+        <div className="question-container">
+          <span>
+            Tempo: {minutes}:{seconds}
+          </span>
+          <span>
+            Questão: {currentQuestion + 1}/{questions.length}
+          </span>
           <h1> {questions[currentQuestion].question}</h1>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="options-container">
           {questions[currentQuestion].options.map((item, index) => (
             <button
-              // disabled={currentAnswer != null}
-              onClick={() => handleAnswerButtonClick(item)}
               key={index}
-              className={`p-2 text-sm md:text-base border flex items-center gap-1 rounded-full ${
-                currentAnswer === item
-                  ? 'border border-primary-200 text-primary-200'
-                  : 'border border-transparent'
-              } bg-cinza-100 ${
-                correctAnswer === item && 'bg-green-600 text-zinc-50'
-              }`}
+              disabled={currentAnswer != null}
+              onClick={() => handleAnswerButtonClick(item)}
+              className={`${
+                currentAnswer === item ? 'option-selected' : 'option'
+              } `}
             >
-              <div className="h-8 md:h-12 w-8 md:w-12 bg-cinza-200 rounded-full flex items-center justify-center">
-                {index + 1}{' '}
+              <div className="option-letters-container">
+                <span>
+                  {index == 0
+                    ? 'A'
+                    : index == 1
+                    ? 'B'
+                    : index == 2
+                    ? 'C'
+                    : 'D'}
+                </span>
               </div>
-              <h1>{item.option}</h1>
+              <div className="option-container">
+                <span>{item.option}</span>
+              </div>
             </button>
           ))}
         </div>
 
-        {currentAnswer && (
-          <div className="flex items-center justify-center ">
-            {currentQuestion === questions.length - 1 ? (
-              <button
-                onClick={SeeResults}
-                className="p-2 bg-green-600 rounded text-zinc-50"
-              >
-                Resultados
-              </button>
-            ) : (
-              <button
-                onClick={NextQuestion}
-                className="p-2 bg-green-600 rounded text-zinc-50"
-              >
-                Proxima
-              </button>
-            )}
-          </div>
-        )}
+        <div className="question-buttons">
+          {currentAnswer && (
+            <>
+              {currentQuestion === questions.length - 1 ? (
+                <button onClick={SeeResults}>
+                  <span>Resultados</span>
+                  <ArrowRight />
+                </button>
+              ) : (
+                <button onClick={NextQuestion}>
+                  <span>Proxima</span>
+                  <ArrowRight />
+                </button>
+              )}
+            </>
+          )}
+        </div>
       </div>
     </div>
   )

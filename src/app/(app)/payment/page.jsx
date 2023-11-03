@@ -12,6 +12,7 @@ import CHECK from '../../../../public/animations/check.json'
 import SUCESS from '../../../../public/animations/sucess.json'
 import { DotLoader } from 'react-spinners'
 import Cookies from 'js-cookie'
+import CustomToast from '@/components/Universal/Toasts/CustomToast'
 
 export default function Payment() {
   const getUserCookie = Cookies.get('user')
@@ -47,6 +48,11 @@ export default function Payment() {
             setIsPaid(false)
             router.push('/dashboard')
           }, 4000)
+        } else if (res.data.status == 409) {
+          toast(res.data.message, {
+            duration: 2000
+          })
+          router.push('/dashboard')
         } else {
           toast.error('Payment not sucessful, please try again')
         }
@@ -60,13 +66,13 @@ export default function Payment() {
   }
 
   return (
-    <div className="text-xs md:text-base">
+    <div className="payment">
       {isLoading && (
         <Modal>
-          <div className="flex flex-col items-center justify-center text-xs md:text-base text-center">
+          <div className="modal-presences-content-of-content">
             <h1>Verifique seu celular</h1>
             <Lottie
-              className="h-40 w-40"
+              className="lottie"
               animationData={CHECK}
               loop={true}
             />
@@ -81,10 +87,10 @@ export default function Payment() {
       )}
       {isPaid && (
         <Modal>
-          <div className="flex flex-col items-center justify-center text-xs md:text-base text-center">
+          <div className="modal-presences-content-of-content">
             <h1>Sucessos!</h1>
             <Lottie
-              className="h-40 w-40"
+              className="lottie"
               animationData={SUCESS}
               loop={true}
             />
@@ -95,38 +101,39 @@ export default function Payment() {
           </div>
         </Modal>
       )}
-      <div className="h-[30vh] md:h-[30vh] bg-cinza-100 rounded-bl-3xl rounded-br-3xl text-xs md:text-base"></div>
-      <div className="flex items-center justify-center">
-        <div className="h-44 w-44 -mt-24 bg-white rounded-full shadow-lg" />
-      </div>
 
-      <div className="mt-6 flex items-center justify-center flex-col gap-4">
-        <form
-          onSubmit={e => payment(e)}
-          className="wrapper flex flex-col items-center gap-6"
-        >
-          <Input
-            className="bg-cinza-100 py-2 px-4 rounded-lg  w-full"
-            placeholder="Digite seu celular"
-            type="number"
-            value={number}
-            onChange={e => setNumber(e.target.value)}
-            required
-          />
+      <div className="wrapper">
+        <form onSubmit={e => payment(e)} className="fill-container">
+          <h1>Quase lá</h1>
+          <div className="payment-inputs">
+            <span>Telefone</span>
+            <input
+              placeholder="Digite seu celular"
+              type="number"
+              value={number}
+              onChange={e => setNumber(e.target.value)}
+              required
+            />
+          </div>
           {isLoading ? (
             <p>Verifique seu celular....</p>
           ) : (
             <div>
-              <button
-                className="bg-cinza-100 py-2 px-4 rounded-lg"
-                onClick={payment}
-              >
+              <button className="get-access-button" onClick={payment}>
                 Obter acesso
               </button>
             </div>
           )}
         </form>
-        <button className="underline">Usar outro numero</button>
+
+        {number.length > 1 && (
+          <button
+            onClick={() => setNumber('')}
+            className="other-number"
+          >
+            Usar outro numero
+          </button>
+        )}
       </div>
     </div>
   )

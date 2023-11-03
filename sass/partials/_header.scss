@@ -1,0 +1,43 @@
+.header {
+  height: 80px;
+  padding: 0 20px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .header-buttons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  .btn {
+    font-weight: bold;
+    font-size: 12px;
+    @include breakpoint-desktop-small {
+      font-size: 16px;
+    }
+  }
+  .login-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    > a {
+      font-weight: bold;
+      text-transform: uppercase;
+      color: $color-green;
+      font-size: 14px;
+      @include breakpoint-desktop-small {
+        font-size: 18px;
+      }
+    }
+  }
+
+  .login-icon {
+    font-size: 30px;
+    color: $color-green;
+  }
+}

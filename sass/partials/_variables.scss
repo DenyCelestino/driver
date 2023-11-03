@@ -1,0 +1,22 @@
+//fonts
+@font-face {
+  font-family: 'DoumbarRegular';
+  src: url('/public/fonts/doumbar-regular-webfont.woff2'),
+    url('/public/fonts/doumbar-regular-webfont.woff2') format('woff2'),
+    url('/public/fonts/doumbar-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+// Colors
+$color-black: #000;
+$color-white: #fff;
+$color-green: #84bc9c;
+$color-green-light: rgba(132, 188, 156, 0.2);
+$color-yellow: #ffdd00;
+$color-orange: #ef8354;
+$color-gray: #f8f8f8;
+$color-red: red;
+
+// Fonts // 400 800
+$font-family-title: 'doumbarbold', Arial, sans-serif;
+$font-family-default: 'doumbarregular', Arial, sans-serif;
