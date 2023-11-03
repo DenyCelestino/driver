@@ -10,10 +10,10 @@ export default function Header() {
         <div className="login-button">
           <FaUserCircle className="login-icon" />
 
-          <Link href={'/'}>Login</Link>
+          <Link href={'/login'}>Login</Link>
         </div>
 
-        <Link className="btn btn-orange" href={'/'}>
+        <Link className="btn btn-orange" href={'/free'}>
           COMEÇAR
         </Link>
       </div>

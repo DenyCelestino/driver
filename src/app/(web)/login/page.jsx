@@ -2,7 +2,7 @@
 import { useMyContext } from '@/context/Context'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useGoogleLogin } from '@react-oauth/google'
 import axios from 'axios'
@@ -14,14 +14,61 @@ import Image from 'next/image'
 
 export default function Login() {
   const router = useRouter()
-
   const { ENDPOINT } = useMyContext()
   const { setCookies } = ContextUser()
   const [isLoading, setLoading] = useState(false)
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const { modalInstall, setModalInstall } = useMyContext()
+  const [deferredPrompt, setDeferredPrompt] = useState(null)
+  const [installed, setInstalled] = useState(true)
+  let isiOS = false // Inicialize a variável isiOS
 
+  if (typeof window !== 'undefined') {
+    isiOS =
+      /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+
+    // Resto do seu código que depende de 'navigator'
+  }
+  useEffect(() => {
+    const handleBeforeInstallPrompt = event => {
+      // Armazena o evento para ser usado posteriormente
+      event.preventDefault()
+
+      setInstalled(false)
+      setDeferredPrompt(event)
+    }
+
+    window.addEventListener(
+      'beforeinstallprompt',
+      handleBeforeInstallPrompt
+    )
+
+    return () => {
+      window.removeEventListener(
+        'beforeinstallprompt',
+        handleBeforeInstallPrompt
+      )
+    }
+  }, [])
+
+  const handleInstallClick = () => {
+    if (deferredPrompt) {
+      // Inicia a instalação
+      deferredPrompt.prompt()
+
+      deferredPrompt.userChoice.then(choiceResult => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('O usuário aceitou a instalação da PWA')
+        } else {
+          console.log('O usuário cancelou a instalação da PWA')
+        }
+
+        // Limpa o evento para que não possa ser usado novamente
+        setDeferredPrompt(null)
+      })
+    }
+  }
   const signin = async e => {
     e.preventDefault()
 
