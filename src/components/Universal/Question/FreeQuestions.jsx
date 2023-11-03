@@ -187,7 +187,13 @@ export default function FreeQuestions({ questions }) {
                   }  ${correctAnswer === item && 'correct-option'}`}
                 >
                   <div className="option-letters-container">
-                    <span>{index + 1}</span>
+                    {index == 0
+                      ? 'A'
+                      : index == 1
+                      ? 'B'
+                      : index == 2
+                      ? 'C'
+                      : 'D'}
                   </div>
                   <div className="option-container">
                     <span>{item.option}</span>
