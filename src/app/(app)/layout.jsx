@@ -12,7 +12,7 @@ export default function AppLayout({ children }) {
   return (
     <PrivateRoutes>
       <div>
-        {isLoadingCheckPlan && <CheckplanLoading />}
+        {/* {isLoadingCheckPlan && <CheckplanLoading />} */}
         {/* <AnimatePresence>
           {hamburguer && (
             <motion.div
