@@ -146,7 +146,7 @@ export default function FreeQuestions({ questions }) {
                 <h1>Alerta!</h1>
                 <p>Você só pode realizar o teste uma vez.</p>
                 <button onClick={HandleTrial}>
-                  {localStorage.getItem('trial')
+                  {Cookies.get('trial')
                     ? 'Obter acesso'
                     : 'Continuar'}
                 </button>
