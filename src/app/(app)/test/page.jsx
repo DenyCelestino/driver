@@ -1,5 +1,4 @@
 import TestQuestion from '@/components/Universal/Question/TestQuestion'
-import PrivateRoutes from '@/functions/PrivateRoutes'
 import axios from 'axios'
 
 export default async function Test() {
@@ -9,9 +8,5 @@ export default async function Test() {
 
   const questions = res.data.questions
 
-  return (
-    <PrivateRoutes>
-      <TestQuestion questions={questions} />
-    </PrivateRoutes>
-  )
+  return <TestQuestion questions={questions} />
 }
