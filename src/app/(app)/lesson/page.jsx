@@ -11,7 +11,7 @@ export default async function Lesson() {
   const questions = res.data.questions
 
   return (
-    <PrivateRoutes>
+    <PrivateRoutes redirect={false}>
       <LessonQuestion questions={questions} />
     </PrivateRoutes>
   )

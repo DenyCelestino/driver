@@ -10,7 +10,7 @@ export default async function Test() {
   const questions = res.data.questions
 
   return (
-    <PrivateRoutes>
+    <PrivateRoutes redirect={false}>
       <TestQuestion questions={questions} />
     </PrivateRoutes>
   )

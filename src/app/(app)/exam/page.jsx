@@ -10,7 +10,7 @@ export default async function Exam() {
   const questions = res.data.questions
 
   return (
-    <PrivateRoutes>
+    <PrivateRoutes redirect={false}>
       <QuestionList questions={questions} />
     </PrivateRoutes>
   )

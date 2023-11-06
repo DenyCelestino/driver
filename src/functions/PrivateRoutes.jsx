@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useMyContext } from '@/context/Context'
 import { Navigate } from 'react-router-dom'
 
-export default function PrivateRoutes({ children }) {
+export default function PrivateRoutes({ children, redirect = true }) {
   const { ENDPOINT } = useMyContext()
   const {
     user,
@@ -31,7 +31,7 @@ export default function PrivateRoutes({ children }) {
       setBypass(res.data)
 
       if (res.data.status == 200) {
-        router.push('/dashboard')
+        redirect && router.push('/dashboard')
         setLoadingCheckPlan(false)
       } else if (res.data.status == 404) {
         router.push('/payment')

@@ -26,7 +26,7 @@ export default function Profile() {
   const { bypass } = ContextUser()
 
   return (
-    <PrivateRoutes>
+    <PrivateRoutes redirect={false}>
       <div className="profile">
         <div className="wrapper">
           <Header App={true} time={bypass} />
