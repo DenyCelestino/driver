@@ -10,6 +10,7 @@ import { useMyContext } from '@/context/Context'
 import Header from '@/components/App/Dashboard/Header'
 import { ContextUser } from '@/context/ContextUser'
 import Modal from '../Modal/Modal'
+import Cookies from 'js-cookie'
 
 export default function FreeQuestions({ questions }) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -97,14 +98,14 @@ export default function FreeQuestions({ questions }) {
     setResult(true)
   }
 
-  // const HandleTrial = () => {
-  //   if (localStorage.getItem('trial')) {
-  //     router.push('/signup')
-  //   } else {
-  //     localStorage.setItem('trial', true)
-  //     setTrial(false)
-  //   }
-  // }
+  const HandleTrial = () => {
+    if (Cookies.get('trial')) {
+      router.push('/signup')
+    } else {
+      Cookies.set('trial', true)
+      setTrial(false)
+    }
+  }
 
   function Try() {
     setCurrentQuestion(0)
@@ -124,10 +125,10 @@ export default function FreeQuestions({ questions }) {
   }
   return (
     <div className="lesson">
-      {/* {trial && (
+      {trial && (
         <Modal>
           <div className="modal-free-alert">
-            {localStorage.getItem('trial') ? (
+            {Cookies.get('trial') ? (
               <>
                 <h1>Oooops ... !</h1>
                 <p>
@@ -135,7 +136,7 @@ export default function FreeQuestions({ questions }) {
                   acesso agora.
                 </p>
                 <button onClick={HandleTrial}>
-                  {localStorage.getItem('trial')
+                  {Cookies.get('trial')
                     ? 'Obter acesso'
                     : 'Continuar'}
                 </button>
@@ -153,7 +154,7 @@ export default function FreeQuestions({ questions }) {
             )}
           </div>
         </Modal>
-      )} */}
+      )}
       {result && (
         <Result
           score={score}
