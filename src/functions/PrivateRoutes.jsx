@@ -34,7 +34,7 @@ export default function PrivateRoutes({ children }) {
     } else {
       router.push('/login')
     }
-  }, [checkPlan, setUser])
+  }, [checkPlan, setUser, router])
 
   const checkPlan = async user => {
     try {
