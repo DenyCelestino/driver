@@ -1,5 +1,3 @@
-'use client'
-
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { ContextUser } from '@/context/ContextUser'
@@ -9,32 +7,10 @@ import { useMyContext } from '@/context/Context'
 
 export default function PrivateRoutes({ children }) {
   const { ENDPOINT } = useMyContext()
-  const {
-    user,
-    setUser,
-    setBypass,
-
-    setLoadingCheckPlan
-  } = ContextUser()
+  const { user, setUser, setBypass, setLoadingCheckPlan } =
+    ContextUser()
 
   const router = useRouter()
-
-  useEffect(() => {
-    if (Cookies.get('logged')) {
-      const userData = Cookies.get('user')
-      if (!userData) {
-        console.log(userData)
-        console.log('no user')
-        router.push('/login')
-      } else {
-        console.log('user setado: ', JSON.parse(userData))
-        setUser(JSON.parse(userData))
-        checkPlan(JSON.parse(userData))
-      }
-    } else {
-      router.push('/login')
-    }
-  }, [checkPlan, setUser, router])
 
   const checkPlan = async user => {
     try {
@@ -63,5 +39,23 @@ export default function PrivateRoutes({ children }) {
       router.push('/login')
     }
   }
+
+  useEffect(() => {
+    const userData = Cookies.get('user')
+    if (Cookies.get('logged')) {
+      if (!userData) {
+        console.log(userData)
+        console.log('no user')
+        router.push('/login')
+      } else {
+        console.log('user setado: ', JSON.parse(userData))
+        setUser(JSON.parse(userData))
+        checkPlan(JSON.parse(userData))
+      }
+    } else {
+      router.push('/login')
+    }
+  }, [router, setUser, checkPlan])
+
   return user ? children : null
 }
