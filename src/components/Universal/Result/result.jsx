@@ -47,10 +47,10 @@ export default function Result({
 
         <div className="try">
           <button onClick={Try} className="tryagain">
-            Tentar Novamente
+            {test ? 'Obter Acesso' : 'Tentar Novamente'}
           </button>
           <button onClick={Return} className="back">
-            Voltar
+            {test ? 'Sair' : 'Voltar'}
           </button>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import QuestionList from '@/components/Universal/Question/QuestionList'
+import PrivateRoutes from '@/functions/PrivateRoutes'
 import axios from 'axios'
 
 export default async function Exam() {
@@ -8,5 +9,9 @@ export default async function Exam() {
 
   const questions = res.data.questions
 
-  return <QuestionList questions={questions} />
+  return (
+    <PrivateRoutes>
+      <QuestionList questions={questions} />
+    </PrivateRoutes>
+  )
 }

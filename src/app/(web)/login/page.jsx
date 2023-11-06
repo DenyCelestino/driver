@@ -11,11 +11,12 @@ import { DotLoader } from 'react-spinners'
 import LOGO from '../../../../public/logo.svg'
 import GOOGLE from '../../../../public/google.svg'
 import Image from 'next/image'
+import Cookies from 'js-cookie'
 
 export default function Login() {
   const router = useRouter()
   const { ENDPOINT } = useMyContext()
-  const { setCookies } = ContextUser()
+  const { setCookies, user, getUser } = ContextUser()
   const [isLoading, setLoading] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -84,8 +85,9 @@ export default function Login() {
       setLoading(false)
       if (res.data.status == 200) {
         toast.success(res.data.message)
+        const userLogged = JSON.stringify(res.data.user)
+        setCookies(userLogged)
         router.push('/dashboard')
-        setCookies(res.data.user)
       } else {
         toast.error(res.data.message)
       }
@@ -144,7 +146,7 @@ export default function Login() {
         toast.promise(checkLogin, {
           loading: 'Processando...',
           success: response => {
-            // console.log('first-console:' + response)
+            console.log('first-console:' + response.data)
             if (response.data.status === 401) {
               setLoading(true)
               const completeRegister = register(
@@ -157,8 +159,10 @@ export default function Login() {
                 loading: 'Registando e Autenticando... ',
                 success: response => {
                   setLoading(false)
-                  setCookies(response.data.user)
-
+                  const userLogged = JSON.stringify(
+                    response.data.user
+                  )
+                  setCookies(userLogged)
                   router.push('/dashboard')
                   return `Autenticado(a) com sucesso, ${response.data.user.name}`
                 },
@@ -170,8 +174,8 @@ export default function Login() {
             } else if (response.data.status == 200) {
               console.log(response.data)
               setLoading(false)
-              setCookies(response.data.user)
-
+              const userLogged = JSON.stringify(response.data.user)
+              setCookies(userLogged)
               router.push('/dashboard')
               return `Autenticado(a) com sucesso, ${response.data.user.name}`
             }

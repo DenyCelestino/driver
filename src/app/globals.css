@@ -1113,6 +1113,46 @@ em {
   overflow: hidden;
 }
 
+.loadings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #84bc9c;
+}
+.loadings .wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  min-height: 30%;
+  background: #fff;
+  text-align: center;
+  border-radius: 10px;
+  gap: 10px;
+}
+.loadings .wrapper .lottie {
+  height: 160px;
+  height: 160px;
+}
+
+.modal-free-alert {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+.modal-free-alert > button {
+  padding: 12px 24px;
+  background: #ef8354;
+  border-radius: 10px;
+  color: #fff;
+}
+
 .menu-is-open #content-container {
   position: fixed;
   width: 100%;

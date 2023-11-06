@@ -8,9 +8,11 @@ import { DotLoader } from 'react-spinners'
 import Image from 'next/image'
 import LOGO from '../../../../public/logo.svg'
 import { useRouter } from 'next/navigation'
+import { ContextUser } from '@/context/ContextUser'
 
 export default function Signup() {
   const { ENDPOINT } = useMyContext()
+  const { setCookies } = ContextUser()
   const [isLoading, setLoading] = useState(false)
   const [res, setRes] = useState(false)
 
@@ -48,8 +50,10 @@ export default function Signup() {
 
         if (res.data.status == 200) {
           toast.success(res.data.message)
-
-          router.push('/login')
+          toast.success('Autenticado(a) como ' + res.data.user.name)
+          const userLogged = JSON.stringify(res.data.user)
+          setCookies(userLogged)
+          router.push('/dashboard')
         } else {
           toast.error(res.data.message)
         }

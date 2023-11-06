@@ -27,7 +27,7 @@ export default function Profile() {
   return (
     <div className="profile">
       <div className="wrapper">
-        <Header time={bypass} />
+        <Header App={true} time={bypass} />
 
         <div className="avatar-container">
           <div className="avatar">

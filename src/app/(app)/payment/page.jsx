@@ -12,11 +12,11 @@ import CHECK from '../../../../public/animations/check.json'
 import SUCESS from '../../../../public/animations/sucess.json'
 import { DotLoader } from 'react-spinners'
 import Cookies from 'js-cookie'
-import CustomToast from '@/components/Universal/Toasts/CustomToast'
+import Header from '@/components/App/Dashboard/Header'
+import { ContextUser } from '@/context/ContextUser'
 
 export default function Payment() {
-  const getUserCookie = Cookies.get('user')
-  const user = getUserCookie ? JSON.parse(getUserCookie) : {}
+  const { user, bypass } = ContextUser()
   const [number, setNumber] = useState(user.number ? user.number : '')
   const [isLoading, setLoading] = useState(false)
   const [isPaid, setIsPaid] = useState(false)
@@ -103,10 +103,14 @@ export default function Payment() {
       )}
 
       <div className="wrapper">
+        <Header buttons={false} time={bypass} App={true} />
         <form onSubmit={e => payment(e)} className="fill-container">
           <h1>Quase lá</h1>
           <div className="payment-inputs">
-            <span>Telefone</span>
+            <p>
+              Digite seu numero de Celular para efectuar o pagamento
+              de acesso:
+            </p>
             <input
               placeholder="Digite seu celular"
               type="number"

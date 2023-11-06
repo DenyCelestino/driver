@@ -11,15 +11,15 @@ import { useEffect } from 'react'
 const rooms = [
   {
     title: 'Learn',
-    route: '/lesson'
+    route: '/me/lesson'
   },
   {
     title: 'Test Exam',
-    route: '/test'
+    route: '/me/test'
   },
   {
     title: 'Exam',
-    route: '/exam'
+    route: '/me/exam'
   }
 ]
 
@@ -29,7 +29,7 @@ export default function Dashboard() {
   return (
     <section className="dashboard">
       <div className="wrapper">
-        <Header time={bypass} />
+        <Header App={true} time={bypass} />
         <Rooms />
       </div>
     </section>

@@ -124,7 +124,7 @@ export default function TestQuestion({ questions }) {
         />
       )}
       <div className="wrapper">
-        <Header time={bypass} />
+        <Header App={true} time={bypass} />
 
         <div className="lesson-image cover-image">
           {questions[currentQuestion].image && (

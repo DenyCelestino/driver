@@ -9,10 +9,12 @@ import { useRouter } from 'next/navigation'
 import { useMyContext } from '@/context/Context'
 import Header from '@/components/App/Dashboard/Header'
 import { ContextUser } from '@/context/ContextUser'
+import Modal from '../Modal/Modal'
 
 export default function FreeQuestions({ questions }) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [result, setResult] = useState(false)
+  const [trial, setTrial] = useState(true)
   const [score, setScore] = useState(0)
   const [currentAnswer, setCurrentAnswer] = useState(null)
   const [oldAnswer, setOldAnswer] = useState(null)
@@ -80,12 +82,11 @@ export default function FreeQuestions({ questions }) {
       )
       console.log('correct answer: ' + correctAnswer)
       next()
+    } else {
+      router.push('/home')
     }
   }
 
-  const exit = () => {
-    router.push('/login')
-  }
   const SeeResults = () => {
     setOldQuestion(false)
     if (score >= 3) {
@@ -96,24 +97,63 @@ export default function FreeQuestions({ questions }) {
     setResult(true)
   }
 
+  const HandleTrial = () => {
+    if (localStorage.getItem('trial')) {
+      router.push('/signup')
+    } else {
+      localStorage.setItem('trial', true)
+      setTrial(false)
+    }
+  }
+
   function Try() {
     setCurrentQuestion(0)
-
     setCurrentAnswer(null)
     setOldAnswer(null)
     setCorrectAnswer(null)
     setResult(false)
     setOldQuestion(false)
-    router.push('/login')
+    router.push('/signup')
   }
   function Return() {
-    router.push('/login')
+    router.push('/home')
     setCurrentQuestion(0)
+    setScore(0)
     setCurrentAnswer(null)
     setCorrectAnswer(null)
   }
   return (
     <div className="lesson">
+      {trial && (
+        <Modal>
+          <div className="modal-free-alert">
+            {localStorage.getItem('trial') ? (
+              <>
+                <h1>Oooops ... !</h1>
+                <p>
+                  Você ja realizou o teste, crie uma conta e obtenha
+                  acesso agora.
+                </p>
+                <button onClick={HandleTrial}>
+                  {localStorage.getItem('trial')
+                    ? 'Obter acesso'
+                    : 'Continuar'}
+                </button>
+              </>
+            ) : (
+              <>
+                <h1>Alerta!</h1>
+                <p>Você só pode realizar o teste uma vez.</p>
+                <button onClick={HandleTrial}>
+                  {localStorage.getItem('trial')
+                    ? 'Obter acesso'
+                    : 'Continuar'}
+                </button>
+              </>
+            )}
+          </div>
+        </Modal>
+      )}
       {result && (
         <Result
           score={score}
@@ -207,7 +247,7 @@ export default function FreeQuestions({ questions }) {
         <div className="question-buttons">
           <button onClick={BackQuestion}>
             <ArrowLeft />
-            <span>Anterior</span>
+            <span>{currentQuestion < 1 ? 'Sair' : 'Anterior'}</span>
           </button>
 
           {currentAnswer && (

@@ -21,12 +21,12 @@ export default function Checkplan({ children }) {
       let res = await axios.get(
         `${ENDPOINT}checkdays.php?user=${user.id}`
       )
-
+      console.log(res.data)
       setBypass(res.data)
       if (res.data.status == 200) {
-        router.push('/dashboard')
+        router.push('/me/dashboard')
       } else if (res.data.status == 404) {
-        router.push('/payment')
+        router.push('/me/payment')
       } else {
         toast.error(
           'Opps, erro tentando verificar o plano, tente novamente'

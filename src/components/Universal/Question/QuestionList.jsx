@@ -102,6 +102,7 @@ export default function QuestionList({ questions }) {
   function Return() {
     router.push('/dashboard')
     setCurrentQuestion(0)
+    setScore(0)
     setCurrentAnswer(null)
     setCorrectAnswer(null)
   }
@@ -127,7 +128,7 @@ export default function QuestionList({ questions }) {
         />
       )}
       <div className="wrapper">
-        <Header time={bypass} />
+        <Header App={true} time={bypass} />
 
         <div className="lesson-image cover-image">
           {questions[currentQuestion].image && (

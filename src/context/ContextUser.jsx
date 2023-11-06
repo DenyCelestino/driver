@@ -11,37 +11,57 @@ import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
 import { useMyContext } from './Context'
 import axios from 'axios'
+import toast from 'react-hot-toast'
 
 const UserContext = createContext({})
 
 export const UserProvider = ({ children }) => {
-  const getUserCookie = Cookies.get('user')
-  const userCookie = getUserCookie ? JSON.parse(getUserCookie) : {}
-  const [user, setUser] = useState(userCookie ? userCookie : '')
+  const [user, setUser] = useState('')
   const [bypass, setBypass] = useState('')
   const [hamburguer, setHamburguer] = useState(false)
+  const [isLoadingCheckPlan, setLoadingCheckPlan] = useState(false)
 
   const router = useRouter()
 
-  const logout = () => {
-    Cookies.remove('user')
-    router.push('/login')
-    setHamburguer(false)
-  }
-
   const getUser = () => {
-    const getUserCookie = Cookies.get('user')
-    const user = getUserCookie ? JSON.parse(getUserCookie) : {}
-    setUser(user)
+    if (Cookies.get('user')) {
+      setUser(JSON.parse(Cookies.get('user')))
+    }
   }
 
+  const logout = () => {
+    setHamburguer(false)
+    Cookies.remove('user')
+    Cookies.remove('logged')
+    router.push('/login')
+    setUser('')
+  }
   const setCookies = user => {
-    Cookies.set('user', JSON.stringify(user), { expires: 7 })
+    Cookies.set('user', user, {
+      expires: 7
+    })
+    Cookies.set('logged', true)
     getUser()
+  }
+
+  const areCookiesValid = () => {
+    if (Cookies.get('logged')) {
+      const userData = Cookies.get('user')
+      if (!userData) {
+        toast('Sua sessão expirou')
+        Cookies.remove('logged')
+        setUser('')
+      } else {
+        setUser(JSON.parse(userData))
+      }
+    }
   }
 
   useEffect(() => {
     getUser()
+    areCookiesValid()
+    const intervalId = setInterval(areCookiesValid, 5000)
+    return () => clearInterval(intervalId)
   }, [])
 
   return (
@@ -55,7 +75,9 @@ export const UserProvider = ({ children }) => {
         setBypass,
         logout,
         hamburguer,
-        setHamburguer
+        setHamburguer,
+        isLoadingCheckPlan,
+        setLoadingCheckPlan
       }}
     >
       {children}

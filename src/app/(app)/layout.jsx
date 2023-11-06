@@ -1,21 +1,32 @@
 'use client'
 
 import NavBar from '@/components/App/Navbar'
+import CheckplanLoading from '@/components/Universal/Loadings/CheckplanLoading'
 import { ContextUser } from '@/context/ContextUser'
-import Checkplan from '@/functions/Checkplan'
 import PrivateRoutes from '@/functions/PrivateRoutes'
+import { AnimatePresence, motion } from 'framer-motion'
 
 export default function AppLayout({ children }) {
-  const { hamburguer, setHamburguer } = ContextUser()
+  const { hamburguer, isLoadingCheckPlan } = ContextUser()
 
   return (
     <PrivateRoutes>
-      <Checkplan>
-        <div>
-          {hamburguer && <NavBar />}
-          {children}
-        </div>
-      </Checkplan>
+      <div>
+        {isLoadingCheckPlan && <CheckplanLoading />}
+        <AnimatePresence>
+          {hamburguer && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <NavBar />
+            </motion.div>
+          )}
+        </AnimatePresence>
+        {children}
+      </div>
     </PrivateRoutes>
   )
 }
