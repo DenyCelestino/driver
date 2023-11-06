@@ -66,5 +66,5 @@ export default function PrivateRoutes({ children }) {
     }
   }, [router])
 
-  return isLoggedIn ? children : <Navigate to={'/login'} />
+  return children
 }
