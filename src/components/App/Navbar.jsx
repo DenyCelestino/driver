@@ -2,7 +2,6 @@
 
 import { ContextUser } from '@/context/ContextUser'
 import Header from './Dashboard/Header'
-import { motion, AnimatePresence } from 'framer-motion'
 import { routes } from '@/utils/routes'
 import Link from 'next/link'
 

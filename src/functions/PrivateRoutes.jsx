@@ -5,11 +5,17 @@ import { ContextUser } from '@/context/ContextUser'
 import Cookies from 'js-cookie'
 import axios from 'axios'
 import { useMyContext } from '@/context/Context'
+import { Navigate } from 'react-router-dom'
 
 export default function PrivateRoutes({ children }) {
   const { ENDPOINT } = useMyContext()
-  const { user, setUser, setBypass, setLoadingCheckPlan } =
-    ContextUser()
+  const {
+    user,
+    setUser,
+    setBypass,
+    setLoadingCheckPlan,
+    isLoadingCkeckplan
+  } = ContextUser()
 
   const router = useRouter()
 
@@ -56,7 +62,7 @@ export default function PrivateRoutes({ children }) {
     } else {
       router.push('/login')
     }
-  }, [])
+  }, [router])
 
-  return user ? children : null
+  return Cookies.get('logged') ? children : <Navigate to={'/login'} />
 }

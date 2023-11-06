@@ -1,6 +1,4 @@
 'use client'
-
-import { useMyContext } from '@/context/Context'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Modal({ children }) {
