@@ -97,14 +97,14 @@ export default function FreeQuestions({ questions }) {
     setResult(true)
   }
 
-  const HandleTrial = () => {
-    if (localStorage.getItem('trial')) {
-      router.push('/signup')
-    } else {
-      localStorage.setItem('trial', true)
-      setTrial(false)
-    }
-  }
+  // const HandleTrial = () => {
+  //   if (localStorage.getItem('trial')) {
+  //     router.push('/signup')
+  //   } else {
+  //     localStorage.setItem('trial', true)
+  //     setTrial(false)
+  //   }
+  // }
 
   function Try() {
     setCurrentQuestion(0)
@@ -124,7 +124,7 @@ export default function FreeQuestions({ questions }) {
   }
   return (
     <div className="lesson">
-      {trial && (
+      {/* {trial && (
         <Modal>
           <div className="modal-free-alert">
             {localStorage.getItem('trial') ? (
@@ -153,7 +153,7 @@ export default function FreeQuestions({ questions }) {
             )}
           </div>
         </Modal>
-      )}
+      )} */}
       {result && (
         <Result
           score={score}
