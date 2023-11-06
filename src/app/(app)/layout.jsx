@@ -13,18 +13,18 @@ export default function AppLayout({ children }) {
     <PrivateRoutes>
       <div>
         {isLoadingCheckPlan && <CheckplanLoading />}
-        <AnimatePresence>
+        {/* <AnimatePresence>
           {hamburguer && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-            >
-              <NavBar />
-            </motion.div>
+            > */}
+        {hamburguer && <NavBar />}
+        {/* </motion.div>
           )}
-        </AnimatePresence>
+        </AnimatePresence> */}
         {children}
       </div>
     </PrivateRoutes>
