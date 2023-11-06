@@ -21,7 +21,7 @@ export default function AppLayout({ children }) {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
             >
-              {hamburguer && <NavBar />}
+              <NavBar />
             </motion.div>
           )}
         </AnimatePresence>
