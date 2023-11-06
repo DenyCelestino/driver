@@ -19,6 +19,8 @@ export default function PrivateRoutes({ children }) {
 
   const router = useRouter()
 
+  const isLoggedIn = Cookies.get('user') ? true : false
+
   const checkPlan = async user => {
     try {
       setLoadingCheckPlan(true)
@@ -64,5 +66,5 @@ export default function PrivateRoutes({ children }) {
     }
   }, [router])
 
-  return Cookies.get('logged') ? children : <Navigate to={'/login'} />
+  return isLoggedIn ? children : <Navigate to={'/login'} />
 }
