@@ -10,9 +10,5 @@ export default async function Lesson() {
 
   const questions = res.data.questions
 
-  return (
-    <PrivateRoutes>
-      <LessonQuestion questions={questions} />
-    </PrivateRoutes>
-  )
+  return <LessonQuestion questions={questions} />
 }

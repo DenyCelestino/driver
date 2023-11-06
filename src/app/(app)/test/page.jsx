@@ -9,9 +9,5 @@ export default async function Test() {
 
   const questions = res.data.questions
 
-  return (
-    <PrivateRoutes>
-      <TestQuestion questions={questions} />
-    </PrivateRoutes>
-  )
+  return <TestQuestion questions={questions} />
 }
