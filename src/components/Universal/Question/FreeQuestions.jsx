@@ -84,7 +84,7 @@ export default function FreeQuestions({ questions }) {
       console.log('correct answer: ' + correctAnswer)
       next()
     } else {
-      router.push('/home')
+      router.push('/')
     }
   }
 
