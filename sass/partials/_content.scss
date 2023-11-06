@@ -29,12 +29,14 @@
   .app-header-right {
     display: flex;
     gap: 10px;
+    cursor: pointer;
     .app-header-menu {
       font-weight: bold;
       color: $color-green;
       cursor: pointer;
       &.active {
         color: $color-white;
+        cursor: pointer;
       }
     }
     .hamburguer {
@@ -43,19 +45,21 @@
       align-items: center;
       justify-content: center;
       gap: 3px;
-
+      cursor: pointer;
       .hamburguer-arrow {
         width: 20px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         position: relative;
+        cursor: pointer;
       }
 
       span {
         height: 3px;
         width: 8px;
         background: $color-green;
+        cursor: pointer;
       }
 
       .arrow-middle {
@@ -65,15 +69,18 @@
         width: 20px;
         display: flex;
         position: relative;
+        cursor: pointer;
         > span {
           width: 30px;
           position: absolute;
           top: 0;
           left: 0;
+          cursor: pointer;
         }
         &.active {
           > span {
             background: $color-white;
+            cursor: pointer;
           }
         }
       }
@@ -664,4 +671,15 @@
     color: $color-green;
     text-decoration: underline;
   }
+}
+
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  height: 100vh;
+  overflow: hidden;
 }
