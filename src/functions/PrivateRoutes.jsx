@@ -56,7 +56,7 @@ export default function PrivateRoutes({ children }) {
     } else {
       router.push('/login')
     }
-  }, [router, setUser, checkPlan])
+  }, [])
 
   return user ? children : null
 }
