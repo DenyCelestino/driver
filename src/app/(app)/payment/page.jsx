@@ -108,8 +108,7 @@ export default function Payment() {
           <h1>Quase lá</h1>
           <div className="payment-inputs">
             <p>
-              Digite seu numero de Celular para efectuar o pagamento
-              de acesso:
+              Digite seu numero de Celular para obter acesso completo:
             </p>
             <input
               placeholder="Digite seu celular"
