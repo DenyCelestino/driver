@@ -49,8 +49,6 @@ export default function Signup() {
         setLoading(false)
 
         if (res.data.status == 200) {
-          toast.success(res.data.message)
-          toast.success('Autenticado(a) como ' + res.data.user.name)
           const userLogged = JSON.stringify(res.data.user)
           setCookies(userLogged)
           router.push('/dashboard')
