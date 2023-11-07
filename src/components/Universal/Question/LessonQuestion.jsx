@@ -31,10 +31,12 @@ export default function LessonQuestion({ questions }) {
     }
   }
   const BackQuestion = () => {
-    if (currentQuestion != 0) {
+    if (currentQuestion > 0) {
       const Backquestion = currentQuestion - 1
       setCurrentQuestion(Backquestion)
       next()
+    } else {
+      router.push('/dashboard')
     }
   }
   const exit = () => {
@@ -97,7 +99,7 @@ export default function LessonQuestion({ questions }) {
         <div className="question-buttons">
           <button onClick={BackQuestion}>
             <ArrowLeft />
-            <span>Anterior</span>
+            <span>{currentQuestion < 1 ? 'Sair' : 'Anterior'}</span>
           </button>
 
           {questions.length != currentQuestion + 1 ? (

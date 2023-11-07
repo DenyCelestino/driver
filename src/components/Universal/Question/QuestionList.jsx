@@ -19,7 +19,7 @@ export default function QuestionList({ questions }) {
   const [score, setScore] = useState(0)
   const [currentAnswer, setCurrentAnswer] = useState(null)
   const [correctAnswer, setCorrectAnswer] = useState(null)
-  const [minutes, setMinutes] = useState(1)
+  const [minutes, setMinutes] = useState(8)
   const [seconds, setSeconds] = useState(0)
   const [userMinute, setUserMinute] = useState(0)
   const [userSecond, setUserSecond] = useState(0)
@@ -114,7 +114,6 @@ export default function QuestionList({ questions }) {
           total={questions.length}
           Try={Try}
           Return={Return}
-          test={true}
         />
       )}
       {timeOut && (
@@ -180,20 +179,28 @@ export default function QuestionList({ questions }) {
         </div>
 
         <div className="question-buttons">
-          {currentAnswer && (
-            <>
-              {currentQuestion === questions.length - 1 ? (
-                <button onClick={SeeResults}>
-                  <span>Resultados</span>
-                  <ArrowRight />
-                </button>
-              ) : (
-                <button onClick={NextQuestion}>
-                  <span>Proxima</span>
-                  <ArrowRight />
-                </button>
-              )}
-            </>
+          {currentQuestion === questions.length - 1 ? (
+            <button
+              disabled={!currentAnswer}
+              className={
+                currentAnswer ? 'nextbutton active' : 'nextbutton'
+              }
+              onClick={SeeResults}
+            >
+              <span>Resultados</span>
+              <ArrowRight />
+            </button>
+          ) : (
+            <button
+              disabled={!currentAnswer}
+              className={
+                currentAnswer ? 'nextbutton active' : 'nextbutton'
+              }
+              onClick={NextQuestion}
+            >
+              <span>Proxima</span>
+              <ArrowRight />
+            </button>
           )}
         </div>
       </div>

@@ -20,7 +20,7 @@ export default function Header({
         <Image className="logo" src={LOGO} alt="Logo" />
         {App && (
           <>
-            {time.days <= 31 && (
+            {time.days <= 7 && (
               <span className="btn-days">
                 {time.days
                   ? time.days + ' dias restantes'

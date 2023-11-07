@@ -80,6 +80,8 @@ export default function TestQuestion({ questions }) {
       )
       console.log('correct answer: ' + correctAnswer)
       next()
+    } else {
+      router.push('/dashboard')
     }
   }
 
@@ -120,7 +122,7 @@ export default function TestQuestion({ questions }) {
           total={questions.length}
           Try={Try}
           Return={Return}
-          test={true}
+          test={false}
         />
       )}
       <div className="wrapper">
@@ -207,23 +209,31 @@ export default function TestQuestion({ questions }) {
         <div className="question-buttons">
           <button onClick={BackQuestion}>
             <ArrowLeft />
-            <span>Anterior</span>
+            <span>{currentQuestion < 1 ? 'Sair' : 'Anterior'}</span>
           </button>
 
-          {currentAnswer && (
-            <>
-              {currentQuestion === questions.length - 1 ? (
-                <button onClick={SeeResults}>
-                  <span>Resultados</span>
-                  <ArrowRight />
-                </button>
-              ) : (
-                <button onClick={NextQuestion}>
-                  <span>Proxima</span>
-                  <ArrowRight />
-                </button>
-              )}
-            </>
+          {currentQuestion === questions.length - 1 ? (
+            <button
+              disabled={!correctAnswer}
+              className={
+                currentAnswer ? 'nextbutton active' : 'nextbutton'
+              }
+              onClick={SeeResults}
+            >
+              <span>Resultados</span>
+              <ArrowRight />
+            </button>
+          ) : (
+            <button
+              disabled={!correctAnswer}
+              className={
+                currentAnswer ? 'nextbutton active' : 'nextbutton'
+              }
+              onClick={NextQuestion}
+            >
+              <span>Proxima</span>
+              <ArrowRight />
+            </button>
           )}
         </div>
       </div>
