@@ -84,7 +84,6 @@ export default function Login() {
       )
       setLoading(false)
       if (res.data.status == 200) {
-        toast.success(res.data.message)
         const userLogged = JSON.stringify(res.data.user)
         setCookies(userLogged)
         router.push('/dashboard')
@@ -146,7 +145,6 @@ export default function Login() {
         toast.promise(checkLogin, {
           loading: 'Processando...',
           success: response => {
-            console.log('first-console:' + response.data)
             if (response.data.status === 401) {
               setLoading(true)
               const completeRegister = register(
@@ -164,7 +162,6 @@ export default function Login() {
                   )
                   setCookies(userLogged)
                   router.push('/dashboard')
-                  return `Autenticado(a) com sucesso, ${response.data.user.name}`
                 },
                 error: response => {
                   setLoading(false)
@@ -177,7 +174,6 @@ export default function Login() {
               const userLogged = JSON.stringify(response.data.user)
               setCookies(userLogged)
               router.push('/dashboard')
-              return `Autenticado(a) com sucesso, ${response.data.user.name}`
             }
           },
           error: 'Ocorreu um erro no processo'

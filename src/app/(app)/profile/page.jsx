@@ -10,6 +10,8 @@ import { PencilLine } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { DotLoader } from 'react-spinners'
+import PERSON from '../../../../public/person.png'
+import Image from 'next/image'
 
 export default function Profile() {
   const getUserCookie = Cookies.get('user')
@@ -33,7 +35,12 @@ export default function Profile() {
 
           <div className="avatar-container">
             <div className="avatar">
-              <img src="https://media.licdn.com/dms/image/D4E03AQGjDromGcPp6A/profile-displayphoto-shrink_200_200/0/1682194840630?e=1704326400&v=beta&t=iudDkWaGyPWNR0WoDlK3kK4_hsqIp_V0YJSYEOWGhTw" />
+              <Image
+                src={PERSON}
+                height={100}
+                width={100}
+                alt="avatar"
+              />
 
               <button className="avatar-edit">
                 <PencilLine />
@@ -46,6 +53,7 @@ export default function Profile() {
               <span>Nome</span>
               <div className="input">
                 <input
+                  disabled
                   placeholder="email@example.com"
                   type="text"
                   onChange={e => setName(e.target.value)}
@@ -58,6 +66,7 @@ export default function Profile() {
               <span>Telefone</span>
               <div className="input">
                 <input
+                  disabled
                   placeholder="+258 XX XX XX"
                   type="number"
                   onChange={e => setNumber(e.target.value)}
@@ -70,6 +79,7 @@ export default function Profile() {
               <span>Email</span>
               <div className="input">
                 <input
+                  disabled
                   placeholder="+258 XX XX XX"
                   type="email"
                   onChange={e => setEmail(e.target.value)}
@@ -82,6 +92,20 @@ export default function Profile() {
               <span>Password</span>
               <div className="input">
                 <input
+                  disabled
+                  placeholder="*****"
+                  type="password"
+                  onChange={e => setPassword(e.target.value)}
+                  value={password}
+                />
+                <PencilLine />
+              </div>
+            </div>
+            <div className="profile-inputs">
+              <span>Confirm Password</span>
+              <div className="input">
+                <input
+                  disabled
                   placeholder="*****"
                   type="password"
                   onChange={e => setPassword(e.target.value)}
