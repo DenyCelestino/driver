@@ -16,7 +16,7 @@ import Header from '@/components/App/Dashboard/Header'
 import { ContextUser } from '@/context/ContextUser'
 
 export default function Payment() {
-  const { user, bypass } = ContextUser()
+  const { user, bypass, logout } = ContextUser()
   const [number, setNumber] = useState(user.number ? user.number : '')
   const [isLoading, setLoading] = useState(false)
   const [isPaid, setIsPaid] = useState(false)
@@ -137,6 +137,9 @@ export default function Payment() {
             Usar outro numero
           </button>
         )}
+        <button onClick={logout} className="other-number">
+          Sair
+        </button>
       </div>
     </div>
   )
