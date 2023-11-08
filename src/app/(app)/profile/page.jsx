@@ -47,11 +47,6 @@ export default function Profile() {
     const file = event.target.files[0]
     if (file) {
       setImage(file)
-      if (file.size > 1000000) {
-        toast.error(
-          'Aviso! O arquivo é muito grande. O tamanho máximo recomendado é 1MB.'
-        )
-      }
 
       // Lê o arquivo para exibir a prévia
       const reader = new FileReader()
@@ -59,6 +54,8 @@ export default function Profile() {
         setImagePreview(reader.result)
       }
       reader.readAsDataURL(file)
+
+      avatar()
     }
   }
   const handleClick = () => {
