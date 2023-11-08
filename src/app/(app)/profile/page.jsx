@@ -330,7 +330,7 @@ export default function Profile() {
                   </div>
                 </div>
                 <div className="profile-inputs">
-                  <span>Confirm Password</span>
+                  <span>Confirmar Password</span>
                   <div className="input">
                     <input
                       disabled={isPasswordLock}
