@@ -145,7 +145,7 @@ export default function Login() {
         toast.promise(checkLogin, {
           loading: 'Processando...',
           success: response => {
-            if (response.data.status === 401) {
+            if (response.data.status === 404) {
               setLoading(true)
               const completeRegister = register(
                 res.data.name,
@@ -157,11 +157,15 @@ export default function Login() {
                 loading: 'Registando e Autenticando... ',
                 success: response => {
                   setLoading(false)
-                  const userLogged = JSON.stringify(
-                    response.data.user
-                  )
-                  setCookies(userLogged)
-                  router.push('/dashboard')
+                  if (response.data.status === 401) {
+                    toast.error(response.data.message)
+                  } else {
+                    const userLogged = JSON.stringify(
+                      response.data.user
+                    )
+                    setCookies(userLogged)
+                    router.push('/dashboard')
+                  }
                 },
                 error: response => {
                   setLoading(false)

@@ -1009,6 +1009,9 @@ em {
   border-radius: 10px;
   width: 100%;
 }
+.profile .input.active {
+  border: 1px solid #ef8354;
+}
 .profile .fill-container {
   display: flex;
   flex-direction: column;
