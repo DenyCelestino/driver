@@ -15,6 +15,7 @@ import Image from 'next/image'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { useMyContext } from '@/context/Context'
+import BackgroundCheck from '@/functions/BackgroundCheck'
 
 export default function Profile() {
   const { bypass, user, setCookies } = ContextUser()
@@ -168,7 +169,7 @@ export default function Profile() {
   }
 
   return (
-    <PrivateRoutes redirect={false}>
+    <BackgroundCheck>
       <div className="profile">
         <div className="wrapper">
           <Header App={true} time={bypass} />
@@ -364,6 +365,6 @@ export default function Profile() {
           </form>
         </div>
       </div>
-    </PrivateRoutes>
+    </BackgroundCheck>
   )
 }

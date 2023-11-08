@@ -10,23 +10,21 @@ export default function AppLayout({ children }) {
   const { hamburguer, isLoadingCheckPlan } = ContextUser()
 
   return (
-    <PrivateRoutes>
-      <div>
-        {isLoadingCheckPlan && <CheckplanLoading />}
-        <AnimatePresence>
-          {hamburguer && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              <NavBar />
-            </motion.div>
-          )}
-        </AnimatePresence>
-        {children}
-      </div>
-    </PrivateRoutes>
+    <div>
+      {isLoadingCheckPlan && <CheckplanLoading />}
+      <AnimatePresence>
+        {hamburguer && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <NavBar />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {children}
+    </div>
   )
 }

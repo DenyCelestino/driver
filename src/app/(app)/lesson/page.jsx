@@ -1,6 +1,5 @@
-import Header from '@/components/App/Dashboard/Header'
 import LessonQuestion from '@/components/Universal/Question/LessonQuestion'
-import PrivateRoutes from '@/functions/PrivateRoutes'
+import BackgroundCheck from '@/functions/BackgroundCheck'
 import axios from 'axios'
 
 export default async function Lesson() {
@@ -11,8 +10,8 @@ export default async function Lesson() {
   const questions = res.data.questions
 
   return (
-    <PrivateRoutes redirect={false}>
+    <BackgroundCheck>
       <LessonQuestion questions={questions} />
-    </PrivateRoutes>
+    </BackgroundCheck>
   )
 }

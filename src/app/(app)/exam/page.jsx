@@ -1,5 +1,5 @@
 import QuestionList from '@/components/Universal/Question/QuestionList'
-import PrivateRoutes from '@/functions/PrivateRoutes'
+import BackgroundCheck from '@/functions/BackgroundCheck'
 import axios from 'axios'
 
 export default async function Exam() {
@@ -10,8 +10,8 @@ export default async function Exam() {
   const questions = res.data.questions
 
   return (
-    <PrivateRoutes redirect={false}>
+    <BackgroundCheck>
       <QuestionList questions={questions} />
-    </PrivateRoutes>
+    </BackgroundCheck>
   )
 }

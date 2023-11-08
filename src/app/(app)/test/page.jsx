@@ -1,5 +1,5 @@
 import TestQuestion from '@/components/Universal/Question/TestQuestion'
-import PrivateRoutes from '@/functions/PrivateRoutes'
+import BackgroundCheck from '@/functions/BackgroundCheck'
 import axios from 'axios'
 
 export default async function Test() {
@@ -10,8 +10,8 @@ export default async function Test() {
   const questions = res.data.questions
 
   return (
-    <PrivateRoutes redirect={false}>
+    <BackgroundCheck>
       <TestQuestion questions={questions} />
-    </PrivateRoutes>
+    </BackgroundCheck>
   )
 }
