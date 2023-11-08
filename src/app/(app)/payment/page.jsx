@@ -36,8 +36,7 @@ export default function Payment() {
           `${ENDPOINT}payment.php`,
           JSON.stringify({
             user: JSON.parse(Cookies.get('user')).id,
-            number: number,
-            amount: 10
+            number: number
           })
         )
         setLoading(false)
