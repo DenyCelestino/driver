@@ -6,7 +6,12 @@ import Input from '@/components/Universal/Inputs/input'
 import { ContextUser } from '@/context/ContextUser'
 import PrivateRoutes from '@/functions/PrivateRoutes'
 import Cookies from 'js-cookie'
-import { LockIcon, PencilLine, UploadCloud } from 'lucide-react'
+import {
+  CheckCheckIcon,
+  LockIcon,
+  PencilLine,
+  UploadCloud
+} from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { DotLoader } from 'react-spinners'
@@ -244,9 +249,9 @@ export default function Profile() {
                   value={name}
                 />
                 {!isNameLock ? (
-                  <LockIcon
-                    onClick={() => setNameLock(!isNameLock)}
-                  />
+                  <button disabled={isLoading} onClick={information}>
+                    <CheckCheckIcon />
+                  </button>
                 ) : (
                   <PencilLine
                     onClick={() => setNameLock(!isNameLock)}
@@ -267,9 +272,9 @@ export default function Profile() {
                   value={number}
                 />
                 {!isNumberLock ? (
-                  <LockIcon
-                    onClick={() => setNumberLock(!isNumberLock)}
-                  />
+                  <button disabled={isLoading} onClick={information}>
+                    <CheckCheckIcon />
+                  </button>
                 ) : (
                   <PencilLine
                     onClick={() => setNumberLock(!isNumberLock)}
@@ -303,17 +308,18 @@ export default function Profile() {
                   >
                     <input
                       disabled={isPasswordLock}
-                      placeholder="*****"
+                      placeholder="Digite sua password"
                       type="password"
                       onChange={e => setPassword(e.target.value)}
                       value={password}
                     />
                     {!isPasswordLock ? (
-                      <LockIcon
-                        onClick={() =>
-                          setPasswordLock(!isPasswordLock)
-                        }
-                      />
+                      <button
+                        disabled={isLoading}
+                        onClick={information}
+                      >
+                        <CheckCheckIcon />
+                      </button>
                     ) : (
                       <PencilLine
                         onClick={() =>
@@ -328,7 +334,7 @@ export default function Profile() {
                   <div className="input">
                     <input
                       disabled={isPasswordLock}
-                      placeholder="*****"
+                      placeholder="Digite novamente sua password"
                       type="password"
                       onChange={e =>
                         setPasswordConfirm(e.target.value)
@@ -336,11 +342,12 @@ export default function Profile() {
                       value={confirmPassword}
                     />
                     {!isPasswordLock ? (
-                      <LockIcon
-                        onClick={() =>
-                          setPasswordLock(!isPasswordLock)
-                        }
-                      />
+                      <button
+                        disabled={isLoading}
+                        onClick={information}
+                      >
+                        <CheckCheckIcon />
+                      </button>
                     ) : (
                       <PencilLine
                         onClick={() =>
