@@ -102,38 +102,68 @@ export default function Profile() {
         toast.error('A senha precisa ter no mínimo 8 caracteres')
       } else if (password != confirmPassword) {
         toast.error('As senhas devem ser iguais')
-      }
-    }
-
-    try {
-      setLoading(true)
-
-      let res = await axios.post(
-        `${ENDPOINT}changes.php`,
-        JSON.stringify({
-          name: name,
-          number: number,
-          email: email,
-          password: password
-        })
-      )
-      setLoading(false)
-      console.log(res.data)
-      if (res.data.status == 200) {
-        toast.success(res.data.message)
-        const userLogged = JSON.stringify(res.data.user)
-        setCookies(userLogged)
-        setNameLock(true)
-        setEmaiLock(true)
-        setNumberLock(true)
-        setPasswordLock(true)
-        setPassword('')
-        setPasswordConfirm('')
       } else {
-        toast.error(res.data.message)
+        try {
+          setLoading(true)
+
+          let res = await axios.post(
+            `${ENDPOINT}changes.php`,
+            JSON.stringify({
+              name: name,
+              number: number,
+              email: email,
+              password: password
+            })
+          )
+          setLoading(false)
+          console.log(res.data)
+          if (res.data.status == 200) {
+            toast.success(res.data.message)
+            const userLogged = JSON.stringify(res.data.user)
+            setCookies(userLogged)
+            setNameLock(true)
+            setEmaiLock(true)
+            setNumberLock(true)
+            setPasswordLock(true)
+            setPassword('')
+            setPasswordConfirm('')
+          } else {
+            toast.error(res.data.message)
+          }
+        } catch (error) {
+          setLoading(false)
+        }
       }
-    } catch (error) {
-      setLoading(false)
+    } else {
+      try {
+        setLoading(true)
+
+        let res = await axios.post(
+          `${ENDPOINT}changes.php`,
+          JSON.stringify({
+            name: name,
+            number: number,
+            email: email
+          })
+        )
+        setLoading(false)
+        console.log(res.data)
+        if (res.data.status == 200) {
+          toast.success(res.data.message)
+          const userLogged = JSON.stringify(res.data.user)
+          setCookies(userLogged)
+          setNameLock(true)
+          setEmaiLock(true)
+          setNumberLock(true)
+          setPasswordLock(true)
+          setPassword('')
+          setPasswordConfirm('')
+        } else {
+          toast.error(res.data.message)
+        }
+      } catch (error) {
+        setLoading(false)
+      }
     }
   }
 
