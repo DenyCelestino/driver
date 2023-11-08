@@ -52,11 +52,9 @@ export default function Profile() {
       const reader = new FileReader()
       reader.onload = () => {
         setImagePreview(reader.result)
-      }
-      reader.readAsDataURL(file)
-      if (image) {
         avatar()
       }
+      reader.readAsDataURL(file)
     }
   }
   const handleClick = () => {
