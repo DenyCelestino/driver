@@ -11,7 +11,7 @@ export default function AppLayout({ children }) {
 
   return (
     <div className="scrollable">
-      {isLoadingCheckPlan && <CheckplanLoading />}
+      {!isLoadingCheckPlan && <CheckplanLoading />}
       <AnimatePresence>
         {hamburguer && (
           <motion.div

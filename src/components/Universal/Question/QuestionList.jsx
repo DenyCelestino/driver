@@ -36,33 +36,34 @@ export default function QuestionList({ questions }) {
   const router = useRouter()
 
   // Função para atualizar o contador regressivo
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (minutes === 0 && seconds === 0) {
-        clearInterval(interval)
-        if (!result) {
-          setTimeOut(true)
-        }
-      } else {
-        if (seconds === 0) {
-          setMinutes(minutes - 1)
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     if (minutes === 0 && seconds === 0) {
+  //       clearInterval(interval)
+  //       if (!result) {
+  //         setTimeOut(true)
+  //       }
+  //     } else {
+  //       if (seconds === 0) {
+  //         setMinutes(minutes - 1)
 
-          setSeconds(59)
-          if (!result && !timeOut) {
-            setUserMinute(minutes - 1)
-          }
-        } else {
-          setSeconds(seconds - 1)
+  //         setSeconds(59)
+  //         if (!result && !timeOut) {
+  //           setUserMinute(minutes - 1)
+  //         }
+  //       } else {
+  //         setSeconds(seconds - 1)
 
-          if (!result && !timeOut) {
-            setUserSecond(seconds - 1)
-          }
-        }
-      }
-    }, 1000)
+  //         if (!result && !timeOut) {
+  //           setUserSecond(seconds - 1)
+  //         }
+  //       }
+  //     }
+  //   }, 1000)
 
-    return () => clearInterval(interval)
-  }, [minutes, seconds, result, timeOut]) // Adição das dependências result e timeOut
+  //   return () => clearInterval(interval)
+  // }, [minutes, seconds, result, timeOut])
+  // Adição das dependências result e timeOut
   const handleAnswerButtonClick = answer => {
     setCurrentAnswer(answer)
     if (answer.iscorrect) {
