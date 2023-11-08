@@ -87,7 +87,6 @@ export default function Profile() {
       setLoading(false)
       console.log(res.data)
       if (res.data.status == 200) {
-        toast.success('Avatar alterado com sucesso')
         const userLogged = JSON.stringify(res.data.user)
         setCookies(userLogged)
         setImage(null)
@@ -122,7 +121,6 @@ export default function Profile() {
           setLoading(false)
           console.log(res.data)
           if (res.data.status == 200) {
-            toast.success(res.data.message)
             const userLogged = JSON.stringify(res.data.user)
             setCookies(userLogged)
             setNameLock(true)
