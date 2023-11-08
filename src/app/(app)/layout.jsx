@@ -10,7 +10,7 @@ export default function AppLayout({ children }) {
   const { hamburguer, isLoadingCheckPlan } = ContextUser()
 
   return (
-    <div>
+    <div className="scrollable">
       {isLoadingCheckPlan && <CheckplanLoading />}
       <AnimatePresence>
         {hamburguer && (

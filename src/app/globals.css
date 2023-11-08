@@ -456,6 +456,10 @@ body {
   overflow: hidden;
 }
 
+.scrollable {
+  overflow-y: scroll;
+}
+
 .app-header {
   display: flex;
   padding: 20px 0 0 0;
