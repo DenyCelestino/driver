@@ -161,13 +161,13 @@ html {
 }
 
 body {
-  background: #fff;
+  background: #fffdf7;
   min-height: 100vh;
   color: #000;
 }
 body.bg-black {
   background: #000;
-  color: #fff;
+  color: #fffdf7;
 }
 
 #site-container {
@@ -354,7 +354,7 @@ em {
   content: counter(ol-counter) ".";
 }
 .text-container a:not(.btn):hover {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 253, 247, 0.7);
 }
 .text-container blockquote {
   padding-left: 1em;
@@ -367,7 +367,7 @@ em {
   font-family: "doumbarbold", Arial, sans-serif;
   transition: padding 0.3s ease-in-out;
   display: inline-block;
-  background: #fff;
+  background: #fffdf7;
   color: #000;
   padding: 2vw 4vw;
   font-size: 12px;
@@ -383,7 +383,7 @@ em {
 
 .btn:hover {
   background: #ffdd00;
-  color: #fff;
+  color: #fffdf7;
 }
 
 .btn-center {
@@ -400,11 +400,11 @@ em {
 }
 .btn.btn-orange {
   background: #ef8354;
-  color: #fff;
+  color: #fffdf7;
 }
 .btn.btn-orange:hover {
   background: #84bc9c;
-  color: #fff;
+  color: #fffdf7;
 }
 .header {
   height: 80px;
@@ -475,7 +475,7 @@ em {
   background: #84bc9c;
 }
 .app-header .logo.logo-white {
-  background: #fff;
+  background: #fffdf7;
 }
 .app-header .app-header-left {
   display: flex;
@@ -486,7 +486,7 @@ em {
   padding: 4px 20px;
   border-radius: 20px;
   background: #ef8354;
-  color: #fff;
+  color: #fffdf7;
 }
 .app-header .app-header-right {
   display: flex;
@@ -499,7 +499,7 @@ em {
   cursor: pointer;
 }
 .app-header .app-header-right .app-header-menu.active {
-  color: #fff;
+  color: #fffdf7;
   cursor: pointer;
 }
 .app-header .app-header-right .hamburguer {
@@ -541,7 +541,7 @@ em {
   cursor: pointer;
 }
 .app-header .app-header-right .hamburguer .hamburguer-arrow-close.active > span {
-  background: #fff;
+  background: #fffdf7;
   cursor: pointer;
 }
 
@@ -564,7 +564,7 @@ em {
 .app-nav-bar .routes .route {
   padding: 14px 24px;
   border-radius: 10px;
-  background: #fff;
+  background: #fffdf7;
   color: #84bc9c;
   font-weight: bold;
 }
@@ -574,7 +574,7 @@ em {
 }
 .app-nav-bar .logout-container button {
   text-decoration: underline;
-  color: #fff;
+  color: #fffdf7;
 }
 
 .dashboard .wrapper {
@@ -625,7 +625,7 @@ em {
 .dashboard .room .room-title {
   font-size: 27px;
   font-weight: bold;
-  color: #fff;
+  color: #fffdf7;
   word-wrap: break-word;
 }
 .dashboard .room .room-subtitle {
@@ -642,7 +642,7 @@ em {
   background: #ef8354;
   font-size: 18px;
   font-weight: bold;
-  color: #fff;
+  color: #fffdf7;
   border-radius: 30px;
   text-transform: uppercase;
 }
@@ -732,7 +732,7 @@ em {
   display: flex;
   border-radius: 10px;
   gap: 12px;
-  color: #fff;
+  color: #fffdf7;
   width: 100%;
 }
 .lesson .error-option .option-letters-container {
@@ -742,7 +742,7 @@ em {
   font-size: 20px;
   font-weight: bold;
   text-transform: uppercase;
-  color: #fff;
+  color: #fffdf7;
 }
 .lesson .correct-option {
   font-size: 16px;
@@ -751,7 +751,7 @@ em {
   display: flex;
   border-radius: 10px;
   gap: 12px;
-  color: #fff;
+  color: #fffdf7;
   width: 100%;
 }
 .lesson .correct-option .option-letters-container {
@@ -761,7 +761,7 @@ em {
   font-size: 20px;
   font-weight: bold;
   text-transform: uppercase;
-  color: #fff;
+  color: #fffdf7;
 }
 .lesson .question-buttons {
   display: flex;
@@ -796,7 +796,7 @@ em {
   flex-direction: column;
   padding-top: 16px;
   position: fixed;
-  background: #fff;
+  background: #fffdf7;
   color: #84bc9c;
   inset: 0;
   z-index: 100;
@@ -819,12 +819,12 @@ em {
   background: red;
   border-radius: 10px;
   text-align: center;
-  color: #fff;
+  color: #fffdf7;
 }
 .modal .congrats-image > h1 {
   font-size: 20px;
   font-weight: bold;
-  color: #fff;
+  color: #fffdf7;
 }
 .modal .share {
   display: flex;
@@ -848,7 +848,7 @@ em {
   padding: 8px 12px;
   background: #ef8354;
   font-size: 16px;
-  color: #fff;
+  color: #fffdf7;
   border-radius: 100px;
 }
 .modal .try .back {
@@ -912,7 +912,7 @@ em {
 .login .login-button-container button {
   padding: 10px 30px;
   background: #ef8354;
-  color: #fff;
+  color: #fffdf7;
   text-transform: uppercase;
   border-radius: 24px;
   display: flex;
@@ -968,7 +968,7 @@ em {
   width: 34px;
   right: -10px;
   background: #84bc9c;
-  color: #fff;
+  color: #fffdf7;
   font-size: 20px;
   padding: 10px;
   display: flex;
@@ -1035,7 +1035,7 @@ em {
 .profile .profile-button-container button {
   padding: 10px 30px;
   background: #ef8354;
-  color: #fff;
+  color: #fffdf7;
   text-transform: uppercase;
   border-radius: 24px;
   display: flex;
@@ -1052,7 +1052,7 @@ em {
   justify-content: center;
 }
 .modal-presences .modal-presences-content {
-  background: #fff;
+  background: #fffdf7;
   min-height: 10px;
   width: 90%;
   padding: 1rem;
@@ -1117,7 +1117,7 @@ em {
 .payment .get-access-button {
   padding: 10px 30px;
   background: #ef8354;
-  color: #fff;
+  color: #fffdf7;
   text-transform: uppercase;
   border-radius: 24px;
   display: flex;
@@ -1165,7 +1165,7 @@ em {
   padding: 12px 24px;
   background: #ef8354;
   border-radius: 10px;
-  color: #fff;
+  color: #fffdf7;
 }
 
 .menu-is-open #content-container {
@@ -1204,7 +1204,7 @@ em {
   font-size: 30px;
   color: #84bc9c;
   display: block;
-  background: #fff;
+  background: #fffdf7;
   padding: 20px;
 }
 
