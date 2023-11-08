@@ -12,8 +12,19 @@
     text-decoration: underline;
   }
   .logo {
-    height: 32px;
-    width: 32px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 100%;
+    &.logo-green {
+      background: $color-green;
+    }
+    &.logo-white {
+      background: $color-white;
+    }
   }
   .app-header-left {
     display: flex;

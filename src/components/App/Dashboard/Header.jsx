@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import LOGO from '../../../../public/logo.svg'
+import LOGOWHITE from '../../../../public/logo-white.svg'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { ContextUser } from '@/context/ContextUser'
@@ -17,7 +18,17 @@ export default function Header({
   return (
     <div className="app-header">
       <div className="app-header-left">
-        <Image className="logo" src={LOGO} alt="Logo" />
+        <div
+          className={
+            hamburguer ? 'logo logo-white' : 'logo logo-green'
+          }
+        >
+          {hamburguer ? (
+            <Image src={LOGO} />
+          ) : (
+            <Image src={LOGOWHITE} alt="Logo" />
+          )}
+        </div>
         {App && (
           <>
             {time.days <= 7 && (

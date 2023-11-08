@@ -464,8 +464,18 @@ em {
   text-decoration: underline;
 }
 .app-header .logo {
-  height: 32px;
-  width: 32px;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+}
+.app-header .logo.logo-green {
+  background: #84bc9c;
+}
+.app-header .logo.logo-white {
+  background: #fff;
 }
 .app-header .app-header-left {
   display: flex;
