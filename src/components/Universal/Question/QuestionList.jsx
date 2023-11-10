@@ -20,7 +20,8 @@ export default function QuestionList({ questions }) {
   const [userMinute, setUserMinute] = useState(0);
   const [userSecond, setUserSecond] = useState(0);
   const [result, setResult] = useState(false);
-
+  const [win] = useSound("/win.mp3");
+  const [lose] = useSound("/lose.mp3");
   const router = useRouter();
 
   useEffect(() => {
@@ -125,6 +126,11 @@ export default function QuestionList({ questions }) {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
+      if (score >= 3) {
+        win();
+      } else {
+        lose();
+      }
       setResult(true);
     }
   };

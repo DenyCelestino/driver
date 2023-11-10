@@ -23,6 +23,9 @@ export default function TestQuestion({ questions }) {
   const [correct] = useSound("/correct.mp3");
   const [wrong] = useSound("/wrong.mp3");
 
+  const [win] = useSound("/win.mp3");
+  const [lose] = useSound("/lose.mp3");
+
   const handleAnswerSelection = (optionIndex, isCorrect) => {
     const updatedQuestions = [...answeredQuestions];
     const currentQuestion = questions[currentQuestionIndex];
@@ -73,6 +76,11 @@ export default function TestQuestion({ questions }) {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
+      if (score >= 3) {
+        win();
+      } else {
+        lose();
+      }
       setResult(true);
     }
   };
