@@ -29,9 +29,7 @@ export default function Result({ score = 0, total = 0, Try, Return }) {
 
         <div className="content-result">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-          quos nesciunt, ipsum consequatur dolor soluta voluptate suscipit quam,
-          dicta, corporis distinctio ut necessitatibus temporibus quis assumenda
-          iusto repellat officia neque.
+          quos nesciunt.
         </div>
 
         <div className="try-container">

@@ -721,12 +721,14 @@ em {
   color: #84bc9c;
   inset: 0;
   z-index: 100;
+  height: 100%;
+  overflow-y: scroll;
   padding: 62px 0 0 0;
 }
 .modal .wrapper-result {
   display: flex;
   flex-direction: column;
-  gap: 43px;
+  gap: 20px;
 }
 .modal .header-result {
   display: flex;
@@ -735,7 +737,7 @@ em {
 }
 .modal .header-result > h1 {
   text-transform: uppercase;
-  font-size: 27px;
+  font-size: 18px;
 }
 .modal .header-result .congrats-image {
   height: 25vh;
@@ -751,7 +753,7 @@ em {
 .modal .header-result .congrats-image > h1 {
   color: #fffdf7;
   text-transform: uppercase;
-  font-size: 27px;
+  font-size: 18px;
 }
 .modal .share {
   display: flex;
