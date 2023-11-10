@@ -4,7 +4,7 @@
   padding: 62px 0 0 0;
 }
 .scrollable {
-  padding: 62px 0 0 0;
+  padding: 40px 0 0 0;
 }
 .app-header {
   display: flex;
@@ -189,7 +189,11 @@
     gap: 24px;
   }
   .image-container {
-    height: 30vh;
+    height: 20vh;
+
+    @include breakpoint-desktop-small {
+      height: 40vh;
+    }
     width: 100%;
 
     border-radius: 10px;

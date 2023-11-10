@@ -457,7 +457,7 @@ em {
 }
 
 .scrollable {
-  padding: 62px 0 0 0;
+  padding: 40px 0 0 0;
 }
 
 .app-header {
@@ -641,10 +641,15 @@ em {
   gap: 24px;
 }
 .lesson .image-container {
-  height: 30vh;
+  height: 20vh;
   width: 100%;
   border-radius: 10px;
   position: relative;
+}
+@media (min-width: 960px) {
+  .lesson .image-container {
+    height: 40vh;
+  }
 }
 .lesson .image-container > img {
   height: 100%;
