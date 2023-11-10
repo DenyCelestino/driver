@@ -44,7 +44,7 @@ export default function TestQuestion({ questions }) {
   };
 
   const goBackToQuestion = (index) => {
-    if (index > 0) {
+    if (index >= 0) {
       setCurrentQuestionIndex(index);
     } else {
       router.push("/dashboard");
