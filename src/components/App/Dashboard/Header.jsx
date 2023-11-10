@@ -5,7 +5,7 @@ import LOGOWHITE from "../../../../public/logo-white.svg";
 import LOGO from "../../../../public/logo.svg";
 import { ContextUser } from "@/context/ContextUser";
 import { SidebarCloseIcon, X } from "lucide-react";
-export default function Header() {
+export default function Header({ buttons = true }) {
   const { hamburguer, setHamburguer, bypass } = ContextUser();
   return (
     <div className="app-header">
@@ -19,30 +19,32 @@ export default function Header() {
         )}
       </div>
 
-      <div
-        onClick={() => setHamburguer(!hamburguer)}
-        className="right-container"
-      >
-        {hamburguer ? (
-          <X size={40} color="#FFF" />
-        ) : (
-          <>
-            <span className="menu">Menu</span>
+      {buttons && (
+        <div
+          onClick={() => setHamburguer(!hamburguer)}
+          className="right-container"
+        >
+          {hamburguer ? (
+            <X size={40} color="#FFF" />
+          ) : (
+            <>
+              <span className="menu">Menu</span>
 
-            <div className="hamburguer">
-              <div className="hamburguer-arrow">
-                <span />
-                <span />
+              <div className="hamburguer">
+                <div className="hamburguer-arrow">
+                  <span />
+                  <span />
+                </div>
+                <span className="line" />
+                <div className="hamburguer-arrow">
+                  <span />
+                  <span />
+                </div>
               </div>
-              <span className="line" />
-              <div className="hamburguer-arrow">
-                <span />
-                <span />
-              </div>
-            </div>
-          </>
-        )}
-      </div>
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 }
