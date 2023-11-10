@@ -638,7 +638,7 @@ em {
 .lesson .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 10px;
 }
 .lesson .image-container {
   height: 20vh;
