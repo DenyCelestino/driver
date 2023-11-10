@@ -76,9 +76,6 @@ export default function LessonQuestion({ questions }) {
             </button>
           ))}
         </div>
-        <p>
-          Score: {score}/{questions.length}
-        </p>
 
         <div className="buttons">
           <button
