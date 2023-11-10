@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import useSound from "use-sound";
 import { useMyContext } from "@/context/Context";
 import Header from "@/components/App/Dashboard/Header";
 import Result from "../Result/result";
 import { useRouter } from "next/navigation";
+import Time from "../Result/time";
 
 export default function QuestionList({ questions }) {
   const { ENDPOINT } = useMyContext();
@@ -13,10 +14,42 @@ export default function QuestionList({ questions }) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [score, setScore] = useState(0);
-
+  const [timeOut, setTimeOut] = useState(false);
+  const [minutes, setMinutes] = useState(4);
+  const [seconds, setSeconds] = useState(0);
+  const [userMinute, setUserMinute] = useState(0);
+  const [userSecond, setUserSecond] = useState(0);
   const [result, setResult] = useState(false);
 
   const router = useRouter();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (minutes === 0 && seconds === 0) {
+        clearInterval(interval);
+        if (!result) {
+          setTimeOut(true);
+        }
+      } else {
+        if (seconds === 0) {
+          setMinutes(minutes - 1);
+
+          setSeconds(59);
+          if (!result && !timeOut) {
+            setUserMinute(minutes - 1);
+          }
+        } else {
+          setSeconds(seconds - 1);
+
+          if (!result && !timeOut) {
+            setUserSecond(seconds - 1);
+          }
+        }
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [minutes, seconds, result, timeOut]);
   const handleAnswerSelection = (optionIndex) => {
     const updatedQuestions = [...answeredQuestions];
     const currentQuestion = questions[currentQuestionIndex];
@@ -111,6 +144,14 @@ export default function QuestionList({ questions }) {
 
   return (
     <div className="lesson">
+      {timeOut && (
+        <Time
+          score={score}
+          total={questions.length}
+          Try={Try}
+          Return={Return}
+        />
+      )}
       {result && (
         <Result
           score={score}
@@ -127,6 +168,9 @@ export default function QuestionList({ questions }) {
             alt={currentQuestion.question + ""}
           />
         </div>
+        <span>
+          Tempo: {minutes}:{seconds}
+        </span>
         <span>
           Questão {currentQuestionIndex + 1} / {questions.length}
         </span>

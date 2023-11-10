@@ -1,55 +1,48 @@
-'use client'
+"use client";
 
-import Lottie from 'lottie-react'
-import TIME from '../../../../public/animations/timeout.json'
-import Link from 'next/link'
-import Header from '@/components/App/Dashboard/Header'
-import { ContextUser } from '@/context/ContextUser'
-export default function Time({
-  total = 0,
-  score = 0,
-  minutes = 0,
-  seconds = 0,
-  Try,
-  Return
-}) {
-  const { bypass } = ContextUser()
+import Header from "@/components/App/Dashboard/Header";
+import { ContextUser } from "@/context/ContextUser";
+
+export default function Time({ score = 0, total = 0, Try, Return }) {
+  const { user } = ContextUser();
 
   return (
     <div className="modal">
-      <div className="wrapper">
-        <Header time={bypass} />
+      <div className="wrapper wrapper-result">
+        <Header />
 
         <div className="header-result">
-          <h1 className="title">Tempo esgotado</h1>
+          <h1>Tempo esgotado</h1>
           <p>
-            Sua pontuação foi de <span>{score}</span> de{' '}
-            <span>{total}</span>
+            Sua pontuação foi de {score} / {total}
           </p>
-        </div>
-        <div className="congrats-image">
-          <h1>Parabéns</h1>
-          <p>Some image</p>
+
+          <div className="congrats-image">
+            <h1>Parabéns {user.name}</h1>
+          </div>
         </div>
 
         <div className="share">
-          <Link href="#">Share on Facebook</Link>
-          <Link href="#">Share on Facebook</Link>
+          <button>Partilhe no Facebook</button>
+          <button>Partilhe no Whatsapp</button>
         </div>
-        <p className="text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Quo, obcaecati? Voluptas debitis, eligendi.
-        </p>
 
-        <div className="try">
-          <button onClick={Try} className="tryagain">
-            Tentar Novamente
+        <div className="content-result">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+          quos nesciunt, ipsum consequatur dolor soluta voluptate suscipit quam,
+          dicta, corporis distinctio ut necessitatibus temporibus quis assumenda
+          iusto repellat officia neque.
+        </div>
+
+        <div className="try-container">
+          <button onClick={Try} className="try">
+            Tentar de novo
           </button>
-          <button onClick={Return} className="back" href={'#'}>
+          <button onClick={Return} className="out">
             Voltar
           </button>
         </div>
       </div>
     </div>
-  )
+  );
 }

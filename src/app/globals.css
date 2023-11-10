@@ -635,6 +635,11 @@ em {
   text-transform: uppercase;
 }
 
+.lesson .wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
 .lesson .image-container {
   height: 30vh;
   width: 100%;

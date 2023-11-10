@@ -2,8 +2,6 @@
 
 import Header from "@/components/App/Dashboard/Header";
 import { ContextUser } from "@/context/ContextUser";
-import { useEffect } from "react";
-import useSound from "use-sound";
 
 export default function Result({ score = 0, total = 0, Try, Return }) {
   const { user } = ContextUser();
