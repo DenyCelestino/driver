@@ -4,40 +4,30 @@ import React, { useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import useSound from "use-sound";
 import Header from "@/components/App/Dashboard/Header";
+import { useRouter } from "next/navigation";
 
 export default function LessonQuestion({ questions }) {
   const { ENDPOINT } = useMyContext();
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answeredQuestions, setAnsweredQuestions] = useState([]);
-  const [score, setScore] = useState(0);
 
   //sounds
-  const [correct] = useSound("/correct.mp3");
-  const [wrong] = useSound("/wrong.mp3");
 
-  const handleAnswerSelection = (optionIndex, isCorrect) => {
-    const updatedQuestions = [...answeredQuestions];
-    const currentQuestion = questions[currentQuestionIndex];
-    const answeredQuestion = {
-      id: currentQuestion.id,
-      question: currentQuestion.question,
-      selectedAnswer: optionIndex,
-      isCorrect: isCorrect,
-    };
-    updatedQuestions.push(answeredQuestion);
-    setAnsweredQuestions(updatedQuestions);
-
-    if (isCorrect) {
-      setScore(score + 1);
-      correct();
-    } else {
-      wrong();
-    }
-  };
+  const router = useRouter();
 
   const goBackToQuestion = (index) => {
-    setCurrentQuestionIndex(index);
+    if (index >= 0) {
+      setCurrentQuestionIndex(index);
+    } else {
+      router.push("/dashboard");
+    }
+  };
+  const nextQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      router.push("/dashboard");
+    }
   };
 
   const currentQuestion = questions[currentQuestionIndex];
@@ -82,13 +72,13 @@ export default function LessonQuestion({ questions }) {
             className="back"
             onClick={() => goBackToQuestion(currentQuestionIndex - 1)}
           >
-            <ArrowLeft /> Voltar
+            <ArrowLeft /> {currentQuestionIndex > 0 ? "Voltar" : "Sair"}
           </button>
-          <button
-            className={"next active"}
-            onClick={() => setCurrentQuestionIndex(currentQuestionIndex + 1)}
-          >
-            Proxima <ArrowRight />
+          <button className={"next active"} onClick={nextQuestion}>
+            {currentQuestionIndex === questions.length - 1
+              ? "Finalizar"
+              : "Proxima"}{" "}
+            <ArrowRight />
           </button>
         </div>
       </div>
