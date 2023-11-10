@@ -1,120 +1,100 @@
-'use client'
-
-import { ArrowLeft, ArrowRight } from 'lucide-react'
-import { useState } from 'react'
-
-import useSound from 'use-sound'
-
-import { useRouter } from 'next/navigation'
-import { useMyContext } from '@/context/Context'
-import { ContextUser } from '@/context/ContextUser'
-import Header from '@/components/App/Dashboard/Header'
+"use client";
+import { useMyContext } from "@/context/Context";
+import React, { useState } from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import useSound from "use-sound";
+import Header from "@/components/App/Dashboard/Header";
 
 export default function LessonQuestion({ questions }) {
-  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const { ENDPOINT } = useMyContext();
 
-  const { ENDPOINT } = useMyContext()
-  const { bypass } = ContextUser()
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [answeredQuestions, setAnsweredQuestions] = useState([]);
+  const [score, setScore] = useState(0);
 
-  const [next] = useSound('/next.mp3')
+  //sounds
+  const [correct] = useSound("/correct.mp3");
+  const [wrong] = useSound("/wrong.mp3");
 
-  const router = useRouter()
+  const handleAnswerSelection = (optionIndex, isCorrect) => {
+    const updatedQuestions = [...answeredQuestions];
+    const currentQuestion = questions[currentQuestionIndex];
+    const answeredQuestion = {
+      id: currentQuestion.id,
+      question: currentQuestion.question,
+      selectedAnswer: optionIndex,
+      isCorrect: isCorrect,
+    };
+    updatedQuestions.push(answeredQuestion);
+    setAnsweredQuestions(updatedQuestions);
 
-  // Função para atualizar o contador regressivo
-
-  const NextQuestion = () => {
-    const nextQuestion = currentQuestion + 1
-
-    if (nextQuestion < questions.length) {
-      setCurrentQuestion(nextQuestion)
-      next()
-    }
-  }
-  const BackQuestion = () => {
-    if (currentQuestion > 0) {
-      const Backquestion = currentQuestion - 1
-      setCurrentQuestion(Backquestion)
-      next()
+    if (isCorrect) {
+      setScore(score + 1);
+      correct();
     } else {
-      router.push('/dashboard')
+      wrong();
     }
-  }
-  const exit = () => {
-    router.push('/dashboard')
-  }
-  const EnLesson = () => {
-    router.push('/dashboard')
-  }
+  };
+
+  const goBackToQuestion = (index) => {
+    setCurrentQuestionIndex(index);
+  };
+
+  const currentQuestion = questions[currentQuestionIndex];
+  const correctAnswerIndex = currentQuestion.options.findIndex(
+    (option) => option.iscorrect
+  );
 
   return (
     <div className="lesson">
       <div className="wrapper">
-        <Header App={true} time={bypass} />
-
-        <div className="lesson-image cover-image">
-          {questions[currentQuestion].image && (
-            <img
-              src={
-                ENDPOINT +
-                'images/question/' +
-                questions[currentQuestion].image
-              }
-              alt="question"
-            />
-          )}
+        <Header />
+        <div className="image-container">
+          <img
+            src={ENDPOINT + "images/question/" + currentQuestion.image}
+            alt={currentQuestion.question + ""}
+          />
         </div>
-        <div className="question-container">
-          <span>
-            Questão: {currentQuestion + 1}/{questions.length}
-          </span>
-          <h1> {questions[currentQuestion].question}</h1>
-        </div>
-
-        <div className="options-container">
-          {questions[currentQuestion].options.map((item, index) => (
+        <span>
+          Question {currentQuestionIndex + 1} / {questions.length}
+        </span>
+        <h1 className="question">{currentQuestion.question}</h1>
+        <div className="options">
+          {currentQuestion.options.map((option, index) => (
             <button
               key={index}
-              className={`option ${
-                item.iscorrect ? 'correct-option' : 'error-option'
-              }  `}
+              className={option.iscorrect ? "option correct" : "option error"}
             >
-              <div className="option-letters-container">
-                <span>
-                  {index == 0
-                    ? 'A'
-                    : index == 1
-                    ? 'B'
-                    : index == 2
-                    ? 'C'
-                    : 'D'}
+              <div>
+                <span className="letter">
+                  {index == 0 ? "A" : index == 1 ? "B" : index == 2 ? "C" : "D"}
                 </span>
               </div>
               <div className="option-container">
-                <span>{item.option}</span>
+                <span>{option.option}</span>
               </div>
             </button>
           ))}
         </div>
+        <p>
+          Score: {score}/{questions.length}
+        </p>
 
-        <div className="question-buttons">
-          <button onClick={BackQuestion}>
-            <ArrowLeft />
-            <span>{currentQuestion < 1 ? 'Sair' : 'Anterior'}</span>
+        <div className="buttons">
+          <button
+            className="back"
+            onClick={() => goBackToQuestion(currentQuestionIndex - 1)}
+          >
+            <ArrowLeft /> Voltar
           </button>
-
-          {questions.length != currentQuestion + 1 ? (
-            <button onClick={NextQuestion}>
-              <span>Proxima</span>
-              <ArrowRight />
-            </button>
-          ) : (
-            <button onClick={EnLesson}>
-              <span>Finalizar</span>
-              <ArrowRight />
-            </button>
-          )}
+          <button
+            className={"next active"}
+            onClick={() => setCurrentQuestionIndex(currentQuestionIndex + 1)}
+          >
+            Proxima <ArrowRight />
+          </button>
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -452,24 +452,78 @@ em {
   color: #84bc9c;
 }
 
+.freescreen {
+  padding: 62px 0 0 0;
+}
+
+.scrollable {
+  padding: 62px 0 0 0;
+}
+
 .app-header {
   display: flex;
-  padding: 20px 0 0 0;
-  justify-content: space-between;
   align-items: center;
-  font-size: 16px;
+  justify-content: space-between;
 }
-.app-header .login-anchor {
+.app-header .left-container {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+}
+.app-header .left-container .days {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  background: #ef8354;
+  border-radius: 14px;
+  font-size: 18px;
+  color: #fffdf7;
+}
+.app-header .right-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   color: #84bc9c;
-  text-decoration: underline;
+  cursor: pointer;
+}
+.app-header .right-container .menu {
+  font-weight: bold;
+}
+.app-header .right-container .hamburguer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.app-header .right-container .hamburguer .hamburguer-arrow {
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.app-header .right-container .hamburguer span {
+  height: 3px;
+  width: 8px;
+  background: #84bc9c;
+}
+.app-header .right-container .hamburguer .line {
+  width: 15px;
 }
 .app-header .logo {
-  height: 40px;
-  width: 40px;
+  height: 44px;
+  width: 44px;
+  padding: 2px;
+  border-radius: 24px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  border-radius: 100%;
+  justify-content: center;
+}
+.app-header .logo > img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
 }
 .app-header .logo.logo-green {
   background: #84bc9c;
@@ -477,79 +531,13 @@ em {
 .app-header .logo.logo-white {
   background: #fffdf7;
 }
-.app-header .app-header-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.app-header .app-header-left .btn-days {
-  padding: 4px 20px;
-  border-radius: 20px;
-  background: #ef8354;
-  color: #fffdf7;
-}
-.app-header .app-header-right {
-  display: flex;
-  gap: 10px;
-  cursor: pointer;
-}
-.app-header .app-header-right .app-header-menu {
-  font-weight: bold;
-  color: #84bc9c;
-  cursor: pointer;
-}
-.app-header .app-header-right .app-header-menu.active {
-  color: #fffdf7;
-  cursor: pointer;
-}
-.app-header .app-header-right .hamburguer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  cursor: pointer;
-}
-.app-header .app-header-right .hamburguer .hamburguer-arrow {
-  width: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  cursor: pointer;
-}
-.app-header .app-header-right .hamburguer span {
-  height: 3px;
-  width: 8px;
-  background: #84bc9c;
-  cursor: pointer;
-}
-.app-header .app-header-right .hamburguer .arrow-middle {
-  width: 15px;
-}
-.app-header .app-header-right .hamburguer .hamburguer-arrow-close {
-  width: 20px;
-  display: flex;
-  position: relative;
-  cursor: pointer;
-}
-.app-header .app-header-right .hamburguer .hamburguer-arrow-close > span {
-  width: 30px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  cursor: pointer;
-}
-.app-header .app-header-right .hamburguer .hamburguer-arrow-close.active > span {
-  background: #fffdf7;
-  cursor: pointer;
-}
 
 .app-nav-bar {
   position: fixed;
   inset: 0;
   background: #84bc9c;
   z-index: 200;
+  padding-top: 62px;
 }
 .app-nav-bar .wrapper {
   display: flex;
@@ -585,17 +573,17 @@ em {
 .dashboard .rooms {
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 100px;
 }
 @media (min-width: 960px) {
   .dashboard .rooms {
     gap: 129px;
-    margin-top: 66px;
+    margin-top: 100px;
   }
 }
 .dashboard .room {
   padding: 10px;
-  height: 150px;
+  height: 171px;
   border-radius: 10px;
   display: flex;
   background: #84bc9c;
@@ -647,148 +635,71 @@ em {
   text-transform: uppercase;
 }
 
-.lesson .wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.lesson .image-container {
+  height: 30vh;
+  width: 100%;
+  border-radius: 10px;
+  position: relative;
 }
-.lesson .lesson-image {
-  height: 20vh;
-}
-@media (min-width: 960px) {
-  .lesson .lesson-image {
-    height: 40vh;
-  }
-}
-.lesson .lesson-image > img {
+.lesson .image-container > img {
+  height: 100%;
+  width: 100%;
   object-fit: contain;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
 }
-.lesson .question-container {
+.lesson .question {
+  font-size: 20px;
+}
+.lesson .options {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
-.lesson .question-container > span {
-  font-size: 16px;
-}
-.lesson .question-container h1 {
-  font-size: 25px;
-  font-weight: bold;
-}
-.lesson .options-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 20px;
-}
 .lesson .option {
-  font-size: 16px;
-  background: rgba(132, 188, 156, 0.2);
-  padding: 15px 24px;
   display: flex;
-  border-radius: 10px;
+  padding: 16px 42px;
   gap: 12px;
-  color: #000;
-  width: 100%;
-  border: 1px solid transparent;
-}
-.lesson .option-selected {
-  font-size: 16px;
   background: rgba(132, 188, 156, 0.2);
-  padding: 15px 24px;
-  display: flex;
   border-radius: 10px;
-  gap: 12px;
-  color: #ef8354;
-  border: 1px solid #ef8354;
-  width: 100%;
+  font-size: 16px;
 }
-.lesson .option-selected .option-letters-container {
-  height: 100%;
-}
-.lesson .option-selected .option-letters-container > span {
-  font-size: 20px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #ef8354;
-}
-.lesson .option-letters-container {
-  height: 100%;
-}
-.lesson .option-letters-container > span {
-  font-size: 20px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #000;
-}
-.lesson .option-container {
-  height: 100%;
+.lesson .option .option-container {
   text-align: left;
 }
-.lesson .error-option {
-  font-size: 16px;
-  background: red;
-  padding: 15px 24px;
-  display: flex;
-  border-radius: 10px;
-  gap: 12px;
-  color: #fffdf7;
-  width: 100%;
-}
-.lesson .error-option .option-letters-container {
-  height: 100%;
-}
-.lesson .error-option .option-letters-container > span {
-  font-size: 20px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #fffdf7;
-}
-.lesson .correct-option {
-  font-size: 16px;
+.lesson .option.active {
   background: #84bc9c;
-  padding: 15px 24px;
-  display: flex;
-  border-radius: 10px;
-  gap: 12px;
+}
+.lesson .option.error {
+  background: red;
   color: #fffdf7;
-  width: 100%;
 }
-.lesson .correct-option .option-letters-container {
-  height: 100%;
+.lesson .option.correct {
+  background: #84bc9c;
+  color: #fffdf7;
 }
-.lesson .correct-option .option-letters-container > span {
+.lesson .option .letter {
   font-size: 20px;
   font-weight: bold;
-  text-transform: uppercase;
-  color: #fffdf7;
 }
-.lesson .question-buttons {
+.lesson .buttons {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.lesson .question-buttons > button {
+.lesson .buttons > button {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  border-radius: 15px;
-  font-size: 18px;
+  gap: 5px;
 }
-.lesson .question-buttons .nextbutton {
-  border: 1px solid #84bc9c;
-  opacity: 0.3;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  border-radius: 15px;
-  font-size: 18px;
+.lesson .buttons > button.next {
+  background: transparent;
+  border-radius: 24px;
+  padding: 16px 12px;
 }
-.lesson .question-buttons .nextbutton.active {
+.lesson .buttons > button.next.active {
   background: rgba(132, 188, 156, 0.2);
-  opacity: 1;
 }
 
 .modal {
@@ -800,61 +711,61 @@ em {
   color: #84bc9c;
   inset: 0;
   z-index: 100;
+  padding: 62px 0 0 0;
 }
-.modal .wrapper {
+.modal .wrapper-result {
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  gap: 43px;
 }
-.modal .header-result .title {
-  font-weight: bold;
+.modal .header-result {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.modal .header-result > h1 {
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: 27px;
 }
-.modal .header-result p {
-  font-size: 16px;
-}
-.modal .congrats-image {
-  height: 180px;
-  padding: 10px;
+.modal .header-result .congrats-image {
+  height: 25vh;
+  width: 100%;
   background: red;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
   text-align: center;
-  color: #fffdf7;
 }
-.modal .congrats-image > h1 {
-  font-size: 20px;
-  font-weight: bold;
+.modal .header-result .congrats-image > h1 {
   color: #fffdf7;
+  text-transform: uppercase;
+  font-size: 27px;
 }
 .modal .share {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 16px;
 }
-.modal .share > a {
+.modal .share > button {
   text-decoration: underline;
-  font-size: 16px;
 }
-.modal .text {
-  font-size: 16px;
-}
-.modal .try {
+.modal .try-container {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
 }
-.modal .try .tryagain {
-  padding: 8px 12px;
+.modal .try-container .try {
+  padding: 18px 30px;
   background: #ef8354;
-  font-size: 16px;
+  border-radius: 24px;
+  text-transform: uppercase;
   color: #fffdf7;
-  border-radius: 100px;
 }
-.modal .try .back {
-  text-decoration: underline;
+.modal .try-container .out {
   color: #000;
-  font-size: 16px;
+  text-decoration: underline;
 }
 
 .login .wrapper {

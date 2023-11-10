@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import NavBar from '@/components/App/Navbar'
-import CheckplanLoading from '@/components/Universal/Loadings/CheckplanLoading'
-import { ContextUser } from '@/context/ContextUser'
-import PrivateRoutes from '@/functions/PrivateRoutes'
-import { AnimatePresence, motion } from 'framer-motion'
+import NavBar from "@/components/App/Navbar";
+import CheckplanLoading from "@/components/Universal/Loadings/CheckplanLoading";
+import { ContextUser } from "@/context/ContextUser";
+import PrivateRoutes from "@/functions/PrivateRoutes";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function AppLayout({ children }) {
-  const { hamburguer, isLoadingCheckPlan } = ContextUser()
+  const { hamburguer, isLoadingCheckPlan } = ContextUser();
 
   return (
     <div className="scrollable">
@@ -20,11 +20,11 @@ export default function AppLayout({ children }) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
           >
-            <NavBar />
+            {hamburguer && <NavBar />}
           </motion.div>
         )}
       </AnimatePresence>
       {children}
     </div>
-  )
+  );
 }

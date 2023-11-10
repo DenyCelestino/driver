@@ -1,111 +1,114 @@
-'use client'
-
-import { Search } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
-import useSound from 'use-sound'
-import Result from '../Result/result'
-import Time from '../Result/time'
-import { useRouter } from 'next/navigation'
-import { useMyContext } from '@/context/Context'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
-import Header from '@/components/App/Dashboard/Header'
-import { ContextUser } from '@/context/ContextUser'
+"use client";
+import React, { useState } from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import useSound from "use-sound";
+import { useMyContext } from "@/context/Context";
+import Header from "@/components/App/Dashboard/Header";
+import Result from "../Result/result";
+import { useRouter } from "next/navigation";
 
 export default function QuestionList({ questions }) {
-  const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [result, setResult] = useState(false)
-  const [timeOut, setTimeOut] = useState(false)
-  const [score, setScore] = useState(0)
-  const [currentAnswer, setCurrentAnswer] = useState(null)
-  const [correctAnswer, setCorrectAnswer] = useState(null)
-  const [minutes, setMinutes] = useState(8)
-  const [seconds, setSeconds] = useState(0)
-  const [userMinute, setUserMinute] = useState(0)
-  const [userSecond, setUserSecond] = useState(0)
+  const { ENDPOINT } = useMyContext();
 
-  const { ENDPOINT } = useMyContext()
-  const { bypass } = ContextUser()
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [answeredQuestions, setAnsweredQuestions] = useState([]);
+  const [score, setScore] = useState(0);
 
-  // const [correct] = useSound('/correct.mp3')
-  // const [wrong] = useSound('/wrong.mp3')
-  const [next] = useSound('/next.mp3')
-  const [tictac] = useSound('/tictac.mp3')
-  const [win] = useSound('/win.mp3')
-  const [lose] = useSound('/lose.mp3')
-  const router = useRouter()
+  const [result, setResult] = useState(false);
 
-  // Função para atualizar o contador regressivo
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (minutes === 0 && seconds === 0) {
-        clearInterval(interval)
-        if (!result) {
-          setTimeOut(true)
-        }
-      } else {
-        if (seconds === 0) {
-          setMinutes(minutes - 1)
+  const router = useRouter();
+  const handleAnswerSelection = (optionIndex) => {
+    const updatedQuestions = [...answeredQuestions];
+    const currentQuestion = questions[currentQuestionIndex];
 
-          setSeconds(59)
-          if (!result && !timeOut) {
-            setUserMinute(minutes - 1)
-          }
-        } else {
-          setSeconds(seconds - 1)
+    const answeredQuestionIndex = updatedQuestions.findIndex(
+      (answered) => answered.id === currentQuestion.id
+    );
 
-          if (!result && !timeOut) {
-            setUserSecond(seconds - 1)
-          }
-        }
+    if (answeredQuestionIndex !== -1) {
+      const previousIsCorrect =
+        updatedQuestions[answeredQuestionIndex].isCorrect;
+
+      // Atualiza a resposta apenas para a pergunta atual
+      updatedQuestions[answeredQuestionIndex] = {
+        ...updatedQuestions[answeredQuestionIndex],
+        selectedAnswer: optionIndex,
+        isCorrect: currentQuestion.options[optionIndex].iscorrect,
+      };
+
+      // Atualiza o score com base na mudança de resposta
+      if (
+        previousIsCorrect &&
+        !currentQuestion.options[optionIndex].iscorrect
+      ) {
+        setScore(score - 1);
+      } else if (
+        !previousIsCorrect &&
+        currentQuestion.options[optionIndex].iscorrect
+      ) {
+        setScore(score + 1);
       }
-    }, 1000)
-
-    return () => clearInterval(interval)
-  }, [minutes, seconds, result, timeOut]) // Adição das dependências result e timeOut
-  const handleAnswerButtonClick = answer => {
-    setCurrentAnswer(answer)
-    if (answer.iscorrect) {
-      setScore(score + 1)
-    }
-  }
-
-  const NextQuestion = () => {
-    const nextQuestion = currentQuestion + 1
-
-    setCurrentAnswer(null)
-    if (nextQuestion < questions.length) {
-      // setMinutes(1)
-      // setSeconds(0)
-      setCurrentQuestion(nextQuestion)
-      next()
-    }
-  }
-  const SeeResults = () => {
-    if (score >= 3) {
-      win()
     } else {
-      lose()
+      // Se a pergunta ainda não foi respondida, adiciona uma nova resposta
+      updatedQuestions.push({
+        id: currentQuestion.id,
+        question: currentQuestion.question,
+        selectedAnswer: optionIndex,
+        isCorrect: currentQuestion.options[optionIndex].iscorrect,
+      });
+
+      // Atualiza o score com base na nova resposta
+      if (currentQuestion.options[optionIndex].iscorrect) {
+        setScore(score + 1);
+      } else {
+      }
     }
-    setResult(true)
-  }
-  function Try() {
-    router.push('/exam')
-    setCurrentAnswer(null)
-    setCorrectAnswer(null)
-    setResult(false)
-    setTimeOut(false)
-    setCurrentQuestion(0)
-    setScore(0)
-    setMinutes(1)
-  }
-  function Return() {
-    router.push('/dashboard')
-    setCurrentQuestion(0)
-    setScore(0)
-    setCurrentAnswer(null)
-    setCorrectAnswer(null)
-  }
+
+    setAnsweredQuestions(updatedQuestions);
+  };
+
+  const goBackToQuestion = (index) => {
+    if (index > 0) {
+      setCurrentQuestionIndex(index);
+    } else {
+      router.push("/dashboard");
+    }
+  };
+  const isQuestionAnswered = (index) => {
+    return answeredQuestions.some(
+      (answered) => answered.id === questions[index].id
+    );
+  };
+
+  const getSelectedAnswerIndex = (questionId) => {
+    const answeredQuestion = answeredQuestions.find(
+      (answered) => answered.id === questionId
+    );
+    return answeredQuestion ? answeredQuestion.selectedAnswer : -1;
+  };
+
+  const currentQuestion = questions[currentQuestionIndex];
+  const nextQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      setResult(true);
+    }
+  };
+  const Try = () => {
+    setCurrentQuestionIndex(0);
+    setAnsweredQuestions([]);
+    setScore(0);
+    setResult(false);
+  };
+  const Return = () => {
+    setScore(0);
+    setAnsweredQuestions([]);
+    setResult(false);
+    goBackToQuestion(0);
+    router.push("/dashboard");
+  };
+
   return (
     <div className="lesson">
       {result && (
@@ -116,94 +119,69 @@ export default function QuestionList({ questions }) {
           Return={Return}
         />
       )}
-      {timeOut && (
-        <Time
-          score={score}
-          minutes={userMinute}
-          seconds={userSecond}
-          total={questions.length}
-          Try={Try}
-          Return={Return}
-        />
-      )}
       <div className="wrapper">
-        <Header App={true} time={bypass} />
-
-        <div className="lesson-image cover-image">
-          {questions[currentQuestion].image && (
-            <img
-              src={
-                ENDPOINT +
-                'images/question/' +
-                questions[currentQuestion].image
-              }
-              alt="question"
-            />
-          )}
+        <Header />
+        <div className="image-container">
+          <img
+            src={ENDPOINT + "images/question/" + currentQuestion.image}
+            alt={currentQuestion.question + ""}
+          />
         </div>
-        <div className="question-container">
-          <span>
-            Tempo: {minutes}:{seconds}
-          </span>
-          <span>
-            Questão: {currentQuestion + 1}/{questions.length}
-          </span>
-          <h1> {questions[currentQuestion].question}</h1>
-        </div>
-
-        <div className="options-container">
-          {questions[currentQuestion].options.map((item, index) => (
+        <span>
+          Questão {currentQuestionIndex + 1} / {questions.length}
+        </span>
+        <h1 className="question">{currentQuestion.question}</h1>
+        <div className="options">
+          {currentQuestion.options.map((option, index) => (
             <button
               key={index}
-              onClick={() => handleAnswerButtonClick(item)}
-              className={`${
-                currentAnswer === item ? 'option-selected' : 'option'
-              } `}
+              className={
+                getSelectedAnswerIndex(currentQuestion.id) === index
+                  ? "option correct"
+                  : "option"
+              }
+              onClick={() => handleAnswerSelection(index)}
             >
-              <div className="option-letters-container">
-                <span>
-                  {index == 0
-                    ? 'A'
-                    : index == 1
-                    ? 'B'
-                    : index == 2
-                    ? 'C'
-                    : 'D'}
+              <div>
+                <span className="letter">
+                  {index === 0
+                    ? "A"
+                    : index === 1
+                    ? "B"
+                    : index === 2
+                    ? "C"
+                    : "D"}
                 </span>
               </div>
               <div className="option-container">
-                <span>{item.option}</span>
+                <span>{option.option}</span>
               </div>
             </button>
           ))}
         </div>
 
-        <div className="question-buttons">
-          {currentQuestion === questions.length - 1 ? (
-            <button
-              disabled={!currentAnswer}
-              className={
-                currentAnswer ? 'nextbutton active' : 'nextbutton'
-              }
-              onClick={SeeResults}
-            >
-              <span>Resultados</span>
-              <ArrowRight />
-            </button>
-          ) : (
-            <button
-              disabled={!currentAnswer}
-              className={
-                currentAnswer ? 'nextbutton active' : 'nextbutton'
-              }
-              onClick={NextQuestion}
-            >
-              <span>Proxima</span>
-              <ArrowRight />
-            </button>
-          )}
+        <div className="buttons">
+          <button
+            className="back"
+            onClick={() => goBackToQuestion(currentQuestionIndex - 1)}
+          >
+            <ArrowLeft />
+            {currentQuestionIndex > 0 ? "Voltar" : "Sair"}
+          </button>
+          <button
+            className={
+              isQuestionAnswered(currentQuestionIndex) ? "next active" : "next"
+            }
+            disabled={!isQuestionAnswered(currentQuestionIndex)}
+            onClick={nextQuestion}
+          >
+            {currentQuestionIndex === questions.length - 1
+              ? "Resultados"
+              : "Proxima"}
+            <ArrowRight />
+          </button>
         </div>
       </div>
     </div>
-  )
+  );
 }

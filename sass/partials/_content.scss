@@ -1,100 +1,81 @@
 .landing {
 }
-
+.freescreen {
+  padding: 62px 0 0 0;
+}
+.scrollable {
+  padding: 62px 0 0 0;
+}
 .app-header {
   display: flex;
-  padding: 20px 0 0 0;
-  justify-content: space-between;
   align-items: center;
-  font-size: 16px;
-  .login-anchor {
-    color: $color-green;
-    text-decoration: underline;
-  }
-  .logo {
-    height: 40px;
-    width: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border-radius: 100%;
-    &.logo-green {
-      background: $color-green;
-    }
-    &.logo-white {
-      background: $color-white;
-    }
-  }
-  .app-header-left {
+  justify-content: space-between;
+  .left-container {
     display: flex;
     align-items: center;
-    gap: 10px;
-    .btn-days {
-      padding: 4px 20px;
-      border-radius: 20px;
+    gap: 19px;
+    .days {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 18px;
       background: $color-orange;
+      border-radius: 14px;
+      font-size: 18px;
       color: $color-white;
     }
   }
-  .app-header-right {
+  .right-container {
     display: flex;
-    gap: 10px;
+    align-items: center;
+    gap: 8px;
+    color: $color-green;
     cursor: pointer;
-    .app-header-menu {
+    .menu {
       font-weight: bold;
-      color: $color-green;
-      cursor: pointer;
-      &.active {
-        color: $color-white;
-        cursor: pointer;
-      }
     }
     .hamburguer {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 3px;
-      cursor: pointer;
+      gap: 2px;
+
       .hamburguer-arrow {
         width: 20px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         position: relative;
-        cursor: pointer;
       }
 
       span {
         height: 3px;
         width: 8px;
         background: $color-green;
-        cursor: pointer;
       }
-
-      .arrow-middle {
+      .line {
         width: 15px;
       }
-      .hamburguer-arrow-close {
-        width: 20px;
-        display: flex;
-        position: relative;
-        cursor: pointer;
-        > span {
-          width: 30px;
-          position: absolute;
-          top: 0;
-          left: 0;
-          cursor: pointer;
-        }
-        &.active {
-          > span {
-            background: $color-white;
-            cursor: pointer;
-          }
-        }
-      }
+    }
+  }
+  .logo {
+    height: 44px;
+    width: 44px;
+    padding: 2px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+    &.logo-green {
+      background: $color-green;
+    }
+    &.logo-white {
+      background: $color-white;
     }
   }
 }
@@ -106,6 +87,7 @@
   inset: 0;
   background: $color-green;
   z-index: 200;
+  padding-top: 62px;
   .wrapper {
     display: flex;
     flex-direction: column;
@@ -143,16 +125,15 @@
   .rooms {
     display: flex;
     flex-direction: column;
-    gap: 80px;
-
+    gap: 100px;
     @include breakpoint-desktop-small {
       gap: 129px;
-      margin-top: 66px;
+      margin-top: 100px;
     }
   }
   .room {
     padding: 10px;
-    height: 150px;
+    height: 171px;
     @include breakpoint-desktop-small {
       height: 344px;
     }
@@ -202,158 +183,79 @@
   }
 }
 .lesson {
-  .wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+  .image-container {
+    height: 30vh;
+    width: 100%;
 
-  .lesson-image {
-    height: 20vh;
-    @include breakpoint-desktop-small {
-      height: 40vh;
-    }
+    border-radius: 10px;
+    position: relative;
     > img {
+      height: 100%;
+      width: 100%;
       object-fit: contain;
+      position: absolute;
+      inset: 0;
+      z-index: -1;
     }
   }
-  .question-container {
+  .question {
+    font-size: 20px;
+  }
+  .options {
     display: flex;
     flex-direction: column;
     gap: 5px;
+  }
 
-    > span {
-      font-size: 16px;
-    }
-    h1 {
-      font-size: 25px;
-      font-weight: bold;
-    }
-  }
-  .options-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
-  }
   .option {
-    font-size: 16px;
-
-    background: $color-green-light;
-    padding: 15px 24px;
     display: flex;
-    border-radius: 10px;
-    gap: 12px;
-    color: $color-black;
-    width: 100%;
-    border: 1px solid transparent;
-  }
-  .option-selected {
-    font-size: 16px;
-    background: $color-green-light;
-    padding: 15px 24px;
-    display: flex;
-    border-radius: 10px;
-    gap: 12px;
-    color: $color-orange;
-    border: 1px solid $color-orange;
-    width: 100%;
-    .option-letters-container {
-      height: 100%;
 
-      > span {
-        font-size: 20px;
-        font-weight: bold;
-        text-transform: uppercase;
-        color: $color-orange;
-      }
+    padding: 16px 42px;
+    gap: 12px;
+    background: $color-green-light;
+    border-radius: 10px;
+    font-size: 16px;
+    .option-container {
+      text-align: left;
     }
-  }
-  .option-letters-container {
-    height: 100%;
+    &.active {
+      background: $color-green;
+    }
+    &.error {
+      background: $color-red;
+      color: $color-white;
+    }
+    &.correct {
+      background: $color-green;
+      color: $color-white;
+    }
 
-    > span {
+    .letter {
       font-size: 20px;
       font-weight: bold;
-      text-transform: uppercase;
-      color: $color-black;
     }
   }
-  .option-container {
-    height: 100%;
-    text-align: left;
-  }
-  .error-option {
-    font-size: 16px;
-
-    background: $color-red;
-    padding: 15px 24px;
-    display: flex;
-    border-radius: 10px;
-    gap: 12px;
-    color: $color-white;
-    width: 100%;
-    .option-letters-container {
-      height: 100%;
-      > span {
-        font-size: 20px;
-        font-weight: bold;
-        text-transform: uppercase;
-        color: $color-white;
-      }
-    }
-  }
-  .correct-option {
-    font-size: 16px;
-
-    background: $color-green;
-    padding: 15px 24px;
-    display: flex;
-    border-radius: 10px;
-    gap: 12px;
-    color: $color-white;
-    width: 100%;
-    .option-letters-container {
-      height: 100%;
-      > span {
-        font-size: 20px;
-        font-weight: bold;
-        text-transform: uppercase;
-        color: $color-white;
-      }
-    }
-  }
-  .question-buttons {
+  .buttons {
     display: flex;
     align-items: center;
     justify-content: space-between;
     > button {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 8px 12px;
-      border-radius: 15px;
-
-      font-size: 18px;
-    }
-    .nextbutton {
-      border: 1px solid $color-green;
-      opacity: 0.3;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 12px;
-      border-radius: 15px;
-
-      font-size: 18px;
-      &.active {
-        background: $color-green-light;
-        opacity: 1;
+      gap: 5px;
+      &.next {
+        background: transparent;
+        border-radius: 24px;
+        padding: 16px 12px;
+        &.active {
+          background: $color-green-light;
+        }
       }
     }
   }
 }
 
+//result modal
 .modal {
   display: flex;
   flex-direction: column;
@@ -363,65 +265,61 @@
   color: $color-green;
   inset: 0;
   z-index: 100;
-  .wrapper {
+  padding: 62px 0 0 0;
+
+  .wrapper-result {
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    gap: 43px;
   }
   .header-result {
-    .title {
-      font-weight: bold;
-      text-transform: uppercase;
-      font-size: 18px;
-    }
-    p {
-      font-size: 16px;
-    }
-  }
-  .congrats-image {
-    height: 180px;
-    padding: 10px;
-    background: $color-red;
-    border-radius: 10px;
-    text-align: center;
-    color: $color-white;
-    > h1 {
-      font-size: 20px;
+    display: flex;
 
-      font-weight: bold;
-      color: $color-white;
+    flex-direction: column;
+    > h1 {
+      text-transform: uppercase;
+      font-size: 27px;
+    }
+    gap: 15px;
+    .congrats-image {
+      height: 25vh;
+      width: 100%;
+      background: $color-red;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      text-align: center;
+      > h1 {
+        color: $color-white;
+        text-transform: uppercase;
+        font-size: 27px;
+      }
     }
   }
   .share {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    font-size: 16px;
-
-    > a {
+    > button {
       text-decoration: underline;
-
-      font-size: 16px;
     }
   }
-  .text {
-    font-size: 16px;
-  }
-  .try {
+  .try-container {
     display: flex;
     align-items: center;
-    gap: 10px;
-    .tryagain {
-      padding: 8px 12px;
+    gap: 14px;
+    .try {
+      padding: 18px 30px;
       background: $color-orange;
-      font-size: 16px;
+      border-radius: 24px;
+      text-transform: uppercase;
       color: $color-white;
-      border-radius: 100px;
     }
-    .back {
-      text-decoration: underline;
+    .out {
       color: $color-black;
-      font-size: 16px;
+      text-decoration: underline;
     }
   }
 }

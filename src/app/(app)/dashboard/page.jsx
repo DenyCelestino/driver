@@ -1,31 +1,31 @@
-'use client'
+"use client";
 
-import Header from '@/components/App/Dashboard/Header'
-import Rooms from '@/components/App/Dashboard/Rooms'
-import { ContextUser } from '@/context/ContextUser'
-import PrivateRoutes from '@/functions/PrivateRoutes'
-import Cookies from 'js-cookie'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import Header from "@/components/App/Dashboard/Header";
+import Rooms from "@/components/App/Dashboard/Rooms";
+import { ContextUser } from "@/context/ContextUser";
+import PrivateRoutes from "@/functions/PrivateRoutes";
+import Cookies from "js-cookie";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const rooms = [
   {
-    title: 'Learn',
-    route: '/me/lesson'
+    title: "Learn",
+    route: "/me/lesson",
   },
   {
-    title: 'Test Exam',
-    route: '/me/test'
+    title: "Test Exam",
+    route: "/me/test",
   },
   {
-    title: 'Exam',
-    route: '/me/exam'
-  }
-]
+    title: "Exam",
+    route: "/me/exam",
+  },
+];
 
 export default function Dashboard() {
-  const { bypass } = ContextUser()
+  const { bypass } = ContextUser();
 
   return (
     <PrivateRoutes>
@@ -36,5 +36,5 @@ export default function Dashboard() {
         </div>
       </section>
     </PrivateRoutes>
-  )
+  );
 }

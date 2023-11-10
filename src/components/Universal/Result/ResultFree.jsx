@@ -1,17 +1,15 @@
 "use client";
 
-import Header from "@/components/App/Dashboard/Header";
 import { ContextUser } from "@/context/ContextUser";
-import { useEffect } from "react";
-import useSound from "use-sound";
+import HeaderFree from "../HeaderFree";
 
-export default function Result({ score = 0, total = 0, Try, Return }) {
+export default function ResultFree({ score = 0, total = 0, Try, Return }) {
   const { user } = ContextUser();
 
   return (
     <div className="modal">
       <div className="wrapper wrapper-result">
-        <Header />
+        <HeaderFree />
 
         <div className="header-result">
           <h1>parabéns {user.name}</h1>
@@ -38,10 +36,10 @@ export default function Result({ score = 0, total = 0, Try, Return }) {
 
         <div className="try-container">
           <button onClick={Try} className="try">
-            Tentar de novo
+            Obter Acesso
           </button>
           <button onClick={Return} className="out">
-            Voltar
+            Sair
           </button>
         </div>
       </div>
