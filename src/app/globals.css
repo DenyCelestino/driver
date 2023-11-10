@@ -648,7 +648,7 @@ em {
 }
 @media (min-width: 960px) {
   .lesson .image-container {
-    height: 40vh;
+    height: 30vh;
   }
 }
 .lesson .image-container > img {
