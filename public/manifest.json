@@ -1,7 +1,7 @@
 {
     "theme_color": "#84bc9c",
     "background_color": "#84bc9c",
-    "display": "fullscreen",
+    "display": "standalone",
     "scope": "/",
     "start_url": "/",
     "name": "Tr\u00e1fegoTop",
