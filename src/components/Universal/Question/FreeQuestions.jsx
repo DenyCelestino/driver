@@ -20,7 +20,8 @@ export default function FreeQuestions({ questions }) {
   const [trial, setTrial] = useState(true);
 
   const [result, setResult] = useState(false);
-
+  const [win] = useSound("/win.mp3");
+  const [lose] = useSound("/lose.mp3");
   const router = useRouter();
 
   //sounds
@@ -86,6 +87,11 @@ export default function FreeQuestions({ questions }) {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
+      if (score >= 3) {
+        win();
+      } else {
+        lose();
+      }
       setResult(true);
     }
   };
