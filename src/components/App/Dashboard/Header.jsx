@@ -24,7 +24,7 @@ export default function Header() {
         className="right-container"
       >
         {hamburguer ? (
-          <X color="#FFF" />
+          <X size={40} color="#FFF" />
         ) : (
           <>
             <span className="menu">Menu</span>
