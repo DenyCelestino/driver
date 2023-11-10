@@ -46,7 +46,7 @@ export default function LessonQuestion({ questions }) {
           />
         </div>
         <span>
-          Question {currentQuestionIndex + 1} / {questions.length}
+          Questão {currentQuestionIndex + 1} / {questions.length}
         </span>
         <h1 className="question">{currentQuestion.question}</h1>
         <div className="options">
