@@ -537,7 +537,7 @@ em {
   inset: 0;
   background: #84bc9c;
   z-index: 200;
-  padding-top: 62px;
+  padding-top: 40px;
 }
 .app-nav-bar .wrapper {
   display: flex;
@@ -569,6 +569,7 @@ em {
   display: flex;
   flex-direction: column;
   gap: 80px;
+  padding-bottom: 60px;
 }
 .dashboard .rooms {
   display: flex;
@@ -639,6 +640,7 @@ em {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding-bottom: 60px;
 }
 .lesson .question-time-container {
   display: flex;

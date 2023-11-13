@@ -87,7 +87,7 @@
   inset: 0;
   background: $color-green;
   z-index: 200;
-  padding-top: 62px;
+  padding-top: 40px;
   .wrapper {
     display: flex;
     flex-direction: column;
@@ -120,6 +120,7 @@
     display: flex;
     flex-direction: column;
     gap: 80px;
+    padding-bottom: 60px;
   }
 
   .rooms {
@@ -187,6 +188,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding-bottom: 60px;
   }
   .question-time-container {
     display: flex;
