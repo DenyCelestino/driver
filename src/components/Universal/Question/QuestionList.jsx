@@ -15,8 +15,8 @@ export default function QuestionList({ questions }) {
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [score, setScore] = useState(0);
   const [timeOut, setTimeOut] = useState(false);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(10);
+  const [minutes, setMinutes] = useState(5);
+  const [seconds, setSeconds] = useState(0);
   const [userMinute, setUserMinute] = useState(0);
   const [userSecond, setUserSecond] = useState(0);
   const [result, setResult] = useState(false);
