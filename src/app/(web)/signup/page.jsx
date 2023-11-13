@@ -116,27 +116,27 @@ export default function Signup() {
               />
             </div>
             <div className="login-inputs">
-              <span>Password</span>
+              <span>Senha</span>
               {passwordError && (
                 <p className="error-message">{passwordError}</p>
               )}
 
               <input
                 type="password"
-                placeholder="Password"
+                placeholder="Senha"
                 required
                 onChange={(e) => setPassowrd(e.target.value)}
                 value={password}
               />
             </div>
             <div className="login-inputs">
-              <span>Confirmar password</span>
+              <span>Confirmar Senha</span>
               {confirmPasswordError && (
                 <p className="error-message">{confirmPasswordError}</p>
               )}
               <input
                 type="password"
-                placeholder="Confirme seu password"
+                placeholder="Confirme seu Senha"
                 required
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 value={confirmPassword}
