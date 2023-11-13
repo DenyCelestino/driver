@@ -790,14 +790,15 @@ em {
   text-decoration: underline;
 }
 
+.error-message {
+  color: red;
+}
+
 .login .wrapper {
   display: flex;
   flex-direction: column;
   gap: 80px;
   padding: 40px 0;
-}
-.login .error-message {
-  color: red;
 }
 .login span {
   font-size: 18px;

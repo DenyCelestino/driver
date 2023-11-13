@@ -345,6 +345,9 @@
   }
 }
 
+.error-message {
+  color: $color-red;
+}
 //login screen
 .login {
   .wrapper {
@@ -353,9 +356,7 @@
     gap: 80px;
     padding: 40px 0;
   }
-  .error-message {
-    color: $color-red;
-  }
+
   span {
     font-size: 18px;
     color: $color-green;

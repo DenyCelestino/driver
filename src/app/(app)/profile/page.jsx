@@ -43,6 +43,10 @@ export default function Profile() {
   const [imagePreview, setImagePreview] = useState(null);
   const [image, setImage] = useState(null);
 
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [numberError, setNumberError] = useState("");
+
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -107,9 +111,16 @@ export default function Profile() {
     } else {
       if (user.isgoogle != 1) {
         if (password.length > 0 && password.length < 8) {
-          toast.error("A senha precisa ter no mínimo 8 caracteres");
+          setPasswordError("A senha precisa ter no mínimo 8 caracteres");
+          setTimeout(() => {
+            setPasswordError("");
+          }, 3000);
         } else if (password != confirmPassword) {
-          toast.error("As senhas devem ser iguais");
+          setConfirmPasswordError("As senhas devem ser iguais");
+
+          setTimeout(() => {
+            setConfirmPasswordError("");
+          }, 3000);
         } else {
           try {
             setLoading(true);
@@ -292,6 +303,10 @@ export default function Profile() {
               <>
                 <div className="profile-inputs">
                   <span>Password</span>
+                  {passwordError && (
+                    <p className="error-message">{passwordError}</p>
+                  )}
+
                   <div className={!isPasswordLock ? "input active" : "input"}>
                     <input
                       disabled={isPasswordLock}
@@ -313,6 +328,9 @@ export default function Profile() {
                 </div>
                 <div className="profile-inputs">
                   <span>Confirmar Password</span>
+                  {confirmPasswordError && (
+                    <p className="error-message">{confirmPasswordError}</p>
+                  )}
                   <div className="input">
                     <input
                       disabled={isPasswordLock}
