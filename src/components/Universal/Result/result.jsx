@@ -1,10 +1,24 @@
 "use client";
+import { useEffect } from "react";
 
 import Header from "@/components/App/Dashboard/Header";
 import { ContextUser } from "@/context/ContextUser";
+import html2canvas from "html2canvas";
+import { saveAs } from "file-saver";
 
 export default function Result({ score = 0, total = 0, Try, Return }) {
   const { user } = ContextUser();
+  const captureScreenshot = async () => {
+    const divToCapture = document.getElementById("congrats-image");
+
+    html2canvas(divToCapture).then((canvas) => {
+      canvas.toBlob((blob) => {
+        saveAs(blob, `growskills-winner-${user.name}-screenshot.png`);
+        // const formData = new FormData();
+        // formData.append("file", blob, "screenshot.png");
+      });
+    });
+  };
 
   return (
     <div className="modal">
@@ -17,13 +31,13 @@ export default function Result({ score = 0, total = 0, Try, Return }) {
             Sua pontuação foi de {score} / {total}
           </p>
 
-          <div className="congrats-image">
+          <div id="congrats-image" className="congrats-image">
             <h1>Parabéns {user.name}</h1>
           </div>
         </div>
 
         <div className="share">
-          <button>Partilhe no Facebook</button>
+          <button onClick={captureScreenshot}>Partilhe no Facebook</button>
           <button>Partilhe no Whatsapp</button>
         </div>
 

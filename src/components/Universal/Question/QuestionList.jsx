@@ -15,8 +15,8 @@ export default function QuestionList({ questions }) {
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [score, setScore] = useState(0);
   const [timeOut, setTimeOut] = useState(false);
-  const [minutes, setMinutes] = useState(4);
-  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(10);
   const [userMinute, setUserMinute] = useState(0);
   const [userSecond, setUserSecond] = useState(0);
   const [result, setResult] = useState(false);
@@ -174,12 +174,15 @@ export default function QuestionList({ questions }) {
             alt={currentQuestion.question + ""}
           />
         </div>
-        <span>
-          Tempo: {minutes}:{seconds}
-        </span>
-        <span>
-          Questão {currentQuestionIndex + 1} / {questions.length}
-        </span>
+        <div className="question-time-container">
+          <span>
+            Questão {currentQuestionIndex + 1} / {questions.length}
+          </span>
+          <span>
+            Tempo restante: {minutes}:{seconds < 10 ? "0" + seconds : seconds}
+          </span>
+        </div>
+
         <h1 className="question">{currentQuestion.question}</h1>
         <div className="options">
           {currentQuestion.options.map((option, index) => (
