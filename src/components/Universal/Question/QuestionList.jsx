@@ -180,12 +180,10 @@ export default function QuestionList({ questions }) {
           <span>
             Questão {currentQuestionIndex + 1} / {questions.length}
           </span>
-          <div className="time">
-            <span>Tempo restante:</span>{" "}
-            <span>
-              {minutes}:{seconds < 10 ? "0" + seconds : seconds}
-            </span>
-          </div>
+
+          <span>
+            {minutes}:{seconds < 10 ? "0" + seconds : seconds}
+          </span>
         </div>
 
         <h1 className="question">{currentQuestion.question}</h1>
