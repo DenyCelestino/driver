@@ -46,24 +46,16 @@ export default function Profile() {
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
+      setImage(file);
+
       // Lê o arquivo para exibir a prévia
       const reader = new FileReader();
-      reader.onload = async () => {
+      reader.onload = () => {
         setImagePreview(reader.result);
-
-        // Agora, você pode chamar a função avatar para enviar a imagem
-        try {
-          setLoading(true);
-          await avatar(); // Chama a função avatar para enviar a imagem
-          setLoading(false);
-        } catch (error) {
-          setLoading(false);
-        }
       };
       reader.readAsDataURL(file);
     }
   };
-
   const handleClick = () => {
     // Aciona o clique no input de arquivo
     if (fileInput.current) {
@@ -88,7 +80,6 @@ export default function Profile() {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-        withCredentials: true,
       });
       setLoading(false);
       console.log(res.data);
@@ -291,11 +282,11 @@ export default function Profile() {
             {user.isgoogle != 1 && (
               <>
                 <div className="profile-inputs">
-                  <span>Senha</span>
+                  <span>Password</span>
                   <div className={!isPasswordLock ? "input active" : "input"}>
                     <input
                       disabled={isPasswordLock}
-                      placeholder="Digite sua nova Senha"
+                      placeholder="Digite sua password"
                       type="password"
                       onChange={(e) => setPassword(e.target.value)}
                       value={password}
@@ -312,11 +303,11 @@ export default function Profile() {
                   </div>
                 </div>
                 <div className="profile-inputs">
-                  <span>Confirmar Senha</span>
+                  <span>Confirmar Password</span>
                   <div className="input">
                     <input
                       disabled={isPasswordLock}
-                      placeholder="Digite novamente sua nova Senha"
+                      placeholder="Digite novamente sua password"
                       type="password"
                       onChange={(e) => setPasswordConfirm(e.target.value)}
                       value={confirmPassword}
