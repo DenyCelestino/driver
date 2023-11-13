@@ -291,11 +291,11 @@ export default function Profile() {
             {user.isgoogle != 1 && (
               <>
                 <div className="profile-inputs">
-                  <span>Password</span>
+                  <span>Senha</span>
                   <div className={!isPasswordLock ? "input active" : "input"}>
                     <input
                       disabled={isPasswordLock}
-                      placeholder="Digite sua password"
+                      placeholder="Digite sua nova Senha"
                       type="password"
                       onChange={(e) => setPassword(e.target.value)}
                       value={password}
@@ -312,11 +312,11 @@ export default function Profile() {
                   </div>
                 </div>
                 <div className="profile-inputs">
-                  <span>Confirmar Password</span>
+                  <span>Confirmar Senha</span>
                   <div className="input">
                     <input
                       disabled={isPasswordLock}
-                      placeholder="Digite novamente sua password"
+                      placeholder="Digite novamente sua nova Senha"
                       type="password"
                       onChange={(e) => setPasswordConfirm(e.target.value)}
                       value={confirmPassword}
