@@ -949,12 +949,12 @@ em {
   gap: 5px;
 }
 .profile .profile-inputs input {
-  color: #84bc9c;
+  color: #000;
   height: 100%;
   width: 100%;
 }
 .profile .profile-inputs input::placeholder {
-  color: #000;
+  color: #84bc9c;
 }
 .profile .input {
   display: flex;

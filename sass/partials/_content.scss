@@ -504,12 +504,12 @@
     gap: 5px;
 
     input {
-      color: $color-green;
+      color: $color-black;
       height: 100%;
       width: 100%;
     }
     input::placeholder {
-      color: $color-black;
+      color: $color-green;
     }
   }
   .input {
