@@ -147,7 +147,7 @@
     }
     > img {
       position: absolute;
-
+      border-radius: 10px;
       height: calc(100% + 50px);
       @include breakpoint-desktop-small {
         height: calc(100% + 100px);
