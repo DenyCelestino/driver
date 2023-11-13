@@ -265,9 +265,7 @@ export default function Profile() {
                   value={name}
                 />
                 {!isNameLock ? (
-                  <button disabled={isLoading} onClick={information}>
-                    <CheckCheckIcon />
-                  </button>
+                  <CheckCheckIcon onClick={information} />
                 ) : (
                   <PencilLine onClick={() => setNameLock(!isNameLock)} />
                 )}
@@ -284,9 +282,7 @@ export default function Profile() {
                   value={number}
                 />
                 {!isNumberLock ? (
-                  <button disabled={isLoading} onClick={information}>
-                    <CheckCheckIcon />
-                  </button>
+                  <CheckCheckIcon onClick={information} />
                 ) : (
                   <PencilLine onClick={() => setNumberLock(!isNumberLock)} />
                 )}
@@ -324,9 +320,7 @@ export default function Profile() {
                       value={password}
                     />
                     {!isPasswordLock ? (
-                      <button disabled={isLoading} onClick={information}>
-                        <CheckCheckIcon />
-                      </button>
+                      <CheckCheckIcon onClick={information} />
                     ) : (
                       <PencilLine
                         onClick={() => setPasswordLock(!isPasswordLock)}
@@ -348,9 +342,7 @@ export default function Profile() {
                       value={confirmPassword}
                     />
                     {!isPasswordLock ? (
-                      <button disabled={isLoading} onClick={information}>
-                        <CheckCheckIcon />
-                      </button>
+                      <CheckCheckIcon onClick={information} />
                     ) : (
                       <PencilLine
                         onClick={() => setPasswordLock(!isPasswordLock)}

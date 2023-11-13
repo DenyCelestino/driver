@@ -1,21 +1,54 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import Header from "@/components/App/Dashboard/Header";
 import { ContextUser } from "@/context/ContextUser";
 import html2canvas from "html2canvas";
 import { saveAs } from "file-saver";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useMyContext } from "@/context/Context";
 
 export default function Result({ score = 0, total = 0, Try, Return }) {
+  const [isLoading, setLoading] = useState(false);
+
   const { user } = ContextUser();
+  const { ENDPOINT } = useMyContext();
   const captureScreenshot = async () => {
     const divToCapture = document.getElementById("congrats-image");
 
     html2canvas(divToCapture).then((canvas) => {
-      canvas.toBlob((blob) => {
-        saveAs(blob, `growskills-winner-${user.name}-screenshot.png`);
-        // const formData = new FormData();
-        // formData.append("file", blob, "screenshot.png");
+      canvas.toBlob(async (blob) => {
+        // saveAs(blob, `growskills-winner-${user.name}-screenshot.png`);
+        const formData = new FormData();
+        formData.append("file", blob, "screenshot.png");
+
+        const jsonData = {
+          user: user.id,
+        };
+
+        formData.append("json_data", JSON.stringify(jsonData));
+
+        try {
+          setLoading(true);
+          const response = await axios.post(`${ENDPOINT}share.php`, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
+
+          console.log(response.data);
+          setLoading(false);
+          if (response.data.status == 200) {
+            toast.success("Link generated successfully");
+          } else {
+            toast.error(response.data.message);
+          }
+        } catch (error) {
+          console.log(error);
+          setLoading(false);
+          toast.error(error.message);
+        }
       });
     });
   };
