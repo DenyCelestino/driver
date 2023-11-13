@@ -139,11 +139,13 @@ export default function QuestionList({ questions }) {
     setAnsweredQuestions([]);
     setScore(0);
     setResult(false);
+    setTimeOut(false);
   };
   const Return = () => {
     setScore(0);
     setAnsweredQuestions([]);
     setResult(false);
+    setTimeOut(false);
     goBackToQuestion(0);
     router.push("/dashboard");
   };

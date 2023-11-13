@@ -796,6 +796,9 @@ em {
   gap: 80px;
   padding: 40px 0;
 }
+.login .error-message {
+  color: red;
+}
 .login span {
   font-size: 18px;
   color: #84bc9c;
@@ -951,6 +954,7 @@ em {
   padding: 15px 23px;
   border-radius: 10px;
   width: 100%;
+  border: 1px solid transparent;
 }
 .profile .input.active {
   border: 1px solid #ef8354;

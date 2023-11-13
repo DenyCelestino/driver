@@ -353,6 +353,9 @@
     gap: 80px;
     padding: 40px 0;
   }
+  .error-message {
+    color: $color-red;
+  }
   span {
     font-size: 18px;
     color: $color-green;
@@ -508,6 +511,7 @@
     padding: 15px 23px;
     border-radius: 10px;
     width: 100%;
+    border: 1px solid transparent;
     &.active {
       border: 1px solid $color-orange;
     }
