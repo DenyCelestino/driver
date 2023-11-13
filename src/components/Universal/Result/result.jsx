@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Header from "@/components/App/Dashboard/Header";
 import { ContextUser } from "@/context/ContextUser";
@@ -8,13 +8,20 @@ import { saveAs } from "file-saver";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useMyContext } from "@/context/Context";
+import { FacebookShareButton, WhatsappShareButton } from "react-share";
+import { BeatLoader } from "react-spinners";
 
 export default function Result({ score = 0, total = 0, Try, Return }) {
   const [isLoading, setLoading] = useState(false);
+  const [done, setDone] = useState(false);
+  const [slug, setSlug] = useState("");
+
+  const facebook = useRef(null);
+  const whatsapp = useRef(null);
 
   const { user } = ContextUser();
   const { ENDPOINT } = useMyContext();
-  const captureScreenshot = async () => {
+  const captureScreenshot = async (social) => {
     const divToCapture = document.getElementById("congrats-image");
 
     html2canvas(divToCapture).then((canvas) => {
@@ -38,10 +45,27 @@ export default function Result({ score = 0, total = 0, Try, Return }) {
           });
 
           console.log(response.data);
-          setLoading(false);
+
           if (response.data.status == 200) {
-            toast.success("Link generated successfully");
+            setDone(true);
+            setSlug(response.data.slug);
+            if (social == 2) {
+              setTimeout(() => {
+                if (whatsapp.current) {
+                  whatsapp.current.click();
+                  setLoading(false);
+                }
+              }, 2000);
+            } else if (social == 1) {
+              setTimeout(() => {
+                if (facebook.current) {
+                  facebook.current.click();
+                  setLoading(false);
+                }
+              }, 2000);
+            }
           } else {
+            setLoading(false);
             toast.error(response.data.message);
           }
         } catch (error) {
@@ -70,8 +94,38 @@ export default function Result({ score = 0, total = 0, Try, Return }) {
         </div>
 
         <div className="share">
-          <button onClick={captureScreenshot}>Partilhe no Facebook</button>
-          <button>Partilhe no Whatsapp</button>
+          {done ? (
+            <FacebookShareButton
+              ref={facebook}
+              url={`https://driverbeta.vercel.app/shared/${slug}`}
+            >
+              Partilhe no Facebook
+            </FacebookShareButton>
+          ) : (
+            <button onClick={() => captureScreenshot(1)}>
+              {isLoading ? (
+                <BeatLoader color="#ef8354" size={15} />
+              ) : (
+                " Partilhe no Facebook"
+              )}
+            </button>
+          )}
+          {done ? (
+            <WhatsappShareButton
+              ref={whatsapp}
+              url={`https://driverbeta.vercel.app/shared/${slug}`}
+            >
+              Partilhe no Whatsapp
+            </WhatsappShareButton>
+          ) : (
+            <button onClick={() => captureScreenshot(2)}>
+              {isLoading ? (
+                <BeatLoader color="#ef8354" size={15} />
+              ) : (
+                " Partilhe no Whatsapp"
+              )}
+            </button>
+          )}
         </div>
 
         <div className="content-result">

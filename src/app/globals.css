@@ -1134,6 +1134,41 @@ em {
   border-radius: 10px;
 }
 
+.shared-component .wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 60px;
+}
+.shared-component .wrapper .image-contrats {
+  width: 100%;
+}
+.shared-component .wrapper .image-contrats > img {
+  width: 100%;
+}
+.shared-component > h1 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.shared-component a {
+  color: #84bc9c;
+  text-decoration: underline;
+}
+.shared-component .button {
+  padding: 12px 24px;
+  width: 100%;
+  border-radius: 10px;
+}
+.shared-component .button.facebook {
+  color: blue;
+  border: 1px solid blue;
+}
+.shared-component .button.whatsapp {
+  color: green;
+  border: 1px solid green;
+}
+
 .menu-is-open #content-container {
   position: fixed;
   width: 100%;
