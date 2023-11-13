@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
   return {
     title: "Passei no exame de condução",
     openGraph: {
-      title: shared.user + "Passou no exame de Condução",
+      title: shared.user + " Passou no exame de Condução",
       description: "Venha ver meu resultado |" + shared.user,
       images: [
         {
