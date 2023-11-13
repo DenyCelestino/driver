@@ -942,7 +942,6 @@ em {
 }
 .profile .profile-inputs input::placeholder {
   color: #000;
-  opacity: 0.3;
 }
 .profile .input {
   display: flex;
