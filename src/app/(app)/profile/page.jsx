@@ -1,110 +1,119 @@
-'use client'
+"use client";
 
-import Header from '@/components/App/Dashboard/Header'
-import Anchor from '@/components/Universal/Anchor/anchor'
-import Input from '@/components/Universal/Inputs/input'
-import { ContextUser } from '@/context/ContextUser'
-import PrivateRoutes from '@/functions/PrivateRoutes'
-import Cookies from 'js-cookie'
+import Header from "@/components/App/Dashboard/Header";
+import Anchor from "@/components/Universal/Anchor/anchor";
+import Input from "@/components/Universal/Inputs/input";
+import { ContextUser } from "@/context/ContextUser";
+import PrivateRoutes from "@/functions/PrivateRoutes";
+import Cookies from "js-cookie";
 import {
   CheckCheckIcon,
   LockIcon,
   PencilLine,
-  UploadCloud
-} from 'lucide-react'
-import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
-import { DotLoader } from 'react-spinners'
-import PERSON from '../../../../public/person.png'
-import Image from 'next/image'
-import axios from 'axios'
-import toast from 'react-hot-toast'
-import { useMyContext } from '@/context/Context'
-import BackgroundCheck from '@/functions/BackgroundCheck'
+  UploadCloud,
+} from "lucide-react";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { DotLoader } from "react-spinners";
+import PERSON from "../../../../public/person.png";
+import Image from "next/image";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useMyContext } from "@/context/Context";
+import BackgroundCheck from "@/functions/BackgroundCheck";
 
 export default function Profile() {
-  const { bypass, user, setCookies } = ContextUser()
-  const { ENDPOINT } = useMyContext()
+  const { bypass, user, setCookies } = ContextUser();
+  const { ENDPOINT } = useMyContext();
 
-  const [name, setName] = useState(user.name ? user.name : '')
-  const [number, setNumber] = useState(user.number ? user.number : '')
-  const [email, setEmail] = useState(user.email ? user.email : '')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setPasswordConfirm] = useState('')
+  const [name, setName] = useState(user.name ? user.name : "");
+  const [number, setNumber] = useState(user.number ? user.number : "");
+  const [email, setEmail] = useState(user.email ? user.email : "");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setPasswordConfirm] = useState("");
 
-  const [isLoading, setLoading] = useState(false)
+  const [isLoading, setLoading] = useState(false);
 
-  const [isNameLock, setNameLock] = useState(true)
-  const [isNumberLock, setNumberLock] = useState(true)
-  const [isEmaiLock, setEmaiLock] = useState(true)
-  const [isPasswordLock, setPasswordLock] = useState(true)
+  const [isNameLock, setNameLock] = useState(true);
+  const [isNumberLock, setNumberLock] = useState(true);
+  const [isEmaiLock, setEmaiLock] = useState(true);
+  const [isPasswordLock, setPasswordLock] = useState(true);
 
-  const fileInput = useRef(null)
-  const [imagePreview, setImagePreview] = useState(null)
-  const [image, setImage] = useState(null)
+  const fileInput = useRef(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [image, setImage] = useState(null);
 
-  const handleFileChange = async event => {
-    const file = event.target.files[0]
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
     if (file) {
-      setImage(file)
-
       // Lê o arquivo para exibir a prévia
-      const reader = new FileReader()
-      reader.onload = () => {
-        setImagePreview(reader.result)
-      }
-      reader.readAsDataURL(file)
+      const reader = new FileReader();
+      reader.onload = async () => {
+        setImagePreview(reader.result);
+
+        // Agora, você pode chamar a função avatar para enviar a imagem
+        try {
+          setLoading(true);
+          await avatar(); // Chama a função avatar para enviar a imagem
+          setLoading(false);
+        } catch (error) {
+          setLoading(false);
+        }
+      };
+      reader.readAsDataURL(file);
     }
-  }
+  };
+
   const handleClick = () => {
     // Aciona o clique no input de arquivo
     if (fileInput.current) {
-      fileInput.current.click()
+      fileInput.current.click();
     }
-  }
+  };
   const avatar = async () => {
-    const formData = new FormData()
+    const formData = new FormData();
 
-    formData.append('file', image)
+    formData.append("file", image);
 
     const jsonData = {
       email: user.email,
-      oldavatar: user.avatar
-    }
+      oldavatar: user.avatar,
+    };
 
-    formData.append('json_data', JSON.stringify(jsonData))
+    formData.append("json_data", JSON.stringify(jsonData));
 
     try {
-      setLoading(true)
+      setLoading(true);
       let res = await axios.post(`${ENDPOINT}avatar.php`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      setLoading(false)
-      console.log(res.data)
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+      });
+      setLoading(false);
+      console.log(res.data);
       if (res.data.status == 200) {
-        const userLogged = JSON.stringify(res.data.user)
-        setCookies(userLogged)
-        setImage(null)
+        const userLogged = JSON.stringify(res.data.user);
+        setCookies(userLogged);
+        setImage(null);
       } else {
-        toast.error(res.data.message)
+        toast.error(res.data.message);
       }
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
     }
-  }
-  const information = async e => {
-    e.preventDefault()
+  };
+  const information = async (e) => {
+    e.preventDefault();
 
     if (user.isgoogle != 1) {
       if (password.length > 0 && password.length < 8) {
-        toast.error('A senha precisa ter no mínimo 8 caracteres')
+        toast.error("A senha precisa ter no mínimo 8 caracteres");
       } else if (password != confirmPassword) {
-        toast.error('As senhas devem ser iguais')
+        toast.error("As senhas devem ser iguais");
       } else {
         try {
-          setLoading(true)
+          setLoading(true);
 
           let res = await axios.post(
             `${ENDPOINT}changes.php`,
@@ -112,59 +121,59 @@ export default function Profile() {
               name: name,
               number: number,
               email: email,
-              password: password
+              password: password,
             })
-          )
-          setLoading(false)
-          console.log(res.data)
+          );
+          setLoading(false);
+          console.log(res.data);
           if (res.data.status == 200) {
-            const userLogged = JSON.stringify(res.data.user)
-            setCookies(userLogged)
-            setNameLock(true)
-            setEmaiLock(true)
-            setNumberLock(true)
-            setPasswordLock(true)
-            setPassword('')
-            setPasswordConfirm('')
+            const userLogged = JSON.stringify(res.data.user);
+            setCookies(userLogged);
+            setNameLock(true);
+            setEmaiLock(true);
+            setNumberLock(true);
+            setPasswordLock(true);
+            setPassword("");
+            setPasswordConfirm("");
           } else {
-            toast.error(res.data.message)
+            toast.error(res.data.message);
           }
         } catch (error) {
-          setLoading(false)
+          setLoading(false);
         }
       }
     } else {
       try {
-        setLoading(true)
+        setLoading(true);
 
         let res = await axios.post(
           `${ENDPOINT}changes.php`,
           JSON.stringify({
             name: name,
             number: number,
-            email: email
+            email: email,
           })
-        )
-        setLoading(false)
-        console.log(res.data)
+        );
+        setLoading(false);
+        console.log(res.data);
         if (res.data.status == 200) {
-          toast.success(res.data.message)
-          const userLogged = JSON.stringify(res.data.user)
-          setCookies(userLogged)
-          setNameLock(true)
-          setEmaiLock(true)
-          setNumberLock(true)
-          setPasswordLock(true)
-          setPassword('')
-          setPasswordConfirm('')
+          toast.success(res.data.message);
+          const userLogged = JSON.stringify(res.data.user);
+          setCookies(userLogged);
+          setNameLock(true);
+          setEmaiLock(true);
+          setNumberLock(true);
+          setPasswordLock(true);
+          setPassword("");
+          setPasswordConfirm("");
         } else {
-          toast.error(res.data.message)
+          toast.error(res.data.message);
         }
       } catch (error) {
-        setLoading(false)
+        setLoading(false);
       }
     }
-  }
+  };
 
   return (
     <BackgroundCheck>
@@ -179,7 +188,7 @@ export default function Profile() {
                 accept=".png, .jpg, .jpeg, .gif"
                 onChange={handleFileChange}
                 ref={fileInput}
-                style={{ display: 'none' }} // Esconder o input, pois será acionado pelo botão
+                style={{ display: "none" }} // Esconder o input, pois será acionado pelo botão
               />
               {imagePreview ? (
                 <Image
@@ -192,9 +201,7 @@ export default function Profile() {
               ) : (
                 <>
                   {user.avatar ? (
-                    <img
-                      src={ENDPOINT + 'images/avatar/' + user.avatar}
-                    />
+                    <img src={ENDPOINT + "images/avatar/" + user.avatar} />
                   ) : (
                     <Image
                       src={PERSON}
@@ -227,18 +234,15 @@ export default function Profile() {
             </div>
           </div>
 
-          <form
-            onSubmit={e => information(e)}
-            className="fill-container"
-          >
+          <form onSubmit={(e) => information(e)} className="fill-container">
             <div className="profile-inputs">
               <span>Nome</span>
-              <div className={!isNameLock ? 'input active' : 'input'}>
+              <div className={!isNameLock ? "input active" : "input"}>
                 <input
                   disabled={isNameLock}
                   placeholder="name"
                   type="text"
-                  onChange={e => setName(e.target.value)}
+                  onChange={(e) => setName(e.target.value)}
                   value={name}
                 />
                 {!isNameLock ? (
@@ -246,22 +250,18 @@ export default function Profile() {
                     <CheckCheckIcon />
                   </button>
                 ) : (
-                  <PencilLine
-                    onClick={() => setNameLock(!isNameLock)}
-                  />
+                  <PencilLine onClick={() => setNameLock(!isNameLock)} />
                 )}
               </div>
             </div>
             <div className="profile-inputs">
               <span>Telefone</span>
-              <div
-                className={!isNumberLock ? 'input active' : 'input'}
-              >
+              <div className={!isNumberLock ? "input active" : "input"}>
                 <input
                   disabled={isNumberLock}
                   placeholder="+258 XX XX XX"
                   type="number"
-                  onChange={e => setNumber(e.target.value)}
+                  onChange={(e) => setNumber(e.target.value)}
                   value={number}
                 />
                 {!isNumberLock ? (
@@ -269,20 +269,18 @@ export default function Profile() {
                     <CheckCheckIcon />
                   </button>
                 ) : (
-                  <PencilLine
-                    onClick={() => setNumberLock(!isNumberLock)}
-                  />
+                  <PencilLine onClick={() => setNumberLock(!isNumberLock)} />
                 )}
               </div>
             </div>
             <div className="profile-inputs">
               <span>Email</span>
-              <div className={!isEmaiLock ? 'input active' : 'input'}>
+              <div className={!isEmaiLock ? "input active" : "input"}>
                 <input
                   disabled={isEmaiLock}
                   placeholder="example@gmail.com"
                   type="email"
-                  onChange={e => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   value={email}
                 />
 
@@ -294,30 +292,21 @@ export default function Profile() {
               <>
                 <div className="profile-inputs">
                   <span>Password</span>
-                  <div
-                    className={
-                      !isPasswordLock ? 'input active' : 'input'
-                    }
-                  >
+                  <div className={!isPasswordLock ? "input active" : "input"}>
                     <input
                       disabled={isPasswordLock}
                       placeholder="Digite sua password"
                       type="password"
-                      onChange={e => setPassword(e.target.value)}
+                      onChange={(e) => setPassword(e.target.value)}
                       value={password}
                     />
                     {!isPasswordLock ? (
-                      <button
-                        disabled={isLoading}
-                        onClick={information}
-                      >
+                      <button disabled={isLoading} onClick={information}>
                         <CheckCheckIcon />
                       </button>
                     ) : (
                       <PencilLine
-                        onClick={() =>
-                          setPasswordLock(!isPasswordLock)
-                        }
+                        onClick={() => setPasswordLock(!isPasswordLock)}
                       />
                     )}
                   </div>
@@ -329,23 +318,16 @@ export default function Profile() {
                       disabled={isPasswordLock}
                       placeholder="Digite novamente sua password"
                       type="password"
-                      onChange={e =>
-                        setPasswordConfirm(e.target.value)
-                      }
+                      onChange={(e) => setPasswordConfirm(e.target.value)}
                       value={confirmPassword}
                     />
                     {!isPasswordLock ? (
-                      <button
-                        disabled={isLoading}
-                        onClick={information}
-                      >
+                      <button disabled={isLoading} onClick={information}>
                         <CheckCheckIcon />
                       </button>
                     ) : (
                       <PencilLine
-                        onClick={() =>
-                          setPasswordLock(!isPasswordLock)
-                        }
+                        onClick={() => setPasswordLock(!isPasswordLock)}
                       />
                     )}
                   </div>
@@ -355,16 +337,12 @@ export default function Profile() {
 
             <div className="profile-button-container">
               <button disabled={isLoading}>
-                {isLoading ? (
-                  <DotLoader size={20} color="#FFF" />
-                ) : (
-                  'Guardar'
-                )}
+                {isLoading ? <DotLoader size={20} color="#FFF" /> : "Guardar"}
               </button>
             </div>
           </form>
         </div>
       </div>
     </BackgroundCheck>
-  )
+  );
 }
