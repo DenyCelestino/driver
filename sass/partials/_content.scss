@@ -194,6 +194,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    .time {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
   }
   .image-container {
     height: 20vh;
@@ -246,7 +251,10 @@
       background: $color-green;
       color: $color-white;
     }
-
+    &.selected {
+      background: $color-orange;
+      color: $color-white;
+    }
     .letter {
       font-size: 20px;
       font-weight: bold;
@@ -660,5 +668,27 @@
     background: $color-orange;
     border-radius: 10px;
     color: $color-white;
+  }
+}
+
+.start-exam {
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+    > img {
+      height: 180px;
+      width: 180px;
+    }
+    .start-exame-button {
+      padding: 12px 24px;
+      background: $color-orange;
+      color: $color-white;
+      width: 100%;
+      border-radius: 10px;
+    }
   }
 }

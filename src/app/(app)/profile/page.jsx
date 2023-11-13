@@ -45,7 +45,7 @@ export default function Profile() {
 
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
-  const [numberError, setNumberError] = useState("");
+  const [error, setError] = useState("");
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
@@ -92,7 +92,10 @@ export default function Profile() {
         setCookies(userLogged);
         setImage(null);
       } else {
-        toast.error(res.data.message);
+        setError(res.data.message);
+        setTimeout(() => {
+          setError("");
+        }, 3000);
       }
     } catch (error) {
       setLoading(false);
@@ -146,7 +149,10 @@ export default function Profile() {
               setPassword("");
               setPasswordConfirm("");
             } else {
-              toast.error(res.data.message);
+              setError(res.data.message);
+              setTimeout(() => {
+                setError("");
+              }, 3000);
             }
           } catch (error) {
             setLoading(false);
@@ -167,7 +173,6 @@ export default function Profile() {
           setLoading(false);
           console.log(res.data);
           if (res.data.status == 200) {
-            toast.success(res.data.message);
             const userLogged = JSON.stringify(res.data.user);
             setCookies(userLogged);
             setNameLock(true);
@@ -177,7 +182,10 @@ export default function Profile() {
             setPassword("");
             setPasswordConfirm("");
           } else {
-            toast.error(res.data.message);
+            setError(res.data.message);
+            setTimeout(() => {
+              setError("");
+            }, 3000);
           }
         } catch (error) {
           setLoading(false);
@@ -244,7 +252,7 @@ export default function Profile() {
               )}
             </div>
           </div>
-
+          {error && <p className="error-message">{error}</p>}
           <form onSubmit={(e) => information(e)} className="fill-container">
             <div className="profile-inputs">
               <span>Nome</span>
@@ -302,7 +310,7 @@ export default function Profile() {
             {user.isgoogle != 1 && (
               <>
                 <div className="profile-inputs">
-                  <span>Password</span>
+                  <span>Senha</span>
                   {passwordError && (
                     <p className="error-message">{passwordError}</p>
                   )}
@@ -310,7 +318,7 @@ export default function Profile() {
                   <div className={!isPasswordLock ? "input active" : "input"}>
                     <input
                       disabled={isPasswordLock}
-                      placeholder="Digite sua password"
+                      placeholder="Digite sua Senha"
                       type="password"
                       onChange={(e) => setPassword(e.target.value)}
                       value={password}
@@ -327,14 +335,14 @@ export default function Profile() {
                   </div>
                 </div>
                 <div className="profile-inputs">
-                  <span>Confirmar Password</span>
+                  <span>Confirmar Senha</span>
                   {confirmPasswordError && (
                     <p className="error-message">{confirmPasswordError}</p>
                   )}
                   <div className="input">
                     <input
                       disabled={isPasswordLock}
-                      placeholder="Digite novamente sua password"
+                      placeholder="Digite novamente sua Senha"
                       type="password"
                       onChange={(e) => setPasswordConfirm(e.target.value)}
                       value={confirmPassword}

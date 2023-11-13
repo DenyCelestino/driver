@@ -15,7 +15,7 @@ export default function QuestionList({ questions }) {
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [score, setScore] = useState(0);
   const [timeOut, setTimeOut] = useState(false);
-  const [minutes, setMinutes] = useState(5);
+  const [minutes, setMinutes] = useState(10);
   const [seconds, setSeconds] = useState(0);
   const [userMinute, setUserMinute] = useState(0);
   const [userSecond, setUserSecond] = useState(0);
@@ -180,9 +180,12 @@ export default function QuestionList({ questions }) {
           <span>
             Questão {currentQuestionIndex + 1} / {questions.length}
           </span>
-          <span>
-            Tempo restante: {minutes}:{seconds < 10 ? "0" + seconds : seconds}
-          </span>
+          <div className="time">
+            <span>Tempo restante:</span>{" "}
+            <span>
+              {minutes}:{seconds < 10 ? "0" + seconds : seconds}
+            </span>
+          </div>
         </div>
 
         <h1 className="question">{currentQuestion.question}</h1>
@@ -192,7 +195,7 @@ export default function QuestionList({ questions }) {
               key={index}
               className={
                 getSelectedAnswerIndex(currentQuestion.id) === index
-                  ? "option correct"
+                  ? "option selected"
                   : "option"
               }
               onClick={() => handleAnswerSelection(index)}

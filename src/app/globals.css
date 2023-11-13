@@ -648,6 +648,11 @@ em {
   align-items: center;
   justify-content: space-between;
 }
+.lesson .question-time-container .time {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 .lesson .image-container {
   height: 20vh;
   width: 100%;
@@ -695,6 +700,10 @@ em {
 }
 .lesson .option.correct {
   background: #84bc9c;
+  color: #fffdf7;
+}
+.lesson .option.selected {
+  background: #ef8354;
   color: #fffdf7;
 }
 .lesson .option .letter {
@@ -1103,6 +1112,26 @@ em {
   background: #ef8354;
   border-radius: 10px;
   color: #fffdf7;
+}
+
+.start-exam .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  gap: 10px;
+}
+.start-exam .wrapper > img {
+  height: 180px;
+  width: 180px;
+}
+.start-exam .wrapper .start-exame-button {
+  padding: 12px 24px;
+  background: #ef8354;
+  color: #fffdf7;
+  width: 100%;
+  border-radius: 10px;
 }
 
 .menu-is-open #content-container {
