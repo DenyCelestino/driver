@@ -1773,6 +1773,7 @@ em {
 footer {
   background: #84bc9c;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   text-align: center;
