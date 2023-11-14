@@ -1,14 +1,14 @@
 .landing {
 }
 .hero {
-  padding-top: 90px;
+  padding-top: 150px;
   height: 25vh;
   text-align: center;
   @include breakpoint-desktop-small {
     height: 60vh;
   }
   display: flex;
-  align-items: center;
+  // align-items: center;
   justify-content: center;
   color: $color-green;
 

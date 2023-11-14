@@ -476,11 +476,10 @@ em {
 }
 
 .hero {
-  padding-top: 90px;
+  padding-top: 150px;
   height: 25vh;
   text-align: center;
   display: flex;
-  align-items: center;
   justify-content: center;
   color: #84bc9c;
 }
