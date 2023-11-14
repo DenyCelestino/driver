@@ -91,7 +91,9 @@
     @include breakpoint-desktop-small {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      .start-image {
+    }
+    .start-image {
+      @include breakpoint-desktop-small {
         margin-top: -67px;
       }
     }

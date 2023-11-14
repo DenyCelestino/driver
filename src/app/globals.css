@@ -581,6 +581,8 @@ em {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
   }
+}
+@media (min-width: 960px) {
   .start-section .wrapper-website .start-image {
     margin-top: -67px;
   }
