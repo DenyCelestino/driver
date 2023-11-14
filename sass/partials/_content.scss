@@ -280,6 +280,7 @@
   }
 }
 .try {
+  padding: 0 0 80px 0;
   .wrapper-website {
     display: flex;
     @include breakpoint-desktop-small {
@@ -314,6 +315,69 @@
         border-radius: 27px;
         @include breakpoint-desktop-small {
           padding: 18px 27px;
+        }
+      }
+    }
+  }
+}
+
+.testemonilas-section {
+  .wrapper-website {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 60px;
+    padding: 90px 0;
+    @include breakpoint-desktop-small {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    div {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      color: $color-green;
+      &:nth-child(even) {
+        @include breakpoint-desktop-small {
+          padding-top: 270px;
+        }
+      }
+      p {
+        font-size: 24px;
+      }
+      span {
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .testemonilas-image {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+        > img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+      a {
+        @include breakpoint-desktop-small {
+          position: absolute;
+          bottom: 0;
+        }
+
+        background: $color-orange;
+        padding: 14px 20px;
+        text-align: center;
+        color: $color-white;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        border-radius: 27px;
+        @include breakpoint-desktop-small {
+          padding: 10px 27px;
         }
       }
     }

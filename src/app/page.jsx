@@ -1,8 +1,10 @@
 "use client";
 
+import Footer from "@/components/LandingPage/Footer";
 import Header from "@/components/LandingPage/Header";
 import Hero from "@/components/LandingPage/Hero";
 import Start from "@/components/LandingPage/Start";
+import Testemonials from "@/components/LandingPage/Testemonials";
 import Try from "@/components/LandingPage/Try";
 import Why from "@/components/LandingPage/Why";
 import { ContextUser } from "@/context/ContextUser";
@@ -32,6 +34,8 @@ export default function Main() {
       <Start />
       <Why />
       <Try />
+      <Testemonials />
+      <Footer />
     </>
   );
 }

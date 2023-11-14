@@ -1,6 +1,30 @@
 .header {
   height: 80px;
   padding: 0 20px;
+  .logo-landing-desktop {
+    display: none;
+    @include breakpoint-desktop-small {
+      display: block;
+    }
+  }
+  .logo-landing-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $color-green;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    > img {
+      object-fit: contain;
+    }
+    @include breakpoint-desktop-small {
+      display: none;
+    }
+  }
+  @include breakpoint-desktop-small {
+    padding: 0 150px;
+  }
   position: fixed;
   left: 0;
   right: 0;
