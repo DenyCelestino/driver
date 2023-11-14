@@ -3,6 +3,7 @@
 import Header from "@/components/LandingPage/Header";
 import Hero from "@/components/LandingPage/Hero";
 import Start from "@/components/LandingPage/Start";
+import Why from "@/components/LandingPage/Why";
 import { ContextUser } from "@/context/ContextUser";
 import Cookies from "js-cookie";
 
@@ -28,6 +29,7 @@ export default function Main() {
       <Header />
       <Hero />
       <Start />
+      <Why />
     </>
   );
 }

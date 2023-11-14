@@ -2,7 +2,7 @@
 }
 .hero {
   padding-top: 150px;
-  height: 40vh;
+  height: 33vh;
   text-align: center;
   @include breakpoint-desktop-small {
     height: 60vh;
@@ -44,7 +44,10 @@
   .wrapper-website {
     display: grid;
     grid-template-columns: 1fr;
-
+    row-gap: 40px;
+    @include breakpoint-desktop-small {
+      row-gap: 0;
+    }
     .left-start {
       order: 2;
       @include breakpoint-desktop-small {
@@ -104,6 +107,9 @@
       line-height: 30px;
       color: $color-green;
       align-items: center;
+      @include breakpoint-desktop-small {
+        padding-top: 100px;
+      }
       .content-right {
         display: flex;
         flex-direction: column;
@@ -126,6 +132,148 @@
           width: 100%;
           object-fit: cover;
           border-radius: 50%;
+        }
+      }
+    }
+  }
+}
+
+.why-section {
+  .wrapper-website {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+    @include breakpoint-desktop-small {
+      row-gap: 0;
+      grid-template-columns: 1fr 1fr;
+    }
+    .why-left {
+      order: 2;
+      @include breakpoint-desktop-small {
+        order: 1;
+      }
+      .why-left-content {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        color: $color-green;
+
+        @include breakpoint-desktop-small {
+          padding-top: 70px;
+        }
+        > h1 {
+          font-size: 40px;
+          line-height: 1;
+          @include breakpoint-desktop-small {
+            font-size: 60px;
+          }
+        }
+        p {
+          width: 100%;
+          @include breakpoint-desktop-small {
+            width: 60%;
+          }
+        }
+        a {
+          background: $color-orange;
+          padding: 14px 20px;
+          text-align: center;
+          color: $color-white;
+          font-size: 18px;
+          font-weight: bold;
+          text-transform: uppercase;
+          border-radius: 27px;
+          @include breakpoint-desktop-small {
+            padding: 18px 27px;
+          }
+        }
+      }
+      .phones {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        > img {
+          height: 100%;
+          width: 100%;
+          object-fit: contain;
+        }
+
+        @include breakpoint-desktop-small {
+          height: 500px;
+          margin: 116px 0 0 80px;
+        }
+      }
+    }
+    .why-right {
+      order: 1;
+      @include breakpoint-desktop-small {
+        order: 2;
+      }
+      display: flex;
+      flex-direction: column;
+
+      @include breakpoint-desktop-small {
+        gap: 80px;
+        align-items: center;
+      }
+      .why-right-image {
+        margin-right: 180px;
+        position: relative;
+        height: 479px;
+        width: 328px;
+        border-radius: 30px;
+        &::after {
+          position: absolute;
+          content: "";
+          background: rgb(44, 129, 80);
+          background: linear-gradient(
+            6deg,
+            rgba(44, 129, 80, 0.5634628851540616) 0%,
+            rgba(44, 129, 80, 0.3169642857142857) 49%,
+            rgba(44, 129, 80, 0) 100%
+          );
+          height: 100%;
+          inset: 0;
+          border-radius: 30px;
+        }
+        display: none;
+        @include breakpoint-desktop-small {
+          display: block;
+        }
+        > img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+
+          position: absolute;
+          inset: 0;
+        }
+      }
+      .why-right-content {
+        display: flex;
+        padding-top: 40px;
+        @include breakpoint-desktop-small {
+          padding-top: 0;
+        }
+        .content {
+          color: $color-green;
+          display: flex;
+          flex-direction: column;
+          gap: 22px;
+          h1 {
+            font-size: 30px;
+          }
+          p {
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+          }
+          .vantages {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+          }
         }
       }
     }

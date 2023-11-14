@@ -86,7 +86,7 @@ em {
   ul {
     li:not(.gfield) {
       &::before {
-        content: '•';
+        content: "•";
       }
     }
   }
@@ -98,7 +98,7 @@ em {
       counter-increment: ol-counter;
 
       &::before {
-        content: counter(ol-counter) '.';
+        content: counter(ol-counter) ".";
       }
     }
   }
