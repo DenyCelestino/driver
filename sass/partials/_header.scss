@@ -1,6 +1,15 @@
 .header {
   height: 80px;
   padding: 0 20px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $color-white;
+  z-index: 200;
   .logo-landing-desktop {
     display: none;
     @include breakpoint-desktop-small {
@@ -25,14 +34,7 @@
   @include breakpoint-desktop-small {
     padding: 0 150px;
   }
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: $color-white;
+
   .header-buttons {
     display: flex;
     gap: 20px;
