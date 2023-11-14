@@ -1,5 +1,134 @@
 .landing {
 }
+.hero {
+  padding-top: 85px;
+  height: 25vh;
+  text-align: center;
+  @include breakpoint-desktop-small {
+    height: 60vh;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-green;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    p {
+      font-size: 35px;
+      @include breakpoint-desktop-small {
+        font-size: 75px;
+      }
+    }
+    h1 {
+      font-size: 35px;
+      @include breakpoint-desktop-small {
+        font-size: 75px;
+      }
+    }
+    a {
+      background: $color-orange;
+      padding: 14px 20px;
+      text-align: center;
+      color: $color-white;
+      text-transform: uppercase;
+      border-radius: 27px;
+      @include breakpoint-desktop-small {
+        display: none;
+      }
+    }
+  }
+}
+.start-section {
+  .wrapper-website {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    .left-start {
+      order: 2;
+      @include breakpoint-desktop-small {
+        order: 1;
+      }
+    }
+
+    .start-image {
+      order: 1;
+      @include breakpoint-desktop-small {
+        order: 2;
+      }
+    }
+
+    .right-start {
+      order: 3;
+    }
+    .left-start {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      font-size: 24px;
+      line-height: 1.3;
+      @include breakpoint-desktop-small {
+        font-size: 24px;
+        line-height: 1.3;
+      }
+      color: $color-green;
+      a {
+        padding: 18px 27px;
+        background: $color-orange;
+        color: $color-white;
+        text-transform: uppercase;
+        border-radius: 24px;
+        text-align: center;
+        width: 100%;
+        @include breakpoint-desktop-small {
+          width: 60%;
+        }
+        font-size: 18px;
+        font-weight: bold;
+      }
+    }
+    @include breakpoint-desktop-small {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      .start-image {
+        margin-top: -67px;
+      }
+    }
+    .right-start {
+      display: flex;
+      flex-direction: column;
+      gap: 21px;
+      line-height: 30px;
+      color: $color-green;
+      align-items: center;
+      .content-right {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        p {
+          font-size: 20px;
+        }
+        span {
+          font-size: 24px;
+          font-weight: bold;
+        }
+      }
+
+      .right-image {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        > img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
 .freescreen {
   padding: 62px 0 0 0;
 }

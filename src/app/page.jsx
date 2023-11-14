@@ -1,31 +1,33 @@
-'use client'
+"use client";
 
-import Header from '@/components/LandingPage/Header'
-import Hero from '@/components/LandingPage/Hero'
-import { ContextUser } from '@/context/ContextUser'
-import Cookies from 'js-cookie'
+import Header from "@/components/LandingPage/Header";
+import Hero from "@/components/LandingPage/Hero";
+import Start from "@/components/LandingPage/Start";
+import { ContextUser } from "@/context/ContextUser";
+import Cookies from "js-cookie";
 
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Main() {
-  const { setUser } = ContextUser()
-  const router = useRouter()
+  const { setUser } = ContextUser();
+  const router = useRouter();
 
   useEffect(() => {
-    const userData = Cookies.get('user')
-    if (Cookies.get('logged')) {
+    const userData = Cookies.get("user");
+    if (Cookies.get("logged")) {
       if (!userData) {
-        router.push('/login')
+        router.push("/login");
       } else {
-        router.push('/dashboard')
+        router.push("/dashboard");
       }
     }
-  }, [router])
+  }, [router]);
   return (
     <>
       <Header />
       <Hero />
+      <Start />
     </>
-  )
+  );
 }
