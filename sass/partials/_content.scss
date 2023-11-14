@@ -366,6 +366,7 @@
         @include breakpoint-desktop-small {
           position: absolute;
           bottom: 0;
+          z-index: 1;
         }
 
         background: $color-orange;

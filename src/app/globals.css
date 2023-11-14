@@ -921,6 +921,7 @@ em {
   .testemonilas-section .wrapper-website div a {
     position: absolute;
     bottom: 0;
+    z-index: 1;
   }
 }
 @media (min-width: 960px) {
