@@ -108,7 +108,7 @@ export default function Signup() {
               {numberError && <p className="error-message">{numberError}</p>}
 
               <input
-                type="number"
+                type="text"
                 placeholder="Celular (+258)"
                 required
                 onChange={(e) => setNumber(e.target.value)}
