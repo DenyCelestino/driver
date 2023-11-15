@@ -140,6 +140,7 @@ export default function QuestionList({ questions }) {
     setScore(0);
     setResult(false);
     setTimeOut(false);
+    router.push("/startexame");
   };
   const Return = () => {
     setScore(0);
