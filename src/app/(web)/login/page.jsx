@@ -1,201 +1,194 @@
-'use client'
-import { useMyContext } from '@/context/Context'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
-import { useGoogleLogin } from '@react-oauth/google'
-import axios from 'axios'
-import { ContextUser } from '@/context/ContextUser'
-import { DotLoader } from 'react-spinners'
-import LOGO from '../../../../public/logo.svg'
-import GOOGLE from '../../../../public/google.svg'
-import Image from 'next/image'
-import Cookies from 'js-cookie'
+"use client";
+import { useMyContext } from "@/context/Context";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import { ContextUser } from "@/context/ContextUser";
+import { DotLoader } from "react-spinners";
+import LOGO from "../../../../public/logo.svg";
+import GOOGLE from "../../../../public/google.svg";
+import Image from "next/image";
+import Cookies from "js-cookie";
 
 export default function Login() {
-  const router = useRouter()
-  const { ENDPOINT } = useMyContext()
-  const { setCookies, user, getUser } = ContextUser()
-  const [isLoading, setLoading] = useState(false)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const { modalInstall, setModalInstall } = useMyContext()
-  const [deferredPrompt, setDeferredPrompt] = useState(null)
-  const [installed, setInstalled] = useState(true)
-  let isiOS = false // Inicialize a variável isiOS
+  const router = useRouter();
+  const { ENDPOINT } = useMyContext();
+  const { setCookies, user, getUser } = ContextUser();
+  const [isLoading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { modalInstall, setModalInstall } = useMyContext();
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [installed, setInstalled] = useState(true);
+  let isiOS = false; // Inicialize a variável isiOS
 
-  if (typeof window !== 'undefined') {
-    isiOS =
-      /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+  if (typeof window !== "undefined") {
+    isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
     // Resto do seu código que depende de 'navigator'
   }
   useEffect(() => {
-    const handleBeforeInstallPrompt = event => {
+    const handleBeforeInstallPrompt = (event) => {
       // Armazena o evento para ser usado posteriormente
-      event.preventDefault()
+      event.preventDefault();
 
-      setInstalled(false)
-      setDeferredPrompt(event)
-    }
+      setInstalled(false);
+      setDeferredPrompt(event);
+    };
 
-    window.addEventListener(
-      'beforeinstallprompt',
-      handleBeforeInstallPrompt
-    )
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
 
     return () => {
       window.removeEventListener(
-        'beforeinstallprompt',
+        "beforeinstallprompt",
         handleBeforeInstallPrompt
-      )
-    }
-  }, [])
+      );
+    };
+  }, []);
 
   const handleInstallClick = () => {
     if (deferredPrompt) {
       // Inicia a instalação
-      deferredPrompt.prompt()
+      deferredPrompt.prompt();
 
-      deferredPrompt.userChoice.then(choiceResult => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('O usuário aceitou a instalação da PWA')
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === "accepted") {
+          console.log("O usuário aceitou a instalação da PWA");
         } else {
-          console.log('O usuário cancelou a instalação da PWA')
+          console.log("O usuário cancelou a instalação da PWA");
         }
 
         // Limpa o evento para que não possa ser usado novamente
-        setDeferredPrompt(null)
-      })
+        setDeferredPrompt(null);
+      });
     }
-  }
-  const signin = async e => {
-    e.preventDefault()
+  };
+  const signin = async (e) => {
+    e.preventDefault();
 
     try {
-      setLoading(true)
+      setLoading(true);
       const res = await axios.post(
         `${ENDPOINT}signin.php`,
         JSON.stringify({
           email: email,
-          password: password
+          password: password,
         })
-      )
-      setLoading(false)
+      );
+      setLoading(false);
       if (res.data.status == 200) {
-        const userLogged = JSON.stringify(res.data.user)
-        setCookies(userLogged)
-        router.push('/dashboard')
+        const userLogged = JSON.stringify(res.data.user);
+        setCookies(userLogged);
+        router.push("/dashboard");
       } else {
-        toast.error(res.data.message)
+        toast.error(res.data.message);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const chekIfUserExists = async (email, google_id) => {
-    setLoading(true)
+    setLoading(true);
     const res = await axios.post(
       `${ENDPOINT}login.php`,
       JSON.stringify({
         email: email,
-        google_id: google_id
+        google_id: google_id,
       })
-    )
-    setLoading(false)
-    return res
-  }
+    );
+    setLoading(false);
+    return res;
+  };
   const register = async (name, email, google_id, picture) => {
-    setLoading(true)
+    setLoading(true);
     const res = await axios.post(
       `${ENDPOINT}register.php`,
       JSON.stringify({
         name: name,
         email: email,
         google_id: google_id,
-        avatar: picture
+        avatar: picture,
       })
-    )
+    );
 
-    setLoading(false)
-    return res
-  }
+    setLoading(false);
+    return res;
+  };
   const login = useGoogleLogin({
-    onSuccess: async response => {
+    onSuccess: async (response) => {
       try {
-        setLoading(true)
+        setLoading(true);
         const res = await axios.get(
-          'https://www.googleapis.com/oauth2/v3/userinfo',
+          "https://www.googleapis.com/oauth2/v3/userinfo",
           {
             headers: {
-              Authorization: `Bearer ${response.access_token}`
-            }
+              Authorization: `Bearer ${response.access_token}`,
+            },
           }
-        )
+        );
 
         // console.log(res)
 
-        const checkLogin = chekIfUserExists(
-          res.data.email,
-          res.data.sub
-        )
-        setLoading(false)
+        const checkLogin = chekIfUserExists(res.data.email, res.data.sub);
+        setLoading(false);
         toast.promise(checkLogin, {
-          loading: 'Processando...',
-          success: response => {
+          loading: "Processando...",
+          success: (response) => {
             if (response.data.status === 404) {
-              setLoading(true)
+              setLoading(true);
               const completeRegister = register(
                 res.data.name,
                 res.data.email,
                 res.data.sub,
                 res.data.picture
-              )
+              );
               toast.promise(completeRegister, {
-                loading: 'Registando e Autenticando... ',
-                success: response => {
-                  setLoading(false)
+                loading: "Registando e Autenticando... ",
+                success: (response) => {
+                  setLoading(false);
                   if (response.data.status === 401) {
-                    toast.error(response.data.message)
+                    toast.error(response.data.message);
                   } else {
-                    const userLogged = JSON.stringify(
-                      response.data.user
-                    )
-                    setCookies(userLogged)
-                    router.push('/dashboard')
+                    const userLogged = JSON.stringify(response.data.user);
+                    setCookies(userLogged);
+                    router.push("/dashboard");
                   }
                 },
-                error: response => {
-                  setLoading(false)
-                  return 'Ocorreu um erro ao registrar o usuário'
-                }
-              })
+                error: (response) => {
+                  setLoading(false);
+                  return "Ocorreu um erro ao registrar o usuário";
+                },
+              });
             } else if (response.data.status == 200) {
-              console.log(response.data)
-              setLoading(false)
-              const userLogged = JSON.stringify(response.data.user)
-              setCookies(userLogged)
-              router.push('/dashboard')
+              console.log(response.data);
+              setLoading(false);
+              const userLogged = JSON.stringify(response.data.user);
+              setCookies(userLogged);
+              router.push("/dashboard");
             }
           },
-          error: 'Ocorreu um erro no processo'
-        })
+          error: "Ocorreu um erro no processo",
+        });
       } catch (error) {
-        setLoading(false)
-        toast.error(error.message)
+        setLoading(false);
+        toast.error(error.message);
       }
     },
-    onError: e => {
-      console.log(e)
-    }
-  })
+    onError: (e) => {
+      console.log(e);
+    },
+  });
 
   return (
     <div className="login">
       <div className="wrapper">
-        <Image className="logo" src={LOGO} alt="Logo" />
+        <Link href={"/"}>
+          <Image className="logo" src={LOGO} alt="Logo" />
+        </Link>
 
         <div className="login-form">
           <div className="login-inputs">
@@ -205,14 +198,14 @@ export default function Login() {
               Continuar com Google
             </button>
           </div>
-          <form onSubmit={e => signin(e)} className="fill-container">
+          <form onSubmit={(e) => signin(e)} className="fill-container">
             <div className="login-inputs">
               <span>Email</span>
               <input
                 placeholder="email@example.com"
                 type="email"
                 required
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 value={email}
               />
             </div>
@@ -222,27 +215,22 @@ export default function Login() {
                 type="password"
                 placeholder="*****"
                 required
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 value={password}
               />
             </div>
             <div className="login-button-container">
               <button>
-                {isLoading ? (
-                  <DotLoader size={20} color="#FFF" />
-                ) : (
-                  'Entrar'
-                )}
+                {isLoading ? <DotLoader size={20} color="#FFF" /> : "Entrar"}
               </button>
             </div>
 
             <span className="login-signup">
-              Não tenho uma conta,{' '}
-              <Link href={'/signup'}>Criar conta</Link>
+              Não tenho uma conta, <Link href={"/signup"}>Criar conta</Link>
             </span>
           </form>
         </div>
       </div>
     </div>
-  )
+  );
 }
