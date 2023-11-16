@@ -17,7 +17,9 @@ export default function Start() {
             <br /> et dolore magna aliqua.{" "}
           </p>
 
-          <Link href={"/free"}> comece agora gratis</Link>
+          <div>
+            <Link href={"/free"}> comece agora gratis</Link>
+          </div>
           <p>* lorem ipsum dolor sit</p>
         </div>
         <div className="start-image">
