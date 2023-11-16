@@ -79,7 +79,9 @@ export default function Signup() {
   return (
     <div className="login">
       <div className="wrapper">
-        <Image className="logo" src={LOGO} alt="Logo" />
+        <Link href={"/"}>
+          <Image className="logo" src={LOGO} alt="Logo" />
+        </Link>
 
         <div className="login-form">
           <form onSubmit={(e) => signup(e)} className="fill-container">
