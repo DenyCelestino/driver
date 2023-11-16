@@ -314,7 +314,9 @@ export default function Profile() {
                   <div className={!isPasswordLock ? "input active" : "input"}>
                     <input
                       disabled={isPasswordLock}
-                      placeholder="Digite sua Senha"
+                      placeholder={
+                        isPasswordLock ? "********" : "Digite sua Senha"
+                      }
                       type="password"
                       onChange={(e) => setPassword(e.target.value)}
                       value={password}
@@ -336,7 +338,11 @@ export default function Profile() {
                   <div className="input">
                     <input
                       disabled={isPasswordLock}
-                      placeholder="Digite novamente sua Senha"
+                      placeholder={
+                        isPasswordLock
+                          ? "********"
+                          : "Digite novamente sua Senha"
+                      }
                       type="password"
                       onChange={(e) => setPasswordConfirm(e.target.value)}
                       value={confirmPassword}
