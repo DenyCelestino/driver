@@ -113,6 +113,7 @@ export default function Result({ score = 0, total = 0, Try, Return }) {
           )}
           {done ? (
             <Link
+              ref={whatsapp}
               href={`https://api.whatsapp.com/send/?text=https://trafegotop.app/shared/${slug}`}
             >
               Partilhe no Whatsapp
