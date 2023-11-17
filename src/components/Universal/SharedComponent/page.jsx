@@ -22,11 +22,12 @@ export default function SharedComponent({ info }) {
             Partilhar com amigos no facebook
           </button>
         </FacebookShareButton>
-        <WhatsappShareButton url={`https://trafegotop.app/shared/${info.slug}`}>
-          <button className="button whatsapp">
-            Partilhar com amigos no Whatsapp
-          </button>
-        </WhatsappShareButton>
+        <Link
+          href={`https://trafegotop.app/shared/${info.slug}`}
+          className="button whatsapp"
+        >
+          Partilhar com amigos no Whatsapp
+        </Link>
       </div>
     </div>
   );
