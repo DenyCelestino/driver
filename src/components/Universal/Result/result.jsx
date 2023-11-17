@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import Header from "@/components/App/Dashboard/Header";
 import { ContextUser } from "@/context/ContextUser";
@@ -8,7 +8,6 @@ import { saveAs } from "file-saver";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useMyContext } from "@/context/Context";
-import { FacebookShareButton, WhatsappShareButton } from "react-share";
 import { BeatLoader } from "react-spinners";
 import Link from "next/link";
 
