@@ -98,7 +98,7 @@ export default function Result({ score = 0, total = 0, Try, Return }) {
           {done ? (
             <FacebookShareButton
               ref={facebook}
-              url={`https://driverbeta.vercel.app/shared/${slug}`}
+              url={`https://trafegotop.app/shared/${slug}`}
             >
               Partilhe no Facebook
             </FacebookShareButton>
