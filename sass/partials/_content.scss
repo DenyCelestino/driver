@@ -1,3 +1,59 @@
+.admin {
+  display: flex;
+  padding-top: 80px;
+  .admin-sidebar {
+    display: none;
+    @include breakpoint-desktop-small {
+      display: block;
+      width: 300px;
+    }
+  }
+  .admin-content {
+    flex: 1 1 0%;
+  }
+  .admin-header {
+    @include breakpoint-desktop-small {
+      padding-left: 350px;
+      position: fixed;
+      padding: 1rem;
+      left: 0;
+      right: 0;
+      top: 0;
+      background: $color-white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-header-content {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .avatar {
+      height: 2.5rem;
+      width: 2.5rem;
+      border-radius: 9999px;
+    }
+  }
+  .admin-sidebar {
+    display: none;
+    @include breakpoint-desktop-small {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 300px;
+      background: $color-orange;
+    }
+    .logo {
+      color: $color-white;
+    }
+  }
+}
+
 .landing {
 }
 .hero {

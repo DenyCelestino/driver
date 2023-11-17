@@ -506,6 +506,66 @@ em {
   color: #84bc9c;
 }
 
+.admin {
+  display: flex;
+  padding-top: 80px;
+}
+.admin .admin-sidebar {
+  display: none;
+}
+@media (min-width: 960px) {
+  .admin .admin-sidebar {
+    display: block;
+    width: 300px;
+  }
+}
+.admin .admin-content {
+  flex: 1 1 0%;
+}
+@media (min-width: 960px) {
+  .admin .admin-header {
+    padding-left: 350px;
+    position: fixed;
+    padding: 1rem;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: #fffdf7;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+.admin .admin-header .admin-header-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.admin .admin-header .avatar {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 9999px;
+}
+.admin .admin-sidebar {
+  display: none;
+}
+@media (min-width: 960px) {
+  .admin .admin-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 300px;
+    background: #ef8354;
+  }
+}
+.admin .admin-sidebar .logo {
+  color: #fffdf7;
+}
+
 .hero {
   padding-top: 150px;
   height: 45vh;
