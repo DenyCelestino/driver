@@ -96,12 +96,14 @@ export default function Result({ score = 0, total = 0, Try, Return }) {
 
         <div className="share">
           {done ? (
-            <FacebookShareButton
+            <Link
               ref={facebook}
+              target="_blank"
+              href={`https://www.facebook.com/sharer/sharer.php?u=https://trafegotop.app/shared/${slug}`}
               url={`https://trafegotop.app/shared/${slug}`}
             >
               Partilhe no Facebook
-            </FacebookShareButton>
+            </Link>
           ) : (
             <button onClick={() => captureScreenshot(1)}>
               {isLoading ? (

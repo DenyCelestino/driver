@@ -19,11 +19,14 @@ export default function SharedComponent({ info }) {
         <Link className="link" href={"/"}>
           Saber mais
         </Link>
-        <FacebookShareButton url={`https://trafegotop.app/shared/${info.slug}`}>
-          <button className="button facebook">
-            Partilhar com amigos no facebook
-          </button>
-        </FacebookShareButton>
+
+        <Link
+          target="_blank"
+          href={`https://www.facebook.com/sharer/sharer.php?u=https://trafegotop.app/shared/${info.slug}`}
+          className="button facebook"
+        >
+          Partilhar com amigos no Whatsapp
+        </Link>
         <Link
           target="_blank"
           href={`https://api.whatsapp.com/send/?text=https://trafegotop.app/shared/${info.slug}`}
