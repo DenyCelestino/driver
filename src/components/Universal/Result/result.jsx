@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { useMyContext } from "@/context/Context";
 import { FacebookShareButton, WhatsappShareButton } from "react-share";
 import { BeatLoader } from "react-spinners";
+import Link from "next/link";
 
 export default function Result({ score = 0, total = 0, Try, Return }) {
   const [isLoading, setLoading] = useState(false);
@@ -111,12 +112,11 @@ export default function Result({ score = 0, total = 0, Try, Return }) {
             </button>
           )}
           {done ? (
-            <WhatsappShareButton
-              ref={whatsapp}
-              url={`https://driverbeta.vercel.app/shared/${slug}`}
+            <Link
+              href={`https://api.whatsapp.com/send/?text=https://trafegotop.app/shared/${slug}`}
             >
               Partilhe no Whatsapp
-            </WhatsappShareButton>
+            </Link>
           ) : (
             <button onClick={() => captureScreenshot(2)}>
               {isLoading ? (
