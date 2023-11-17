@@ -17,16 +17,12 @@ export default function SharedComponent({ info }) {
         <p>Você pode se preparar para o exame tambem, clique em:</p>
 
         <Link href={"/"}>Saber mais</Link>
-        <FacebookShareButton
-          url={`https://driverbeta.vercel.app/shared/${info.slug}`}
-        >
+        <FacebookShareButton url={`https://trafegotop.app/shared/${info.slug}`}>
           <button className="button facebook">
             Partilhar com amigos no facebook
           </button>
         </FacebookShareButton>
-        <WhatsappShareButton
-          url={`https://driverbeta.vercel.app/shared/${info.slug}`}
-        >
+        <WhatsappShareButton url={`https://trafegotop.app/shared/${info.slug}`}>
           <button className="button whatsapp">
             Partilhar com amigos no Whatsapp
           </button>
