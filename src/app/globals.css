@@ -1689,11 +1689,12 @@ em {
   align-items: center;
   gap: 10px;
 }
-.shared-component a {
+.shared-component .link {
   color: #84bc9c;
   text-decoration: underline;
 }
 .shared-component .button {
+  text-align: center;
   padding: 12px 24px;
   width: 100%;
   border-radius: 10px;

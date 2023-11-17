@@ -1151,11 +1151,12 @@
     align-items: center;
     gap: 10px;
   }
-  a {
+  .link {
     color: $color-green;
     text-decoration: underline;
   }
   .button {
+    text-align: center;
     padding: 12px 24px;
     width: 100%;
     border-radius: 10px;
